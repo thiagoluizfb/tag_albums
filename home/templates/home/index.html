@@ -1,6 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
-    <h1 class="display-4 text-success">It works!</h1>
+    <div class="container text-center mt-5">
+        <span class="logo-anime py-5">@</span>
+        <div class="row text-center py-5 px-md-5 mx-md-5">
+            <span class="col-4 text-right">#tag</span>
+            <span class="col-4">#create</span>
+            <span class="col-4 text-left">#share</span>
+        </div>
+        <div class="pt-md-5"><a href="">St@rt now</a></div>
+    </div>
 {% endblock %}
