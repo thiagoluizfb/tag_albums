@@ -11,6 +11,7 @@ body{
     color: #bebebe;
 }
 
+/* Landing Page */
 .logo-anime{
     font-size: 150px;
 }
@@ -28,4 +29,64 @@ body{
   100% {
     opacity: 1;
   }
+}
+
+/* Upload Page */
+
+.upload-container{
+    padding: 0;
+    position: relative !important;
+    border: 1px solid #bebebe;
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.image-container{
+    display: inline;
+}
+
+.fa-image{
+    margin: 0;
+    padding: 0;
+    font-size: 200px;
+}
+
+#upload-photo{
+    display: none;
+}
+
+.upload-photo-btn{
+    background-color: #bebebe;
+    color: #1a1a1a !important;
+}
+
+.upload-photo-btn:hover{
+    cursor: pointer;
+    background-color: #1a1a1a;
+    color: #bebebe !important;
+    border: solid 1px #bebebe;
+}
+
+#frame{
+	margin-top: 2rem;
+    padding: 0;
+}
+
+.upload-thumbnail:before {
+    border: solid 2px black;
+}
+
+.upload-thumbnail {
+    height: 200px;
+    width: 200px;
+    border-top: solid 10px #fff;
+    border-left: solid 10px #fff;
+    border-right: solid 10px #fff;
+    border-bottom: solid 10px #fff;
+}
+
+.tag-slot {
+	margin-bottom: 1rem;
+	padding: 5px;
 }
