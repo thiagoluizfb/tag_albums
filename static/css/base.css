@@ -56,37 +56,74 @@ body{
     display: none;
 }
 
-.upload-photo-btn{
-    background-color: #bebebe;
-    color: #1a1a1a !important;
+.frame-wrapper{
+    padding: 0;
+    margin: 10px auto;
+    width: 220px;
+    height: 220px;
+	border-top: solid 10px white;
+    border-left: solid 10px white;
+    border-right: solid 10px white;
+    border-bottom: solid 10px white;
 }
 
-.upload-photo-btn:hover{
-    cursor: pointer;
+.upload-photo-btn{
     background-color: #1a1a1a;
     color: #bebebe !important;
     border: solid 1px #bebebe;
 }
 
-#frame{
-	margin-top: 2rem;
-    padding: 0;
+.upload-photo-btn:hover{
+    cursor: pointer;
+    background-color: #bebebe;
+    color: #1a1a1a !important;
+    border: solid 1px #1a1a1a;
 }
 
-.upload-thumbnail:before {
-    border: solid 2px black;
+#frame{
+	margin: 2rem 0;
 }
+
 
 .upload-thumbnail {
-    height: 200px;
-    width: 200px;
-    border-top: solid 10px #fff;
-    border-left: solid 10px #fff;
-    border-right: solid 10px #fff;
-    border-bottom: solid 10px #fff;
+	margin: 10px 0 0 0;
+    padding: 0;
+    height: 180px;
+    width: 180px;
 }
 
-.tag-slot {
-	margin-bottom: 1rem;
-	padding: 5px;
+.tag-slot{
+    background-color: #1a1a1a;
+    color: #bebebe;
+    border: none;
+    padding: 0;
+    width: 204px;
+    word-wrap: break-word;
+}
+
+.tag-slot::placeholder {
+    color: #bebebe;
+  	opacity: 0.25;
+}
+
+.tag-all-lot{
+    padding-bottom: 40px;
+    width: 204px;
+    word-wrap: break-word;
+}
+
+.addtags-wrapper{
+    display: none;
+}
+
+#tag-all-files-btn{
+    border: solid 1px #bebebe;
+    color: #bebebe;
+}
+
+#tag-all-files-btn:hover{
+    cursor: pointer;
+    background-color: #bebebe;
+    color: #1a1a1a !important;
+    border: solid 1px #1a1a1a;
 }

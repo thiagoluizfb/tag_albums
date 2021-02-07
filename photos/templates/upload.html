@@ -2,49 +2,25 @@
 {% load static %}
 
 {% block content %}
-    <div class="container mt-5 upload-container position-relative text-center">
+    <div class="container mt-5 upload-container position-relative">
         <div class="row mt-5 image-container">
-            <div class="col-4 offset-4 text-center" >
+            <div class="col-8 offset-2 text-center" >
                 <i class="fas fa-image"></i>
-                <div>Click in Upload to start</div>
+                <div>Click "Add Files" to start</div>
             </div>
         </div>
-        <div id="frame" class="row text-center">
-        </div>
+        <div id="frame" class="row d-flex justify-content-center"></div>
         <input type="file"  accept="image/*" name="image" id="upload-photo" onchange="loadFile(event)" multiple>
     </div>
-    <div class="row text-center">
-        <div class="col-4 offset-4">
-            <div class="btn upload-photo-btn mt-5"><label for="upload-photo">Upload</label></div>
+    <div class="row mt-3 col-8 offset-2 d-flex justify-content-end">
+        <label for="upload-photo" class="btn upload-photo-btn">Add Files</label>
+    </div>
+    <div class="row mt-2 addtags-wrapper">
+        <div class="col-12 d-flex justify-content-center mt-1">
+            <input type="text" id="tag-all-files">
+        </div>
+        <div class="col-12 d-flex justify-content-center mt-1">
+            <span id="tag-all-files-btn" class="btn" onclick="addtags()" >Add tags to all files</span>
         </div>
     </div>
-
-    <script>
-        var images = [];
-        var loadFile = function(event) {
-            $(".image-container").css("display", "none");
-            var numFiles = $("#upload-photo")[0].files.length;
-            for (i = 0; i < numFiles; i++) {
-                imageName = event.target.files[i].name;
-                console.log(event.target.files[i]);
-                //console.log(images.indexOf(image_name));
-                if (images.indexOf(imageName)<0){
-                    images.push(imageName);
-                    var count = $("#frame").children().length/2;
-                    imageName = event.target.files[i].name;
-                    //date = event.target.files[i].lastModifiedDate;
-                    //var n = date.toLocaleDateString();
-                    //var x = n.split("/");
-                    //console.log(x);
-                    //console.log(n);
-                    idName = `output${count}`;
-                    $("#frame").append(`<div class="col-3"><img id="${idName}" class="upload-thumbnail" /><div class="tag-slot">${imageName}</div><div>`)
-                    //id_name = `output`+count;
-                    var image = document.getElementById(idName);
-                    image.src = URL.createObjectURL(event.target.files[i]);
-                    var count = $("#frame").children().length/2;
-                }
-            }
-        };
-    </script>
 {% endblock %}
