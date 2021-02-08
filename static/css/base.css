@@ -84,12 +84,33 @@ body{
 	margin: 2rem 0;
 }
 
-
 .upload-thumbnail {
 	margin: 10px 0 0 0;
     padding: 0;
     height: 180px;
     width: 180px;
+}
+
+.delete-thumbnail{
+    top: 5%;
+    left: 75%;
+    position: absolute;
+    color: #1a1a1a;
+}
+
+.fa-times-circle{
+    border: solid 3px #bebebe;
+    border-radius: 50%;
+    background-color: #bebebe;
+}
+
+.displaynone{
+    display: none !important;
+}
+
+.displaynone:hover{
+    display: block !important;
+    color: #1a1a1a;
 }
 
 .tag-slot{
