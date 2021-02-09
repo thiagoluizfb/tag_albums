@@ -61,10 +61,10 @@ body{
     margin: 10px auto;
     width: 220px;
     height: 220px;
-	border-top: solid 10px white;
-    border-left: solid 10px white;
-    border-right: solid 10px white;
-    border-bottom: solid 10px white;
+	border-top: solid 10px #fff;
+    border-left: solid 10px #fff;
+    border-right: solid 10px #fff;
+    border-bottom: solid 10px #fff;
 }
 
 .upload-photo-btn{
@@ -127,14 +127,24 @@ body{
   	opacity: 0.25;
 }
 
-.tag-all-lot{
-    padding-bottom: 40px;
-    width: 204px;
+.tag-all-slot{
+    margin: 0;
+    padding-bottom: 0px;
     word-wrap: break-word;
+    color: #fff;
 }
 
 .addtags-wrapper{
     display: none;
+}
+
+#tag-all-files{
+    background-color: #1a1a1a;
+    color: #bebebe;
+    border: 1px solid #bebebe;
+    padding: 0;
+    width: inherit;
+    word-wrap: break-word;
 }
 
 #tag-all-files-btn{

@@ -30,8 +30,8 @@ var loadFile = function(event) {
                     </span>
                 </div>
                 <div class="text-left position-relative">
-                    <input type="text" class="tag-slot" placeholder="@tag this file">
-                    <div class="tag-all-slot"></div>
+                    <input type="text" class="tag-slot" placeholder="@tag this file only" onclick="addSymbol(this)">
+                    <div class="tag-all-slot col-12"></div>
                 </div>
             </div>`);
             var image = document.getElementById(idName);
@@ -66,15 +66,19 @@ function deleteImg(btn){
 
 function addtags() {
     allTags = $("#tag-all-files").val();
-    console.log(allTags[0]);
-    if (allTags[0] != "@"){
-        if (allTags == ""){
-            allTags = "";
-        }else{
-            allTags = `@${allTags}`;
-        };
-    }
     $("#tag-all-files").val(allTags);
-    $(".tag-all-slot").html(allTags);
+    $(".tag-all-slot").html(`<strong>${allTags}</strong>`);
     $("#tag-all-files-btn").html("Update shared tags");
 };
+
+function addSymbol(input){
+    console.log($(input).val()+"@");
+    text = $(input).val();
+    lastChar = text.slice(-1);
+    console.log(lastChar);
+    if(lastChar == "@"){
+        $(input).val(text);
+    }else{
+        $(input).val(`${text}@`);
+    };
+}

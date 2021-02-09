@@ -12,14 +12,14 @@
         <div id="frame" class="row d-flex justify-content-center"></div>
         <input type="file"  accept="image/*" name="image" id="upload-photo" onchange="loadFile(event)" multiple>
     </div>
-    <div class="row mt-3 col-8 offset-2 d-flex justify-content-end">
+    <div class="row mt-3 col-8 offset-2 d-flex justify-content-center">
         <label for="upload-photo" class="btn upload-photo-btn">Add Files</label>
     </div>
     <div class="row mt-2 addtags-wrapper">
-        <div class="col-12 d-flex justify-content-center mt-1">
-            <input type="text" id="tag-all-files">
+        <div class="col-10 offset-1 d-flex justify-content-center mt-1">
+            <input type="text" id="tag-all-files" placeholder="Tag all files" onclick="addSymbol(this)">
         </div>
-        <div class="col-12 d-flex justify-content-center mt-1">
+        <div class="col-12 d-flex justify-content-center mt-1 px-0">
             <span id="tag-all-files-btn" class="btn" onclick="addtags()" >Add tags to all files</span>
         </div>
     </div>
