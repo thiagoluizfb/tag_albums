@@ -17,10 +17,30 @@
     </div>
     <div class="row mt-2 addtags-wrapper">
         <div class="col-10 offset-1 d-flex justify-content-center mt-1">
-            <input type="text" id="tag-all-files" placeholder="Tag all files" onclick="addSymbol(this)">
+            <input type="text" id="tag-all-files" placeholder="Tag all files" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-file-tag-modal">
         </div>
         <div class="col-12 d-flex justify-content-center mt-1 px-0">
             <span id="tag-all-files-btn" class="btn" onclick="addtags()" >Add tags to all files</span>
+        </div>
+    </div>
+
+    <!-- Modal to edit tags-->
+    <div class="modal" id="edit-file-tag-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea name="edit-file-tag" id="edit-file-tag"></textarea>
+                    <span id="output-file"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="editTagFile()" data-dismiss="modal">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

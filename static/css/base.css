@@ -138,6 +138,21 @@ body{
     display: none;
 }
 
+#edit-file-tag-modal textarea{
+    resize: none;
+    border: none;
+    width: 100%;
+    max-width: 100%;
+}
+
+#edit-file-tag-modal textarea:focus{
+    outline: none;
+}
+
+#output-file{
+    display: none;
+}
+
 #tag-all-files{
     background-color: #1a1a1a;
     color: #bebebe;

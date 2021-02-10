@@ -16,8 +16,6 @@ var loadFile = function(event) {
         if (images.indexOf(imageName)<0){
             images.push(imageName);
             outputs.push(output);
-            console.log(images);
-            console.log(outputs);
             idName = `output${output}`;
             $("#frame").append(`
             <div class="col-12 col-md-6 col-lg-3 text-center">
@@ -30,7 +28,7 @@ var loadFile = function(event) {
                     </span>
                 </div>
                 <div class="text-left position-relative">
-                    <input type="text" class="tag-slot" placeholder="@tag this file only" onclick="addSymbol(this)">
+                    <input type="text" class="tag-slot" placeholder="@tag this file only" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-file-tag-modal">
                     <div class="tag-all-slot col-12"></div>
                 </div>
             </div>`);
@@ -54,13 +52,9 @@ function deleteImg(btn){
     image = $(btn).parent().parent().siblings().attr("id");
     imageId = parseInt(image.slice(6,10));
     index = outputs.indexOf(imageId);
-    console.log("Output Index:" + index);
     imageName = images[index];
-    console.log("Image name:" + imageName);
     images.splice(index,1);
     outputs.splice(index,1);
-    console.log("Images: " + images);
-    console.log("Outputs: " + outputs)
     $(btn).parent().parent().parent().parent().remove();
 }
 
@@ -72,13 +66,23 @@ function addtags() {
 };
 
 function addSymbol(input){
-    console.log($(input).val()+"@");
     text = $(input).val();
     lastChar = text.slice(-1);
-    console.log(lastChar);
+    image = $(input).parent().siblings().children().first().attr("id");
     if(lastChar == "@"){
-        $(input).val(text);
+        //$(input).val(text);
+        $(".modal-body").children().first().val(text);
+        $("#output-file").html(image);
+        
     }else{
-        $(input).val(`${text}@`);
+        //$(input).val(`${text}@`);
+        $(".modal-body").children().first().val(`${text}@`);
+        $("#output-file").html(image);
     };
+}
+
+function editTagFile(){
+    editedTag = $(".modal-body").children().first().val();
+    image = $("#output-file").html();
+    $(`#${image}`).parent().siblings().children().first().val(editedTag);
 }
