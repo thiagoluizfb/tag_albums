@@ -17,25 +17,28 @@
     </div>
     <div class="container text-center mt-5">
         <div class="row">
-            {% for photo in uploaded_photos %}
-                <div class="col-12 col-md-6 col-lg-3 text-center">
-                    <div class="frame-wrapper position-relative">
-                        <img src="../media/{{ photo.image }}" class="upload-thumbnail"/>
+            {% for tag in tags %}
+                {% for t in tag.tag_photos.all %}
+                    <div class="col-12 col-md-6 col-lg-3 text-center">
+                        <div class="frame-wrapper position-relative">
+                            <img src="../media/{{ t.image  }}" class="upload-thumbnail"/>
+                        </div>
+                        <div>{{ tag }}</div>
                     </div>
-                </div>
+                {% endfor %}
             {% endfor %}
-                <!--<div class="frame-wrapper position-relative">
-                    <img class="upload-thumbnail" src="media/{{ photo.image }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)"/>
-                    <span class="displaynone btn delete-thumbnail">
-                        <strong>
-                            <i class="far fa-times-circle" onclick="deleteImg(this)" data-toggle="tooltip" data-placement="top" title="Remove this file"></i>
-                        </strong>
-                    </span>
-                </div>
-                <div class="text-left position-relative">
-                    <input type="text" class="tag-slot" placeholder="@tag this file only" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-file-tag-modal">
-                    <div class="tag-all-slot col-12"></div>
-                </div>-->
+            <!--<div class="frame-wrapper position-relative">
+                <img class="upload-thumbnail" src="media/{{ photo.image }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)"/>
+                <span class="displaynone btn delete-thumbnail">
+                    <strong>
+                        <i class="far fa-times-circle" onclick="deleteImg(this)" data-toggle="tooltip" data-placement="top" title="Remove this file"></i>
+                    </strong>
+                </span>
+            </div>
+            <div class="text-left position-relative">
+                <input type="text" class="tag-slot" placeholder="@tag this file only" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-file-tag-modal">
+                <div class="tag-all-slot col-12"></div>
+            </div>-->
         </div>
     </div>
 {% endblock %}
