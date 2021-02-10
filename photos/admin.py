@@ -4,9 +4,9 @@ from .models import Photos, Tags
 
 class PhotosAdmin(admin.ModelAdmin):
     list_display = (
+        'image',
         'owner',
         'upload_date',
-        'image',
     )
 
 
