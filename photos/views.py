@@ -11,8 +11,8 @@ def upload(request):
 def uploaded_photos(request):
     """ A view to return the photos page"""
 
-    uploaded_photos = Photos.objects.all()
-    tags = Tags.objects.all()
+    uploaded_photos = list(Photos.objects.all())
+    tags = list(Tags.objects.all())
 
 
     context = {

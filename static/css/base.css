@@ -173,3 +173,10 @@ body{
     color: #1a1a1a !important;
     border: solid 1px #1a1a1a;
 }
+
+.carousel-item img{
+    height: 80vh;
+    width: 80vh;
+    display: block;
+    margin: auto;
+}

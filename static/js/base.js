@@ -6,6 +6,8 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 })
 
+$('.carousel').carousel()
+
 var loadFile = function(event) {
     $(".upload-photo-btn").html("Add more");
     $(".image-container").css("display", "none");
@@ -16,6 +18,7 @@ var loadFile = function(event) {
         if (images.indexOf(imageName)<0){
             images.push(imageName);
             outputs.push(output);
+            console.log(event.target.files[i].heigth)
             idName = `output${output}`;
             $("#frame").append(`
             <div class="col-12 col-md-6 col-lg-3 text-center">
