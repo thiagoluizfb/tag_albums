@@ -10,15 +10,15 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
+    <div class="row mx-0">
         <div class="col-12 text-center">
-            <h2>My photos</h2>
+            <h2>@{{ tags.0 }}</h2>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 text-center">
+    <div class="row mx-0">
+        <div class="col-12 text-center px-0">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
+                <!--<ol class="carousel-indicators">
                     {% for tag in tags %}
                         {% if tag.tag_name == 'healthy' %}                
                             {% for t in tag.tag_photos.all %}
@@ -30,16 +30,14 @@
                             {% endfor %}
                         {% endif %}
                     {% endfor %}
-                </ol>
-                <div class="col-12 carousel-inner">
-                    {% for tag in tags %}
-                        {% if tag.tag_name == 'healthy' %}                
-                            {% for t in tag.tag_photos.all %}
-                                <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
-                                    <img class="" src="../media/{{ t.image  }}">
-                                </div>
-                            {% endfor %}
-                        {% endif %}
+                </ol>-->
+                <div class="col-12 carousel-inner px-0">
+                    {% for tag in tags %}          
+                        {% for t in tag.tag_photos.all %}
+                            <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
+                                <img class="" src="/media/{{ t.image  }}">
+                            </div>
+                        {% endfor %}
                     {% endfor %}
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

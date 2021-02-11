@@ -84,7 +84,7 @@ body{
 	margin: 2rem 0;
 }
 
-.upload-thumbnail {
+.thumbnail {
 	margin: 10px 0 0 0;
     padding: 0;
     height: 180px;
@@ -176,7 +176,7 @@ body{
 
 .carousel-item img{
     height: 80vh;
-    width: 80vh;
+    max-width: 100vh;
     display: block;
     margin: auto;
 }

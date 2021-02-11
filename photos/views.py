@@ -8,16 +8,30 @@ def upload(request):
     return render(request, "upload.html")
 
 
-def uploaded_photos(request):
+def photos(request, album):
     """ A view to return the photos page"""
 
-    uploaded_photos = list(Photos.objects.all())
-    tags = list(Tags.objects.all())
-
+    photos = list(Photos.objects.all())
+    tags = list(Tags.objects.filter(tag_name=album))
+    print(tags[0])
 
     context = {
-        'uploaded_photos': uploaded_photos,
+        'photos': photos,
         'tags': tags,
     }
 
-    return render(request, "uploaded_photos.html", context)
+    return render(request, "photos.html", context)
+
+
+def albums(request):
+    """ A view to return the albums page"""
+
+    photos = list(Photos.objects.all())
+    tags = list(Tags.objects.all())
+
+    context = {
+        'photos': photos,
+        'tags': tags,
+    }
+
+    return render(request, "albums.html", context)

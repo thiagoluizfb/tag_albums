@@ -18,12 +18,12 @@ var loadFile = function(event) {
         if (images.indexOf(imageName)<0){
             images.push(imageName);
             outputs.push(output);
-            console.log(event.target.files[i].heigth)
+            console.log(event.target.files[i])
             idName = `output${output}`;
             $("#frame").append(`
             <div class="col-12 col-md-6 col-lg-3 text-center">
                 <div class="frame-wrapper position-relative">
-                    <img id="${idName}" class="upload-thumbnail" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)"/>
+                    <img id="${idName}" class="thumbnail" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)"/>
                     <span class="displaynone btn delete-thumbnail">
                         <strong>
                             <i class="far fa-times-circle" onclick="deleteImg(this)" data-toggle="tooltip" data-placement="top" title="Remove this file"></i>
