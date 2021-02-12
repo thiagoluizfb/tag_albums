@@ -58,7 +58,7 @@ body{
 
 .frame-wrapper{
     padding: 0;
-    margin: 10px auto;
+    margin: 20px auto 0 auto;
     width: 220px;
     height: 220px;
 	border-top: solid 10px #fff;
@@ -81,11 +81,11 @@ body{
 }
 
 #frame{
-	margin: 2rem 0;
+	margin-bottom: 20px;
 }
 
 .thumbnail {
-	margin: 10px 0 0 0;
+	margin: 10px 0;
     padding: 0;
     height: 180px;
     width: 180px;
@@ -114,24 +114,28 @@ body{
 }
 
 .tag-slot{
-    background-color: #1a1a1a;
-    color: #bebebe;
+    text-align: center;
+    background-color: #fff;
+    color: #1a1a1a;
     border: none;
-    padding: 0;
-    width: 204px;
+    padding: 10px;
+    width: 220px;
     word-wrap: break-word;
 }
 
 .tag-slot::placeholder {
-    color: #bebebe;
+    color: #1a1a1a;
   	opacity: 0.25;
 }
 
 .tag-all-slot{
-    margin: 0;
-    padding-bottom: 0px;
+    text-align: center;
+    background-color: #fff;
+    color: #1a1a1a;
+    border: none;
+    padding: 10px;
+    width: 220px;
     word-wrap: break-word;
-    color: #fff;
 }
 
 .addtags-wrapper{

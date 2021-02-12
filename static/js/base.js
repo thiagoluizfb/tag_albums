@@ -22,7 +22,7 @@ var loadFile = function(event) {
             idName = `output${output}`;
             $("#frame").append(`
             <div class="col-12 col-md-6 col-lg-3 text-center">
-                <div class="frame-wrapper position-relative">
+                <div class="position-relative frame-wrapper">
                     <img id="${idName}" class="thumbnail" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)"/>
                     <span class="displaynone btn delete-thumbnail">
                         <strong>
@@ -30,10 +30,13 @@ var loadFile = function(event) {
                         </strong>
                     </span>
                 </div>
-                <div class="text-left position-relative">
-                    <input type="text" class="tag-slot" placeholder="@tag this file only" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-file-tag-modal">
-                    <div class="tag-all-slot col-12"></div>
+                <div>
+                    <input type="text" class="tag-slot text-left" placeholder="@tag this file only" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-file-tag-modal">
                 </div>
+                <div>
+                    <input type="text" class="tag-all-slot text-left" placeholder="@tag all"></input>
+                </div>
+                    
             </div>`);
             var image = document.getElementById(idName);
             image.src = URL.createObjectURL(event.target.files[i]);
@@ -64,7 +67,7 @@ function deleteImg(btn){
 function addtags() {
     allTags = $("#tag-all-files").val();
     $("#tag-all-files").val(allTags);
-    $(".tag-all-slot").html(`<strong>${allTags}</strong>`);
+    $(".tag-all-slot").val(allTags);
     $("#tag-all-files-btn").html("Update shared tags");
 };
 

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <div class="container mt-5 upload-container position-relative">
+    <div class="container upload-container position-relative">
         <div class="row mt-5 image-container">
             <div class="col-8 offset-2 text-center" >
                 <i class="fas fa-image"></i>
@@ -12,10 +12,10 @@
         <div id="frame" class="row d-flex justify-content-center"></div>
         <input type="file"  accept="image/*" name="image" id="upload-photo" onchange="loadFile(event)" multiple>
     </div>
-    <div class="row mt-3 col-8 offset-2 d-flex justify-content-center">
+    <div class="row mt-3 mx-0 d-flex justify-content-center">
         <label for="upload-photo" class="btn upload-photo-btn">Add Files</label>
     </div>
-    <div class="row mt-2 addtags-wrapper">
+    <div class="row mt-2 mx-0 addtags-wrapper">
         <div class="col-10 offset-1 d-flex justify-content-center mt-1">
             <input type="text" id="tag-all-files" placeholder="Tag all files" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-file-tag-modal">
         </div>
