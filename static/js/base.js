@@ -31,12 +31,11 @@ var loadFile = function(event) {
                     </span>
                 </div>
                 <div>
-                    <input type="text" class="tag-slot text-left" placeholder="@tag this file only" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-file-tag-modal">
+                    <input type="text" class="tag-slot text-left" placeholder="@tag this file only" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-tag-modal">
                 </div>
                 <div>
                     <input type="text" class="tag-all-slot text-left" placeholder="@tag all"></input>
                 </div>
-                    
             </div>`);
             var image = document.getElementById(idName);
             image.src = URL.createObjectURL(event.target.files[i]);
@@ -72,22 +71,30 @@ function addtags() {
 };
 
 function addSymbol(input){
+    $(".modal-header").empty();
     text = $(input).val();
     lastChar = text.slice(-1);
     image = $(input).parent().siblings().children().first().attr("id");
+    src = $(input).parent().siblings().children().first().attr("src")
+    $(".modal-header").append(`
+        <img id="${idName}" class="thumbnail" src="${src}"/>
+    `)
     if(lastChar == "@"){
         //$(input).val(text);
-        $(".modal-body").children().first().val(text);
+        $("#edit-file-tag").val(text);
         $("#output-file").html(image);
-        
     }else{
         //$(input).val(`${text}@`);
-        $(".modal-body").children().first().val(`${text}@`);
+        $("#edit-file-tag").val(`${text}@`);
         $("#output-file").html(image);
     };
+    window.setTimeout (function(){ 
+       $("#edit-file-tag").focus();
+    },100);
 }
 
 function editTagFile(){
+    $(".modal-header").empty();
     editedTag = $(".modal-body").children().first().val();
     image = $("#output-file").html();
     $(`#${image}`).parent().siblings().children().first().val(editedTag);

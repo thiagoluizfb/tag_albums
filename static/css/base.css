@@ -113,7 +113,7 @@ body{
     color: #1a1a1a;
 }
 
-.tag-slot{
+.tag-slot, .tag-all-slot{
     text-align: center;
     background-color: #fff;
     color: #1a1a1a;
@@ -123,38 +123,60 @@ body{
     word-wrap: break-word;
 }
 
-.tag-slot::placeholder {
+.tag-slot::placeholder, .tag-all-slot::placeholder {
     color: #1a1a1a;
   	opacity: 0.25;
 }
 
-.tag-all-slot{
-    text-align: center;
-    background-color: #fff;
-    color: #1a1a1a;
-    border: none;
-    padding: 10px;
-    width: 220px;
-    word-wrap: break-word;
+.tag-slot:focus, .tag-all-slot:focus{
+    outline: none;
 }
+
 
 .addtags-wrapper{
     display: none;
 }
 
-#edit-file-tag-modal textarea{
+.modal-dialog{
+    width: 300px;
+}
+
+.modal-content{
+    background-color: #fff;
+}
+
+.modal-footer{
+    border: none;
+}
+
+.modal-header{
+    border: none;
+}
+
+.modal-body{
+    padding: 0;
+}
+
+#edit-file-tag{
+    background-color: #fff;
     resize: none;
     border: none;
     width: 100%;
     max-width: 100%;
 }
 
-#edit-file-tag-modal textarea:focus{
+#edit-file-tag:focus{
     outline: none;
 }
 
 #output-file{
     display: none;
+}
+
+.edit-tag-save{
+    background-color: #1a1a1a;
+    color: #bebebe !important;
+    border: solid 1px #bebebe;
 }
 
 #tag-all-files{
@@ -178,6 +200,7 @@ body{
     border: solid 1px #1a1a1a;
 }
 
+/* Photos in albums */
 .carousel-item img{
     height: 80vh;
     max-width: 100vh;
