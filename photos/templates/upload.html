@@ -3,28 +3,22 @@
 
 {% block content %}
     <div class="row mx-0">
-        <div class="col-10 container-fluid upload-container position-relative">
+        <div class="col-md-2 tag-all-slot text-center mt-md-5" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-tag-modal">
+            <div class="">@tag all</div> 
+        </div>
+        <div class="col-10 container-fluid upload-container position-relative mt-md-5">
             <div class="row mt-5 image-container">
                 <div class="col-8 mt-5 offset-2 text-center" >
                     <i class="fas fa-image"></i>
                 </div>
             </div>
-            <div class="tag-all-slot text-center">@all</div>
             <div id="frame" class="row d-flex justify-content-center"></div>
             <input type="file"  accept="image/*" name="image" id="upload-photo" onchange="loadFile(event)" multiple>
         </div>
     </div>
-        <div class="row mt-3 mx-0 d-flex justify-content-center">
-            <label for="upload-photo" class="btn upload-photo-btn">Add</label>
-        </div>
-        <div class="row mt-2 mx-0 addtags-wrapper">
-            <div class="col-10 offset-1 d-flex justify-content-center mt-1">
-                <textarea type="text" id="tag-all-files" placeholder="@tag all files" class="btn" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-tag-modal"></textarea>
-            </div>
-            <div class="col-12 d-flex justify-content-center mt-1 px-0">
-                <span id="tag-all-files-btn" class="btn" onclick="addtags()" >Add tags to all</span>
-            </div>
-        </div>
+    <div class="row mt-3 mx-0 d-flex justify-content-center">
+        <label for="upload-photo" class="btn upload-photo-btn">Add</label>
+    </div>
 
     <!-- Modal to edit tags-->
     <div class="modal" id="edit-tag-modal" tabindex="-1" role="dialog">
@@ -34,7 +28,7 @@
                 <span class="modal-header d-flex justify-content-center">
                 </span>
                 <div class="modal-body">
-                    <textarea name="edit-file-tag" id="edit-file-tag" class="ml-1"></textarea>
+                    <textarea name="edit-file-tag" id="edit-file-tag"></textarea>
                     <span id="output-file"></span>
                 </div>
             </div>
