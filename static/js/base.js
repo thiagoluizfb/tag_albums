@@ -11,6 +11,7 @@ $('.carousel').carousel()
 var loadFile = function(event) {
     $(".upload-photo-btn").html("Add more");
     $(".image-container").css("display", "none");
+    $(".tag-all-slot").css("display", "block");
     $(".addtags-wrapper").css("display", "block");
     var numFiles = $("#upload-photo")[0].files.length;
     for (i = 0; i < numFiles; i++) {
@@ -31,10 +32,7 @@ var loadFile = function(event) {
                     </span>
                 </div>
                 <div>
-                    <input type="text" class="tag-slot text-left" placeholder="@tag this file only" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-tag-modal">
-                </div>
-                <div>
-                    <input type="text" class="tag-all-slot text-left" placeholder="@tag all"></input>
+                    <textarea type="text" class="tag-slot text-left" placeholder="@tag this only" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-tag-modal"></textarea>
                 </div>
             </div>`);
             var image = document.getElementById(idName);
@@ -66,19 +64,27 @@ function deleteImg(btn){
 function addtags() {
     allTags = $("#tag-all-files").val();
     $("#tag-all-files").val(allTags);
-    $(".tag-all-slot").val(allTags);
+    $(".tag-all-slot").html(allTags);
     $("#tag-all-files-btn").html("Update shared tags");
 };
 
 function addSymbol(input){
     $(".modal-header").empty();
+    /*$(input).css("font-size", "8px");*/
     text = $(input).val();
     lastChar = text.slice(-1);
     image = $(input).parent().siblings().children().first().attr("id");
-    src = $(input).parent().siblings().children().first().attr("src")
-    $(".modal-header").append(`
-        <img id="${idName}" class="thumbnail" src="${src}"/>
-    `)
+    src = $(input).parent().siblings().children().first().attr("src");
+    if(src){
+        console.log(src);
+        $(".modal-header").append(`
+            <img id="${idName}" class="thumbnail-edit" src="${src}"/>
+        `)
+    }else{
+        $(".modal-header").append(`
+            <h3>Tag all photos</h3>
+        `)
+    }
     if(lastChar == "@"){
         //$(input).val(text);
         $("#edit-file-tag").val(text);
@@ -98,4 +104,5 @@ function editTagFile(){
     editedTag = $(".modal-body").children().first().val();
     image = $("#output-file").html();
     $(`#${image}`).parent().siblings().children().first().val(editedTag);
+    $(`#${image}`).parent().siblings().children().first().html(editedTag);
 }
