@@ -3,8 +3,11 @@
 
 {% block content %}
     <div class="row mx-0">
-        <div class="col-md-2 tag-all-slot text-center mt-md-5" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-tag-modal">
-            <div class="">@tag all</div> 
+        <div class="col-md-2 tag-all-slot text-center mt-md-5">
+            <div>
+                <h4>Tag all: </h4>
+                <div id="tag-all-slot" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-tag-modal">@tag all</div>
+            </div>
         </div>
         <div class="col-10 container-fluid upload-container position-relative mt-md-5">
             <div class="row mt-5 image-container">
@@ -25,8 +28,7 @@
         <div class="modal-dialog d-flex justify-content-center" role="document">
             <div class="modal-content">
                 <button type="button" class="btn edit-tag-save" onclick="editTagFile()" data-dismiss="modal">Done</button>
-                <span class="modal-header d-flex justify-content-center">
-                </span>
+                <span class="modal-header d-flex justify-content-center"></span>
                 <div class="modal-body">
                     <textarea name="edit-file-tag" id="edit-file-tag"></textarea>
                     <span id="output-file"></span>
