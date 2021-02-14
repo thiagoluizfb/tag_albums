@@ -1,9 +1,10 @@
-var files = []
+var uploadFiles = []
 var images = [];
 var outputs = [];
 var tags = [[],[]];
-var allTags = null;
+var allTags = "@";
 var output = 0;
+var uploaded = [];
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
@@ -11,15 +12,16 @@ $(function () {
 
 $('.carousel').carousel()
 
-var loadFile = function(event) {
+function loadFile(event) {
     $(".upload-photo-btn").html("Add more");
     $(".image-container").css("display", "none");
     $(".tag-all-slot").css("display", "block");
     var numFiles = $("#upload-photo")[0].files.length;
+    console.log($("#upload-photo")[0].files);
     for (i = 0; i < numFiles; i++) {
         imageName = event.target.files[i].name;
         if (images.indexOf(imageName)<0){
-            files.push(event.target.files[i]);
+            uploadFiles.push(event.target.files[i]);
             images.push(imageName);
             outputs.push(output);
             tags[0].push(`output${output}`);
@@ -44,15 +46,36 @@ var loadFile = function(event) {
             output++;
         };
     };
-    $("#upload-photo").val('');
+    update();
+}
+
+
+update = function(){
+    uploaded[0] = uploadFiles;
+    uploaded[1] = images;
+    uploaded[2] = tags;
+    uploaded[3] = allTags;
+/*credit: https://stackoverflow.com/users/687677/superluminary
+at https://stackoverflow.com/questions/52078853/is-it-possible-to-update-filelist*/
+    let list = new DataTransfer();
+    let file = new File(["content"], "filename.jpg");
+    list.items.add(file);
+    let myFileList = list.files;
+    $("#upload-photo")[0] = list.files;
+/*credit: https://stackoverflow.com/questions/52078853/is-it-possible-to-update-filelist*/
+
+    console.log($("#upload-photo")[0].files);
+    return;
 }
 
 function showDelete(btn){
     $(btn).siblings().removeClass("displaynone");
+    return;
 }
 
 function hideDelete(btn){
     $(btn).siblings().addClass("displaynone");
+    return;
 }
 
 function deleteImg(btn){
@@ -61,11 +84,16 @@ function deleteImg(btn){
     imageId = parseInt(imageOutput.slice(6,10));
     index = outputs.indexOf(imageId);
     imageName = images[index];
+    files.splice(index,1);
     images.splice(index,1);
     outputs.splice(index,1);
     tags[0].splice(index,1);
     tags[1].splice(index,1);
     $(`#${imageOutput}-container`).remove();
+    window.setTimeout (function(){ 
+       update();
+    },100);
+    return;
 }
 
 
@@ -102,6 +130,7 @@ function addSymbol(input){
     window.setTimeout (function(){ 
        $("#edit-file-tag").focus();
     },100);
+    return;
 }
 
 function editTagFile(){
@@ -117,4 +146,5 @@ function editTagFile(){
         $("#tag-all-slot").html(editedTag);
         allTags = editedTag;
     }
+    return;
 }

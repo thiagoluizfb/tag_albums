@@ -64,7 +64,7 @@ body{
 }
 
 #upload-photo{
-    display: none;
+    display: block;
 }
 
 .frame-wrapper{
