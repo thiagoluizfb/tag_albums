@@ -1,5 +1,8 @@
+var files = []
 var images = [];
 var outputs = [];
+var tags = [[],[]];
+var allTags = null;
 var output = 0;
 
 $(function () {
@@ -16,8 +19,11 @@ var loadFile = function(event) {
     for (i = 0; i < numFiles; i++) {
         imageName = event.target.files[i].name;
         if (images.indexOf(imageName)<0){
+            files.push(event.target.files[i]);
             images.push(imageName);
             outputs.push(output);
+            tags[0].push(`output${output}`);
+            tags[1].push("@");
             idName = `output${output}`;
             $("#frame").append(`
             <div id="${idName}-container" class="col-12 col-md-6 col-lg-3 text-center">
@@ -57,6 +63,8 @@ function deleteImg(btn){
     imageName = images[index];
     images.splice(index,1);
     outputs.splice(index,1);
+    tags[0].splice(index,1);
+    tags[1].splice(index,1);
     $(`#${imageOutput}-container`).remove();
 }
 
@@ -100,10 +108,13 @@ function editTagFile(){
     $(".modal-header").empty();
     editedTag = $(".modal-body").children().first().val();
     image = $("#output-file").html();
+    imageId = parseInt(image.slice(6,10));
     if (image){
         $(`#${image}-tag-slot`).html(editedTag);
         $("#output-file").empty();
+        tags[1][tags[0].indexOf(image)] = editedTag;
     }else{
         $("#tag-all-slot").html(editedTag);
+        allTags = editedTag;
     }
 }
