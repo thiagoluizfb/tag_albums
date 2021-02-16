@@ -1,22 +1,27 @@
-from django import forms
 from django.shortcuts import render
+from django.contrib import messages
 from .models import Photos, Tags
+from .forms import Uploaded
 
 
 def upload(request):
     """ A view to return the upload page"""
-
+    messages.success(request, 'Successfully updated product!')
     return render(request, "upload.html")
 
 
 def uploaded(request):
     """ A view to update model return the albums page"""
 
-    uploaded = request.POST.get('uploaded')
-    files = request.FILES.get('image')
-
-    print(files)
-    print("uploaded")
+    if request.method == 'POST':
+        tosave = Photos(
+            owner="none",
+            upload_date="today",
+            image=request.FILES.get('uploaded-file')
+        )
+        tosave.save()
+    else:
+        photos = Uploaded()
 
     photos = list(Photos.objects.all())
     tags = list(Tags.objects.all())
@@ -26,7 +31,7 @@ def uploaded(request):
         'tags': tags,
     }
 
-    return render(request, "albums.html")
+    return render(request, "albums.html", context)
 
 
 def photos(request, album):

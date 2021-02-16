@@ -2,8 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <form class="form" method="POST" action="{% url 'uploaded' %}">
-        {% csrf_token %}
+    <form method="POST" action="{% url 'uploaded' %}" class="form mb-2" enctype="multipart/form-data">
         <div class="row mx-0">
             <div class="col-md-2 tag-all-slot text-center mt-md-5">
                 <div>
@@ -18,7 +17,7 @@
                     </div>
                 </div>
                 <div id="frame" class="row d-flex justify-content-center"></div>
-                <input type="file"  accept="image/*" name="image" id="upload-photo" onchange="loadFile(event)" multiple>
+                <input type="file"  accept="image/*" name="images" id="upload-photo" onchange="loadFile(event)">
             </div>
         </div>
         <div class="row mt-3 mx-0 d-flex justify-content-center">
@@ -26,7 +25,7 @@
         </div>
         <div>
             <input id="uploaded-form" type="text" name="uploaded" value="">
-            <input id="uploaded-file" type="file" name="uploaded-file" value="" multiple>
+            <input id="uploaded-file" type="file" name="uploaded-file">
             <button type="submit" class="btn" >DONE</button>
         </div>
     </form>

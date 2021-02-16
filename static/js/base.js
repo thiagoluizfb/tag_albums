@@ -58,13 +58,15 @@ update = function(){
 /*credit: https://stackoverflow.com/users/687677/superluminary
 at https://stackoverflow.com/questions/52078853/is-it-possible-to-update-filelist*/
     let list = new DataTransfer();
-    let file = new File(["content"], "filename.jpg");
+    let file = new File([""], uploaded[0][0].name, {type: uploaded[0][0].type, lastModified: uploaded[0][0].lastModifiedDate});//
+    //let file = new File(["content"], "filename.jpg");
+    console.log(uploadFiles)
     list.items.add(file);
     let myFileList = list.files;
-    $("#upload-photo")[0] = list.files;
+    $("#uploaded-file")[0].files = list.files;
 /*credit: https://stackoverflow.com/questions/52078853/is-it-possible-to-update-filelist*/
 
-    console.log($("#upload-photo")[0].files);
+    console.log($("#uploaded-file")[0].files);
     return;
 }
 

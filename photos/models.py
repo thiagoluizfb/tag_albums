@@ -7,7 +7,7 @@ class Photos(models.Model):
     image = models.FileField(null=True, blank=True)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['upload_date']
 
     def __str__(self):
         return self.owner
@@ -18,7 +18,7 @@ class Tags(models.Model):
     tag_photos = models.ManyToManyField(Photos)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['tag_name']
 
     def __str__(self):
         return self.tag_name
