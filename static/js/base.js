@@ -31,7 +31,7 @@ function loadFile(event) {
             <div id="${idName}-container" class="col-12 col-md-6 col-lg-3 text-center">
                 <div class="position-relative frame-wrapper">
                     <img id="${idName}" class="thumbnail" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)"/>
-                    <span class="displaynone btn delete-thumbnail">
+                    <span class="btn delete-thumbnail">
                         <strong>
                             <i id="${idName}-delete-img" class="far fa-times-circle" onclick="deleteImg(this)" data-toggle="tooltip" data-placement="top" title="Remove this file"></i>
                         </strong>
@@ -55,28 +55,25 @@ update = function(){
     uploaded[1] = images;
     uploaded[2] = tags;
     uploaded[3] = allTags;
-/*credit: https://stackoverflow.com/users/687677/superluminary
+/*concept credit: https://stackoverflow.com/users/687677/superluminary
 at https://stackoverflow.com/questions/52078853/is-it-possible-to-update-filelist*/
     let list = new DataTransfer();
-    let file = new File([""], uploaded[0][0].name, {type: uploaded[0][0].type, lastModified: uploaded[0][0].lastModifiedDate});//
-    //let file = new File(["content"], "filename.jpg");
-    console.log(uploadFiles)
-    list.items.add(file);
-    let myFileList = list.files;
+    for (i=0; i< uploaded[0].length; i++){
+        list.items.add(uploaded[0][i]);
+    }
     $("#uploaded-file")[0].files = list.files;
-/*credit: https://stackoverflow.com/questions/52078853/is-it-possible-to-update-filelist*/
-
+/* https://stackoverflow.com/users/687677/superluminary */
     console.log($("#uploaded-file")[0].files);
     return;
 }
 
 function showDelete(btn){
-    $(btn).siblings().removeClass("displaynone");
+    $(btn).siblings().removeClass("hidden");
     return;
 }
 
 function hideDelete(btn){
-    $(btn).siblings().addClass("displaynone");
+    $(btn).siblings().addClass("hidden");
     return;
 }
 
@@ -86,7 +83,7 @@ function deleteImg(btn){
     imageId = parseInt(imageOutput.slice(6,10));
     index = outputs.indexOf(imageId);
     imageName = images[index];
-    files.splice(index,1);
+    uploadFiles.splice(index,1);
     images.splice(index,1);
     outputs.splice(index,1);
     tags[0].splice(index,1);
@@ -135,6 +132,15 @@ function addSymbol(input){
     return;
 }
 
+//credit: https://stackoverflow.com/users/2065039/guruprasad-j-rao
+function preventComma() {
+    if(event.keyCode === 44 ) {
+        alert("comma not allowed");
+        event.preventDefault();
+    }
+};
+//at https://stackoverflow.com/questions/32096193/how-to-prevent-default-on-keypress-for-certain-event-but-then-bring-back-the-def
+
 function editTagFile(){
     $(".modal-header").empty();
     editedTag = $(".modal-body").children().first().val();
@@ -144,9 +150,12 @@ function editTagFile(){
         $(`#${image}-tag-slot`).html(editedTag);
         $("#output-file").empty();
         tags[1][tags[0].indexOf(image)] = editedTag;
+        $("#each-tag").val(tags[1]);
     }else{
         $("#tag-all-slot").html(editedTag);
         allTags = editedTag;
+        $("#all-tags").val(editedTag);
     }
+    console.log(tags)
     return;
 }

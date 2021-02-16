@@ -14,12 +14,28 @@ def uploaded(request):
     """ A view to update model return the albums page"""
 
     if request.method == 'POST':
-        tosave = Photos(
-            owner="none",
-            upload_date="today",
-            image=request.FILES.get('uploaded-file')
-        )
-        tosave.save()
+        images = request.FILES.getlist('uploaded-file')
+        tags = request.POST.get('each-tag').split(',')
+        for count, image in enumerate(images):
+            if not Photos.objects.filter(image=image):
+                tosave = Photos(
+                    owner="none",
+                    upload_date="today",
+                    image=image,
+                )
+                tosave.save()
+            else:
+                tosave = Photos.objects.get(image=image)
+            eachtag = tags[count].split('@')
+            for tag in eachtag:
+                if tag != "":
+                    if Tags.objects.filter(tag_name=tag):
+                        savetag = Tags.objects.get(tag_name=tag)
+                        savetag.tag_photos.add(tosave)
+                    else:
+                        savetag = Tags(tag_name=tag)
+                        savetag.save()
+                        savetag.tag_photos.add(tosave)
     else:
         photos = Uploaded()
 

@@ -123,11 +123,11 @@ body{
     background-color: #bebebe;
 }
 
-.displaynone{
+.hidden{
     display: none !important;
 }
 
-.displaynone:hover{
+.delete-thumbnail:hover{
     display: block !important;
     color: #1a1a1a;
 }
