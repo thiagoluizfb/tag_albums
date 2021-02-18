@@ -5,8 +5,11 @@
     <form method="POST" action="{% url 'uploaded' %}" class="form mb-2" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row mx-0">
-            <div class="col-12 tag-all-slot text-center">
-                <div id="tag-all-slot" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-tag-modal">@tag album here</div>
+            <div class="col-md-2 tag-all-slot text-center mt-md-5">
+                <div>
+                    <h4>Tag all: </h4>
+                    <div id="tag-all-slot" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-tag-modal">@tag all</div>
+                </div>
             </div>
             <div class="col-10 container-fluid upload-container position-relative mt-md-5">
                 <div class="row mt-5 image-container">
@@ -22,8 +25,9 @@
             <label for="upload-photo" class="btn upload-photo-btn">Add</label>
         </div>
         <div>
-            <input id="all-tags" type="text" name="all-tags" value="" required>
-            <input id="uploaded-file" type="file" name="uploaded-file" multiple required>
+            <input id="each-tag" type="text" name="each-tag" value="">
+            <input id="all-tags" type="text" name="all-tags" value="">
+            <input id="uploaded-file" type="file" name="uploaded-file" multiple>
             <button type="submit" class="btn" >DONE</button>
         </div>
     </form>

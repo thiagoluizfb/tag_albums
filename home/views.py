@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from photos.views import Photos, Tags
+from photos.forms import Uploaded
 
 
 def index(request):
@@ -10,4 +12,10 @@ def index(request):
 def upload(request):
     """ A view to return the upload page"""
 
-    return render(request, "upload.html")
+    photos = list(Photos.objects.all())
+    tags = list(Tags.objects.all())
+    context = {
+        'photos': photos,
+        'tags': tags
+    }
+    return render(request, "upload.html", context)

@@ -3,7 +3,7 @@ from django.db import models
 
 class Photos(models.Model):
     owner = models.CharField(max_length=254, null=True, blank=True)
-    upload_date = models.CharField(max_length=254)
+    upload_date = models.DateTimeField()
     image = models.FileField(null=True, blank=True)
 
     class Meta:
