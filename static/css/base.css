@@ -11,6 +11,10 @@ body{
     color: #bebebe;
 }
 
+a:hover{
+    color: #bebebe;
+}
+
 /* Landing Page */
 .logo-anime{
     font-size: 150px;
@@ -29,6 +33,54 @@ body{
   100% {
     opacity: 1;
   }
+}
+
+/* Login and authentication */
+
+.auth-container{
+    min-height: 60vh !important;
+}
+
+#id_login,
+#id_password,
+#id_email,
+#id_email2,
+#id_username,
+#id_password1,
+#id_password2{
+    background-color: #1a1a1a !important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    color: #bebebe;
+}
+
+.btn:focus{
+    box-shadow: 0 0 0 0.2rem rgba(190, 190, 190, 0.25);
+}
+
+
+#id_login:focus,
+#id_password:focus,
+#id_email:focus,
+#id_email2:focus,
+#id_username:focus,
+#id_password1:focus,
+#id_password2:focus,
+#id_remember{
+    outline: none; 
+}
+
+form li{
+    list-style-type: none;
+    color: #990000;
+    font-style: italic;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#signup_form ul{
+    padding: 0;
 }
 
 /* Upload Page */
@@ -78,13 +130,13 @@ body{
     border-bottom: solid 10px #fff;
 }
 
-.upload-photo-btn{
+.upload-photo-btn, .auth-btn{
     background-color: #1a1a1a;
     color: #bebebe !important;
     border: solid 1px #bebebe;
 }
 
-.upload-photo-btn:hover{
+.upload-photo-btn:hover, .auth-btn:hover{
     cursor: pointer;
     background-color: #bebebe;
     color: #1a1a1a !important;
