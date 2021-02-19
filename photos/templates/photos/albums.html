@@ -23,7 +23,7 @@
                         {% for cover in tag.tag_photos.all %}
                             {% if forloop.last %}
                                 <div class="frame-wrapper">
-                                    <a href="{% url 'photos' tag.tag_name %}">
+                                    <a href="{% url 'tag_album' tag.tag_name %}">
                                         <img class="thumbnail" src="../media/{{ cover.image  }}">
                                     </a>
                                 </div>

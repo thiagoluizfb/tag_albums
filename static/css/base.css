@@ -97,6 +97,13 @@ form li{
     padding: 0;
 }
 
+/* All Photos Page */
+
+#side-menu-list li{
+    list-style-type: none;
+}
+
+
 /* Upload Page */
 
 .upload-container{

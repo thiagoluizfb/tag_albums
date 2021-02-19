@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <form method="POST" action="{% url 'upload' %}" class="form mb-2" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'all_photos' %}" class="form mb-2" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row mx-0">
             <div class="col-12 tag-all-slot text-center">
