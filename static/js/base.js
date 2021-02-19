@@ -1,3 +1,5 @@
+var indexTag = 1
+var keyCode = 0
 var uploadFiles = []
 var images = [];
 var outputs = [];
@@ -140,3 +142,24 @@ function editTagFile(){
         $("#all-tags").val(editedTag);
     return;
 }
+
+$(document).ready(function() {
+    $('#logo-text').focus();
+});
+
+
+function logoText() {
+    keyCode ++;
+    if (keyCode > 2){
+        $('#logo-text').focus();
+        $(".logo-anime").css("font-size", "50px")
+        text = $("#logo-text").val();
+        if (event.keyCode == 13){
+            if (indexTag == 4){indexTag = 1}
+            $(`.index-tag-${indexTag}`).html(`#${text}`);
+            $(".logo-anime").html(`@`);
+            indexTag ++;
+        }
+        $(".logo-anime").html(`@${text}`);
+    }
+};

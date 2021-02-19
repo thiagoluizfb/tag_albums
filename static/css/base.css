@@ -18,12 +18,26 @@ a:hover{
 /* Landing Page */
 .logo-anime{
     font-size: 150px;
+    max-width: 50vh;
+    word-wrap: break-word;
+}
+
+.index-tag-1,
+.index-tag-2,
+.index-tag-3{
+    word-wrap: break-word;
+}
+
+#logo-text{
+    color: #1a1a1a;
+    background-color: #1a1a1a;
+    border: none;
 }
 
 .logo-anime:after {
-  content: 'I';
-  opacity: 0;
-  animation: tagblink 0.75s linear infinite alternate ;
+    content: 'I' ;
+    opacity: 0;
+    animation: tagblink 0.75s linear infinite alternate ;
 }
 
 @keyframes tagblink {
@@ -59,7 +73,7 @@ a:hover{
     box-shadow: 0 0 0 0.2rem rgba(190, 190, 190, 0.25);
 }
 
-
+#logo-text:focus,
 #id_login:focus,
 #id_password:focus,
 #id_email:focus,
