@@ -12,20 +12,14 @@
 {% block content %}
     <div class="row mx-0 mb-5">
         <div class="col-12 text-center">
-            <h2>Photos</h2>
+            <h2>Edit Photos</h2>
         </div>
     </div>
     <div class="row mx-0">
-        <div class="col-2 text-left px-0 d-none d-md-block">
-            <ul id="side-menu-list">
-                <li class="py-2"><a href="{% url 'albums' %}">@lbums</a></li>
-                <li class="py-2"><a href="{% url 'upload' %}">+ Upload</a></li>
-            </ul>
-        </div>
-        <div class="col-12 col-md-10 text-center mb-5">
+        <div class="col-12 col-md-10 text-center mb-4">
             <div class="row mx-0">
                 {% for photo in photos %}
-                    <div id="{{ photo.id }}-img-container" class="col-12 col-md-4 col-lg-3 text-center">
+                    <div id="{{ photo.id }}-img-container" class="col-12 col-md-4 text-center mx-auto">
                         <div class="frame-wrapper position-relative">
                             <img id="{{ photo.id }}-img" class="thumbnail" src="/media/{{ photo.image }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
                             <span class="btn delete-thumbnail hidden">
@@ -34,22 +28,17 @@
                                 </strong>
                             </span>
                         </div>
-                        <div>
-                            <div class="tag-slot text-left position-relative" >
-                                <p id="{{ photo.id }}-tag-slot-img" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
-                                    {% for tag in photo.tags_set.all %}
-                                        @{{tag.tag_name}}
-                                    {% endfor %}
-                                </p>
-                                <span class="btn edit-tag hidden" data-toggle="tooltip" data-placement="top" title="Edit tags">
-                                    <strong>
-                                        <a href="{% url 'edit_tags' photo.id %}"><i id="{{ photo.id }}-img-edit" class="fas fa-pencil-alt" ></i></a>
-                                    </strong>
-                                </span>
-                            </div>
-                        </div>
+                    </div>
+                    <textarea id="{{ photo.id }}-tag-slot-img"
+                        class="col-12 col-md-6 edit-tag-img text-left">{% for tag in photo.tags_set.all %}@{{tag.tag_name}}{% endfor %}</textarea>
+                    <div class="col-12 col-md-6 offset-md-4 text-center my-3">
+                        <a href="{% url 'all_photos' %}" class="btn upload-photo-btn mx-2" >CANCEL</a>
+                        <button type="submit" class="btn upload-photo-btn mx-2" >DONE</button>
                     </div>
                 {% endfor %}
+            </div>
+            <div class="row mx-0">
+                
             </div>
         </div>
     </div>

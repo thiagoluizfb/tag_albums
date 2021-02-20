@@ -131,13 +131,13 @@ form li{
 }
 
 .fa-image{
-    margin: 0;
+    margin-top: 20%;
     padding: 0;
-    font-size: 200px;
+    font-size: 100px;
 }
 
-#upload-photo{
-    display: block;
+.upload-photo{
+    cursor: pointer;
 }
 
 .frame-wrapper{
@@ -191,8 +191,8 @@ form li{
 }
 
 .edit-tag {
-    top: 80%;
-    left: 75%;
+    top: 5%;
+    left: 80%;
     position: absolute;
     color: #1a1a1a;
     font-size: 12px;
@@ -263,14 +263,18 @@ form li{
     padding: 0;
 }
 
-#edit-file-tag{
-    background-color: #fff;
+.edit-tag-img{
+    margin-top: 20px;
+    color: #bebebe;
+    background-color: #1a1a1a;
     resize: none;
-    border: none;
+    border: 1px solid #bebebe;
     width: 100%;
     max-width: 100%;
-    height: 30vh;
+    height: 220px;
+    bottom: 0;
 }
+
 
 #edit-file-tag:focus{
     outline: none;
