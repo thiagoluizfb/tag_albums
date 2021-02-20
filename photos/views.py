@@ -8,8 +8,13 @@ from .forms import Uploaded
 def all_photos(request):
     """ A view to return the photos page"""
 
-    photos = Photos.objects.all()
-    tags = Tags.objects.all()
+    photos = list(Photos.objects.all())
+    tags = Tags
+    for index, photo in enumerate(photos):
+        tag = {
+            'tags': photo.tags_set.all()
+        }
+    print(tags)
 
     context = {
         'photos': photos,

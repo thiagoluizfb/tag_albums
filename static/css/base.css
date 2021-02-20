@@ -183,11 +183,19 @@ form li{
 }
 
 
-.delete-thumbnail{
+.delete-thumbnail {
     top: 5%;
     left: 75%;
     position: absolute;
     color: #1a1a1a;
+}
+
+.edit-tag {
+    top: 80%;
+    left: 75%;
+    position: absolute;
+    color: #1a1a1a;
+    font-size: 12px;
 }
 
 .fa-times-circle{
@@ -200,7 +208,7 @@ form li{
     display: none !important;
 }
 
-.delete-thumbnail:hover{
+.delete-thumbnail:hover, .edit-tag:hover{
     display: block !important;
     color: #1a1a1a;
 }

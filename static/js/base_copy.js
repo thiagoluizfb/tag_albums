@@ -31,7 +31,7 @@ function loadFile(event) {
             <div id="${idName}-container" class="col-12 col-md-6 col-lg-3 text-center">
                 <div class="position-relative frame-wrapper">
                     <img id="${idName}" class="thumbnail" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)"/>
-                    <span class="btn delete-thumbnail">
+                    <span class="btn delete-thumbnail hidden">
                         <strong>
                             <i id="${idName}-delete-img" class="far fa-times-circle" onclick="deleteImg(this)" data-toggle="tooltip" data-placement="top" title="Remove this file"></i>
                         </strong>

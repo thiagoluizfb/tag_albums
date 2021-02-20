@@ -25,11 +25,28 @@
         <div class="col-10 text-center px-0">
             <div class="row mx-0">
                 {% for photo in photos %}
-                    <div class="col-12 col-md-4 col-lg-3 text-center">
-                        <div class="frame-wrapper">
-                            <a href="">
-                                <img class="thumbnail" src="../media/{{ photo.image }}">
-                            </a>
+                    <div id="image-container-{{ photo.id }}" class="col-12 col-md-4 col-lg-3 text-center">
+                        <div class="frame-wrapper position-relative">
+                            <img id="image-{{ photo.id }}" class="thumbnail" src="../media/{{ photo.image }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
+                            <span class="btn delete-thumbnail hidden">
+                                <strong>
+                                    <i class="far fa-times-circle" onclick="deleteImg(this)" data-toggle="tooltip" data-placement="top" title="Remove this file"></i>
+                                </strong>
+                            </span>
+                        </div>
+                        <div>
+                            <div id="tag-slot-img-{{ photo.id }} position-relative" class="tag-slot text-left" >
+                                <p onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
+                                    {% for tag in photo.tags_set.all %}
+                                        @{{tag.tag_name}}
+                                    {% endfor %}
+                                </p>
+                                <span class="btn edit-tag hidden" data-toggle="tooltip" data-placement="top" title="Edit tags">
+                                    <strong>
+                                        <i class="fas fa-pencil-alt" onclick="addSymbol(this)" data-toggle="modal" data-target="#edit-tag-modal"></i>
+                                    </strong>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
