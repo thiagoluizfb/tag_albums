@@ -4,7 +4,20 @@ from photos.views import Photos, Tags
 
 
 def index(request):
-    """ A view to return the index page"""
+    """ A view to delete photos uploaded w/o login and return the index page"""
+
+    if Photos.objects.filter(owner='none'):
+        photos = Photos.objects.get(owner='none')
+        if photos:
+            photos.delete()
+
+    tags = Tags.objects.all()
+    if tags:
+        for tag in tags:
+            if not tag.tag_photos.all():
+                todelete = Tags.objects.filter(tag_name=tag)
+                todelete.delete()
+        tags.delete()
 
     return render(request, "home/index.html")
 
