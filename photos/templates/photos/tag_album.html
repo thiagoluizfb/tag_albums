@@ -10,13 +10,21 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row mx-0">
-        <div class="col-12 text-center">
+    <div class="row mx-0 mb-5">
+        <div class="col-2"></div>
+        <div class="col-10 text-center">
             <h2>@{{ tags.0 }}</h2>
         </div>
     </div>
     <div class="row mx-0">
-        <div class="col-12 text-center px-0">
+        <div class="col-2 d-none d-md-block">
+            <ul id="side-menu-list">
+                <li class="py-2"><a href="{% url 'all_photos' %}"><i class="fas fa-images"></i> Photos</a></li>
+                <li class="py-2"><a href="{% url 'albums' %}"><i class="fas fa-book"></i> Albums</a></li>
+                <li class="py-2"><a href="{% url 'upload' %}"><i class="fas fa-upload"></i> Upload</a></li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-10 text-center">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <!--<ol class="carousel-indicators">
                     {% for tag in tags %}

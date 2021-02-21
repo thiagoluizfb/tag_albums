@@ -17,9 +17,11 @@ a:hover{
 }
 
 /* Landing Page */
+
 .logo-anime{
     font-size: 150px;
     max-width: 50vh;
+    min-height: 40vh;
     word-wrap: break-word;
 }
 
@@ -237,34 +239,13 @@ form li{
     word-wrap: break-word;
 }
 
-.tag-slot::placeholder, .tag-all-slot::placeholder {
+.tag-slot::placeholder {
     color: #1a1a1a;
   	opacity: 0.25;
 }
 
-.tag-slot:focus, .tag-all-slot:focus{
+.tag-slot:focus{
     outline: none;
-}
-
-.modal-dialog{
-    width: 300px;
-    margin: auto;
-}
-
-.modal-content{
-    background-color: #fff;
-}
-
-.modal-footer{
-    border: none;
-}
-
-.modal-header{
-    border: none;
-}
-
-.modal-body{
-    padding: 0;
 }
 
 .edit-tag-img{
@@ -317,8 +298,7 @@ form li{
 
 /* Photos in albums */
 .carousel-item img{
-    height: 80vh;
+    height: 70vh;
     max-width: 100vh;
-    display: block;
-    margin: auto;
+    margin: 0;
 }

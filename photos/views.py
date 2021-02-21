@@ -104,7 +104,7 @@ def upload(request):
                     savetag.save()
                     savetag.tag_photos.add(tosave)
 
-        redirect(reverse('all_photos'))
+        return redirect(reverse('all_photos'))
 
     return render(request, "photos/upload.html")
 

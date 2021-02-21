@@ -8,27 +8,34 @@
         </div>
     </div>
     <div class="row mx-0">
+        <form method="POST" class="col-12" action="{% url 'upload' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-12 text-center my-3">
+            <a href="{% url 'all_photos' %}" class="btn upload-photo-btn mx-2" >CANCEL</a>
+            <button type="submit" class="btn upload-photo-btn mx-2" >DONE</button>
+        </div>
         <div class="col-12 col-md-10 text-center">
-            <form method="POST" action="{% url 'all_photos' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="row mx-0">
-                        <div id="frame" class="col-12 col-md-4 text-center mx-auto">
-                            <div class="position-relative frame-wrapper">
-                                <div class="image-container">
+            <div class="row mx-0">
+                    <div id="frame" class="col-12 col-md-4 text-center mx-auto">
+                        <div class="position-relative frame-wrapper">
+                            <div class="image-container">
+                                <label for="upload-photo" class="upload-photo">
                                     <i class="fas fa-image"></i>
-                                    <input class="hidden" type="file"  accept="image/*" name="upload-photo" id="upload-photo" onchange="loadFile(event)" required>
-                                    <label for="upload-photo" class="upload-photo"><p>Click here to upload a new image</p></label>
-                                </div>
+                                    <p>Click here to upload a new image</p>
+                                </label>
                             </div>
                         </div>
-                        <textarea class="col-12 col-md-6 edit-tag-img text-left"
-                            name="edit-file-tag" id="edit-file-tag" onkeypress="preventComma()" placeholder="Tag this photo here. Add the symbol @ between each tag. Ex.: @summer@2019@party"></textarea>
-                        <div class="col-12 col-md-6 offset-md-4 text-center my-3">
-                            <a href="{% url 'all_photos' %}" class="btn upload-photo-btn mx-2" >CANCEL</a>
-                            <button type="submit" class="btn upload-photo-btn mx-2" >DONE</button>
+                        <div class="col-12 py-3 text-center">
+                            <input class="hidden" type="file"  accept="image/*" name="upload-photo" id="upload-photo" onchange="loadFile(event)" required>
+                            <label for="upload-photo" class="upload-photo hidden">
+                                <p><i class="fas fa-sync-alt"></i> Change photo</p>
+                            </label>
                         </div>
+                    </div>
+                    <textarea class="col-12 col-md-6 edit-tag-img text-left"
+                        name="edit-file-tag" id="edit-file-tag" onkeypress="preventComma()" placeholder="Tag this photo here. Add the symbol @ between each tag. Ex.: @summer@2019@party"></textarea>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 {% endblock %}
