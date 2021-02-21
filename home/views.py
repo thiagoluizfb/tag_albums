@@ -6,10 +6,11 @@ from photos.views import Photos, Tags
 def index(request):
     """ A view to delete photos uploaded w/o login and return the index page"""
 
-    if Photos.objects.filter(owner='none'):
-        photos = Photos.objects.get(owner='none')
-        if photos:
-            photos.delete()
+    if Photos.objects.all():
+        if Photos.objects.filter(owner='none'):
+            photos = Photos.objects.get(owner='none')
+            if photos:
+                photos.delete()
 
     tags = Tags.objects.all()
     if tags:

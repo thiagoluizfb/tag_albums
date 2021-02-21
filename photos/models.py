@@ -1,10 +1,13 @@
 from django.db import models
+from profiles.models import UserProfile
 
 
 class Photos(models.Model):
-    owner = models.CharField(max_length=254, null=True, blank=True)
+    owner = models.ForeignKey(
+        UserProfile, on_delete=models.SET_NULL,
+        null=True, blank=True, related_name='photos')
     upload_date = models.DateTimeField()
-    image = models.FileField(null=True, blank=True)
+    image = models.FileField(null=False, blank=False)
 
     class Meta:
         ordering = ['upload_date']
