@@ -2,7 +2,6 @@ import datetime
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from .models import Photos, Tags
-from .forms import Uploaded
 
 
 def all_photos(request):
@@ -45,7 +44,7 @@ def tag_album(request, album):
 
 
 def edit_tags(request, image_id):
-    """ A view to edit photos tags page"""
+    """ A view to edit photos' tags page"""
 
     photos = list(Photos.objects.filter(id=image_id))
     tags = Tags
@@ -56,7 +55,7 @@ def edit_tags(request, image_id):
     }
 
     if request.method == 'POST':
-
+ 
         tags = request.POST.get('edit-file-tag').split('@')
         tosave = Photos.objects.get(id=image_id)
         tosave.tags_set.clear()
@@ -108,3 +107,31 @@ def upload(request):
         redirect(reverse('all_photos'))
 
     return render(request, "photos/upload.html")
+
+
+def delete_img(request, image_id):
+    """ A view to delete photo"""
+
+    photos = list(Photos.objects.filter(id=image_id))
+    tags = Tags
+    context = {
+        'photos': photos,
+        'tags': tags,
+        'image_id': image_id,
+    }
+
+    if request.method == 'POST':
+
+        todelete = Photos.objects.get(id=image_id)
+        todelete.delete()
+
+        tags = list(Tags.objects.all())
+        for tag in tags:
+            if not tag.tag_photos.all():
+                todelete = Tags.objects.filter(tag_name=tag)
+                todelete.delete()
+
+        return redirect(reverse('all_photos'))
+
+    else:
+        return render(request, 'photos/delete_photos.html', context)

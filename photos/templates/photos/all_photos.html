@@ -12,14 +12,14 @@
 {% block content %}
     <div class="row mx-0 mb-5">
         <div class="col-12 text-center">
-            <h2>Photos</h2>
+            <h2>My Photos</h2>
         </div>
     </div>
     <div class="row mx-0">
-        <div class="col-2 text-left px-0 d-none d-md-block">
+        <div class="col-2 d-none d-md-block">
             <ul id="side-menu-list">
-                <li class="py-2"><a href="{% url 'albums' %}">@lbums</a></li>
-                <li class="py-2"><a href="{% url 'upload' %}">+ Upload</a></li>
+                <li class="py-2"><a href="{% url 'albums' %}"><i class="fas fa-book"></i> Albums</a></li>
+                <li class="py-2"><a href="{% url 'upload' %}"><i class="fas fa-upload"></i> Upload</a></li>
             </ul>
         </div>
         <div class="col-12 col-md-10 text-center mb-5">
@@ -30,7 +30,7 @@
                             <img id="{{ photo.id }}-img" class="thumbnail" src="/media/{{ photo.image }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
                             <span class="btn delete-thumbnail hidden">
                                 <strong>
-                                    <i class="far fa-times-circle" onclick="deleteImg(this)" data-toggle="tooltip" data-placement="top" title="Remove this file"></i>
+                                    <a href="{% url 'delete_img' photo.id %}"><i class="far fa-times-circle" onclick="deleteImg(this)" data-toggle="tooltip" data-placement="top" title="Delete this photo"></i></a>
                                 </strong>
                             </span>
                         </div>

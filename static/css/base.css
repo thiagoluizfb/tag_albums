@@ -13,6 +13,7 @@ body{
 
 a:hover{
     color: #bebebe;
+    text-decoration: none;
 }
 
 /* Landing Page */
@@ -204,6 +205,7 @@ form li{
     border: solid 3px #bebebe;
     border-radius: 50%;
     background-color: #bebebe;
+    color: #1a1a1a !important;
 }
 
 .hidden{
