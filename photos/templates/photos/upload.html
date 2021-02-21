@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'photos/js/photos.js' %}"></script>
+{% endblock %}
+
 {% block content %}
     <div class="row mx-0 mb-5">
         <div class="col-12 text-center">
@@ -33,7 +41,7 @@
                         </div>
                     </div>
                     <textarea class="col-12 col-md-6 edit-tag-img text-left"
-                        name="edit-file-tag" id="edit-file-tag" onkeypress="preventComma()" placeholder="Tag this photo here. Add the symbol @ between each tag. Ex.: @summer@2019@party"></textarea>
+                        name="edit-file-tag" id="edit-file-tag" placeholder="Tag this photo here. Add the symbol @ between each tag. Ex.: @summer@2019@party"></textarea>
                 </div>
             </div>
         </form>

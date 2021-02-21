@@ -1,0 +1,33 @@
+.logo-anime{
+    font-size: 150px;
+    max-width: 50vh;
+    min-height: 40vh;
+    word-wrap: break-word;
+}
+
+.index-tag-1,
+.index-tag-2,
+.index-tag-3{
+    word-wrap: break-word;
+}
+
+#logo-text{
+    color: #1a1a1a;
+    background-color: #1a1a1a;
+    border: none;
+}
+
+.logo-anime:after {
+    content: 'I' ;
+    opacity: 0;
+    animation: tagblink 0.75s linear infinite alternate ;
+}
+
+@keyframes tagblink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

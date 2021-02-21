@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
-    </div>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'photos/js/photos.js' %}"></script>
 {% endblock %}
 
 {% block content %}

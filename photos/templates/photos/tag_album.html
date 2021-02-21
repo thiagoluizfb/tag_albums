@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
-    </div>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'photos/js/photos.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -26,19 +26,6 @@
         </div>
         <div class="col-12 col-md-10 text-center">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <!--<ol class="carousel-indicators">
-                    {% for tag in tags %}
-                        {% if tag.tag_name == 'healthy' %}                
-                            {% for t in tag.tag_photos.all %}
-                                {% if forloop.counter0 == 0 %}
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.counter0 == 0 %} active {% endif %}"></li>
-                                {% else %}
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter0 }}"></li>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                    {% endfor %}
-                </ol>-->
                 <div class="col-12 carousel-inner px-0">
                     {% for tag in tags %}          
                         {% for t in tag.tag_photos.all %}

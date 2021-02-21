@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
-    </div>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'photos/js/photos.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -30,7 +30,7 @@
                             <img id="{{ photo.id }}-img" class="thumbnail" src="/media/{{ photo.image }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
                             <span class="btn delete-thumbnail hidden">
                                 <strong>
-                                    <a href="{% url 'delete_img' photo.id %}"><i class="far fa-times-circle" onclick="deleteImg(this)" data-toggle="tooltip" data-placement="top" title="Delete this photo"></i></a>
+                                    <a href="{% url 'delete_img' photo.id %}"><i class="far fa-times-circle" data-toggle="tooltip" data-placement="top" title="Delete this photo"></i></a>
                                 </strong>
                             </span>
                         </div>
@@ -56,20 +56,5 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
-    <div class="modal" id="edit-tag-modal" tabindex="-1" role="dialog">
-        <form method="POST" action="" class="form mb-2" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="modal-dialog d-flex justify-content-center" role="document">
-                <div class="modal-content">
-                    <button type="submit" class="btn edit-tag-save">Done</button>
-                    <span class="modal-header d-flex justify-content-center"></span>
-                    <div class="modal-body">
-                        <textarea name="edit-file-tag" id="edit-file-tag" onkeypress="preventComma()"></textarea>
-                        <input type="text" name="output-file" id="output-file">
-                    </div>
-                </div>
-            </div>
-        </form>
     </div>
 {% endblock %}
