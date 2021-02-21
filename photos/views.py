@@ -55,7 +55,7 @@ def edit_tags(request, image_id):
     }
 
     if request.method == 'POST':
- 
+
         tags = request.POST.get('edit-file-tag').split('@')
         tosave = Photos.objects.get(id=image_id)
         tosave.tags_set.clear()
