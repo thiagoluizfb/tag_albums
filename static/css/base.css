@@ -69,7 +69,8 @@ a:hover{
     color: #bebebe;
 }
 
-.btn:focus{
+.btn:focus,
+textarea{
     box-shadow: 0 0 0 0.2rem rgba(190, 190, 190, 0.25);
 }
 
@@ -81,7 +82,8 @@ a:hover{
 #id_username:focus,
 #id_password1:focus,
 #id_password2:focus,
-#id_remember{
+#id_remember,
+textarea{
     outline: none; 
 }
 

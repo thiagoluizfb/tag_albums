@@ -37,9 +37,13 @@
                         <div>
                             <div class="tag-slot text-left position-relative" >
                                 <p id="{{ photo.id }}-tag-slot-img" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
-                                    {% for tag in photo.tags_set.all %}
-                                        @{{tag.tag_name}}
-                                    {% endfor %}
+                                    {% if photo.tags_set.all %}
+                                        {% for tag in photo.tags_set.all %}
+                                            @{{tag.tag_name}}
+                                        {% endfor %}
+                                    {% else %}
+                                        Click edit to add tag
+                                    {% endif %}
                                 </p>
                                 <span class="btn edit-tag hidden" data-toggle="tooltip" data-placement="top" title="Edit tags">
                                     <strong>

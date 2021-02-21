@@ -1,10 +1,6 @@
 var indexTag = 1
 var keyCode = 0
-var uploadFiles = []
 var images = [];
-var allTags = "@";
-var output = 0;
-var uploaded = [];
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
@@ -15,7 +11,6 @@ $('.carousel').carousel()
 function loadFile(event) {
     $(".image-container").css("display", "none");
     imageName = event.target.files[0].name;
-    uploadFiles.push(event.target.files[0]);
     images.push(imageName);
     $(".frame-wrapper").append(`
         <img id="img-upload" class="thumbnail" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)"/>
@@ -26,7 +21,6 @@ function loadFile(event) {
         </span>`);
     image = document.getElementById("img-upload");
     image.src = URL.createObjectURL(event.target.files[0]);
-    $("#edit-file-tag").focus();
 }
 
 function showDelete(btn){
@@ -45,15 +39,6 @@ function deleteImg(btn){
     $(".image-container").css("display", "block");
     return;
 }
-
-//credit: https://stackoverflow.com/users/2065039/guruprasad-j-rao
-function preventComma() {
-    if(event.keyCode === 44 ) {
-        alert("comma not allowed");
-        event.preventDefault();
-    }
-};
-//at https://stackoverflow.com/questions/32096193/how-to-prevent-default-on-keypress-for-certain-event-but-then-bring-back-the-def
 
 $(document).ready(function() {
     $('#logo-text').focus();
