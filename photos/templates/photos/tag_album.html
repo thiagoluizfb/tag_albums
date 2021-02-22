@@ -9,6 +9,10 @@
     <script src="{% static 'photos/js/photos.js' %}"></script>
 {% endblock %}
 
+{% block username %}
+    <em>{{ profile.display_name | lower}}</em>
+{% endblock %}
+
 {% block content %}
     <div class="row mx-0 mb-5">
         <div class="col-2"></div>

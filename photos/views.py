@@ -1,17 +1,22 @@
 import datetime
-from django.shortcuts import render, redirect, reverse
-from django.contrib import messages
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .models import Photos, Tags
+from profiles.models import UserProfile
 
 
 def all_photos(request):
     """ A view to return the photos page"""
 
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+    else:
+        profile = ""
     photos = list(Photos.objects.all())
     tags = Tags
     context = {
         'photos': photos,
         'tags': tags,
+        'profile': profile,
     }
 
     return render(request, 'photos/all_photos.html', context)
@@ -20,11 +25,16 @@ def all_photos(request):
 def albums(request):
     """ A view to return the albums page"""
 
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+    else:
+        profile = ""
     photos = list(Photos.objects.all())
     tags = list(Tags.objects.all())
     context = {
         'photos': photos,
         'tags': tags,
+        'profile': profile,
     }
 
     return render(request, 'photos/albums.html', context)
@@ -35,9 +45,14 @@ def tag_album(request, album):
 
     photos = list(Photos.objects.all())
     tags = list(Tags.objects.filter(tag_name=album))
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+    else:
+        profile = ""
     context = {
         'photos': photos,
         'tags': tags,
+        'profile': profile,
     }
 
     return render(request, 'photos/tag_album.html', context)
@@ -48,10 +63,14 @@ def edit_tags(request, image_id):
 
     photos = list(Photos.objects.filter(id=image_id))
     tags = Tags
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+    else:
+        profile = ""
     context = {
         'photos': photos,
         'tags': tags,
-        'image_id': image_id,
+        'profile': profile,
     }
 
     if request.method == 'POST':
@@ -106,7 +125,15 @@ def upload(request):
 
         return redirect(reverse('all_photos'))
 
-    return render(request, "photos/upload.html")
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+    else:
+        profile = ""
+    context = {
+        'profile': profile,
+    }
+
+    return render(request, "photos/upload.html", context)
 
 
 def delete_img(request, image_id):
@@ -114,10 +141,14 @@ def delete_img(request, image_id):
 
     photos = list(Photos.objects.filter(id=image_id))
     tags = Tags
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+    else:
+        profile = ""
     context = {
         'photos': photos,
         'tags': tags,
-        'image_id': image_id,
+        'profile': profile,
     }
 
     if request.method == 'POST':

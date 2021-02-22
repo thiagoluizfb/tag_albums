@@ -44,7 +44,8 @@ a:hover{
 #id_email2,
 #id_username,
 #id_password1,
-#id_password2{
+#id_password2,
+#id_display_name{
     background-color: #1a1a1a !important;
     border-top: none;
     border-left: none;
@@ -52,12 +53,25 @@ a:hover{
     color: #bebebe;
 }
 
+.auth-btn{
+    background-color: #1a1a1a;
+    color: #bebebe !important;
+    border: solid 1px #bebebe;
+}
+
+.auth-btn:hover{
+    cursor: pointer;
+    background-color: #bebebe;
+    color: #1a1a1a !important;
+    border: solid 1px #1a1a1a;
+}
+
 .btn:focus,
 textarea{
     box-shadow: 0 0 0 0.2rem rgba(190, 190, 190, 0.25);
 }
 
-#logo-text:focus,
+/* #logo-text:focus,
 #id_login:focus,
 #id_password:focus,
 #id_email:focus,
@@ -65,9 +79,37 @@ textarea{
 #id_username:focus,
 #id_password1:focus,
 #id_password2:focus,
+#id_display_name:focus,
 #id_remember,
 textarea{
-    outline: none; 
+    outline: none;
+    box-shadow: none;
+} */
+
+#logo-text:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    background-color: #1a1a1a !important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    color: #bebebe;
+    border-color: #bebebe !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.form-control, textarea{
+    background-color: #1a1a1a !important;
+    border-top: none !important;;
+    border-left: none !important;;
+    border-right: none !important;;
+    color: #bebebe !important;;
+    outline: none !important;;
+    box-shadow: none !important;;
 }
 
 form li{

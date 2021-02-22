@@ -37,15 +37,21 @@
   <body>
     <header class="container-fluid">
         <div class="row">
-            <div class="col-1 my-2">
+            <div class="col-4 my-2">
                 <a href="{% url 'home' %}" class="nav-link">
-                    <h2 class="my-0">@</h2>
+                    {% if request.user.is_authenticated %}
+                        <h4 class="my-0">
+                            @{% block username %}{% endblock %}
+                        </h4>
+                        {% else %}
+                        <h2>@</h2>
+                    {% endif %}
                 </a>
             </div>
-            <div class="col-11">
+            <div class="col-8">
                 <ul class="text-right my-3">
                     {% if request.user.is_authenticated %}
-                        <li class="list-inline-item py-0 mr-5 "><a href="">My @ccount</a></li>
+                        <li class="list-inline-item py-0 mr-5 "><a href="{% url 'profile' %}">My @ccount</a></li>
                         <li class="list-inline-item py-0 mr-5 pr-5"><a href="{% url 'account_logout' %}">Logout</a></li>
                     {% else %}
                         <li class="list-inline-item py-0 mr-5"><a href="{% url 'account_signup' %}">Register</a></li>

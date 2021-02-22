@@ -1,6 +1,7 @@
 import datetime
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from photos.views import Photos, Tags
+from profiles.models import UserProfile
 
 
 def index(request):
@@ -20,7 +21,16 @@ def index(request):
                 todelete.delete()
         tags.delete()
 
-    return render(request, "home/index.html")
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+    else:
+        profile = ""
+
+    context = {
+        'profile': profile,
+    }
+
+    return render(request, "home/index.html", context)
 
 
 def upload(request):
