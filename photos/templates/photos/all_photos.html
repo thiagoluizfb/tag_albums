@@ -28,36 +28,36 @@
         </div>
         <div class="col-12 col-md-10 text-center mb-5">
             <div class="row mx-0">
-                {% for photo in photos %}
-                    <div id="{{ photo.id }}-img-container" class="col-12 col-md-4 col-lg-3 text-center">
-                        <div class="frame-wrapper position-relative">
-                            <img id="{{ photo.id }}-img" class="thumbnail" src="/media/{{ photo.image }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
-                            <span class="btn delete-thumbnail hidden">
-                                <strong>
-                                    <a href="{% url 'delete_img' photo.id %}"><i class="far fa-times-circle" data-toggle="tooltip" data-placement="top" title="Delete this photo"></i></a>
-                                </strong>
-                            </span>
-                        </div>
-                        <div>
-                            <div class="tag-slot text-left position-relative" >
-                                <p id="{{ photo.id }}-tag-slot-img" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
-                                    {% if photo.tags_set.all %}
-                                        {% for tag in photo.tags_set.all %}
-                                            @{{tag.tag_name}}
-                                        {% endfor %}
-                                    {% else %}
-                                        Click edit to add tag
-                                    {% endif %}
-                                </p>
-                                <span class="btn edit-tag hidden" data-toggle="tooltip" data-placement="top" title="Edit tags">
+                {% if not photo.owner %}
+                    {% for photo in photos %}
+                        <div id="{{ photo.id }}-img-container" class="col-12 col-md-4 col-lg-3 text-center">
+                            <div class="frame-wrapper position-relative">
+                                <img id="{{ photo.id }}-img" class="thumbnail" src="/media/{{ photo.image }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
+                                <span class="btn delete-thumbnail hidden">
                                     <strong>
-                                        <a href="{% url 'edit_tags' photo.id %}"><i id="{{ photo.id }}-img-edit" class="fas fa-pencil-alt" ></i></a>
+                                        <a href="{% url 'delete_img' photo.id %}"><i class="far fa-times-circle" data-toggle="tooltip" data-placement="top" title="Delete this photo"></i></a>
                                     </strong>
                                 </span>
                             </div>
+                            <div>
+                                <div class="tag-slot text-left position-relative" >
+                                    <p id="{{ photo.id }}-tag-slot-img" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
+                                        {% if photo.tags_set.all %}
+                                            {% for tag in photo.tags_set.all %}@{{tag.tag_name}}{% endfor %}
+                                        {% else %}
+                                            Click edit to add tag
+                                        {% endif %}
+                                    </p>
+                                    <span class="btn edit-tag hidden" data-toggle="tooltip" data-placement="top" title="Edit tags">
+                                        <strong>
+                                            <a href="{% url 'edit_tags' photo.id %}"><i id="{{ photo.id }}-img-edit" class="fas fa-pencil-alt" ></i></a>
+                                        </strong>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

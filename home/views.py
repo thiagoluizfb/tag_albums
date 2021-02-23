@@ -1,4 +1,4 @@
-import datetime
+import datetime, os
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from photos.views import Photos, Tags
 from profiles.models import UserProfile
@@ -8,9 +8,10 @@ def index(request):
     """ A view to delete photos uploaded w/o login and return the index page"""
 
     if Photos.objects.all():
-        for photos in Photos.objects.all():
-            if not photos.owner:
-                photos.delete()
+        profile = UserProfile.objects.get(id=6)
+        for photos in profile.photos.all():
+            photos.delete()
+            os.remove(f'media/{photos.image.name}')
 
     tags = Tags.objects.all()
     if tags:
@@ -50,7 +51,6 @@ def upload(request):
                 upload_date=datetime.datetime.now(),
                 image=images,
             )
-        print(tosave)
         tosave.save()
         for tag in alltags:
             if tag != "":

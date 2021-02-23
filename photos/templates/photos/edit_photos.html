@@ -21,27 +21,25 @@
     </div>
     <div class="row mx-0">
         <div class="col-12 col-md-10 text-center mb-4">
-            <form method="POST" action="{% url 'edit_tags' image_id%}" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'edit_tags' photo.id %}" enctype="multipart/form-data">
             {% csrf_token %}
                 <div class="row mx-0">
-                    {% for photo in photos %}
-                        <div id="{{ image_id }}-img-container" class="col-12 col-md-4 text-center mx-auto">
-                            <div class="frame-wrapper position-relative">
-                                <img id="{{ image_id }}-img" class="thumbnail" src="/media/{{ photo.image }}">
-                            </div>
-                            <div class="col-12 py-3">
-                                <a href="{% url 'delete_img' image_id %}"><i class="fas fa-trash-alt mr-2"></i>Delete this photo</a>
-                            </div>
+                    <div id="{{ photo.id }}-img-container" class="col-12 col-md-4 text-center mx-auto">
+                        <div class="frame-wrapper position-relative">
+                            <img id="{{ photo.id }}-img" class="thumbnail" src="/media/{{ photo.image }}">
                         </div>
-                        <textarea id="{{ image_id }}-tag-slot-img"
-                            class="col-12 col-md-6 edit-tag-img text-left" 
-                            name="edit-file-tag">{% for tag in photo.tags_set.all %}@{{tag.tag_name}}{% endfor %}</textarea>
-                        <div class="col-12 col-md-6 offset-md-4 text-center my-3">
-                            <a href="{% url 'all_photos' %}" class="btn upload-photo-btn mx-2" >CANCEL</a>
-                            <button type="submit" class="btn upload-photo-btn mx-2" >DONE</button>
+                        <div class="col-12 py-3">
+                            <a href="{% url 'delete_img' photo.id %}"><i class="fas fa-trash-alt mr-2"></i>Delete this photo</a>
                         </div>
-                    {% endfor %}
-                </div>
+                    </div>
+                    <textarea id="{{ photo.id }}-tag-slot-img"
+                        class="col-12 col-md-6 edit-tag-img text-left" 
+                        name="edit-file-tag">{% for tag in photo.tags_set.all %}@{{tag.tag_name}}{% endfor %}</textarea>
+                    <div class="col-12 col-md-6 offset-md-4 text-center my-3">
+                        <a href="{% url 'all_photos' %}" class="btn upload-photo-btn mx-2" >CANCEL</a>
+                        <button type="submit" class="btn upload-photo-btn mx-2" >DONE</button>
+                    </div>
+            </div>
             </form>
         </div>
     </div>

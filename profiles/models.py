@@ -16,8 +16,8 @@ class UserProfile(models.Model):
     class Meta:
         ordering = ['user']
 
-    def __str__(self):
-        return self.display_name
+    def __int__(self):
+        return self.id
 
 
 @receiver(post_save, sender=User)

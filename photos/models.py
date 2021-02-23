@@ -5,7 +5,7 @@ from profiles.models import UserProfile
 class Photos(models.Model):
     owner = models.ForeignKey(
         UserProfile, on_delete=models.SET_NULL,
-        null=True, blank=True, related_name='photos')
+        null=True, blank=True, related_name='photos', default=6)
     upload_date = models.DateTimeField()
     image = models.FileField(null=False, blank=False)
 
