@@ -8,9 +8,8 @@ def index(request):
     """ A view to delete photos uploaded w/o login and return the index page"""
 
     if Photos.objects.all():
-        if Photos.objects.filter(owner='none'):
-            photos = Photos.objects.get(owner='none')
-            if photos:
+        for photos in Photos.objects.all():
+            if not photos.owner:
                 photos.delete()
 
     tags = Tags.objects.all()
@@ -40,11 +39,18 @@ def upload(request):
 
         images = request.FILES.get('upload-photo')
         alltags = request.POST.get('edit-file-tag').split('@')
-        tosave = Photos(
-            owner="none",
-            upload_date=datetime.datetime.now(),
-            image=images,
-        )
+        if request.user.is_authenticated:
+            tosave = Photos(
+                owner=UserProfile.objects.get(user=request.user),
+                upload_date=datetime.datetime.now(),
+                image=images,
+            )
+        else:
+            tosave = Photos(
+                upload_date=datetime.datetime.now(),
+                image=images,
+            )
+        print(tosave)
         tosave.save()
         for tag in alltags:
             if tag != "":

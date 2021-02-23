@@ -6,8 +6,7 @@ from django.dispatch import receiver
 
 class UserProfile(models.Model):
     """
-    A user profile model for maintaining default
-    delivery information and order history
+    A user profile model for saving photos
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     display_name = models.CharField(

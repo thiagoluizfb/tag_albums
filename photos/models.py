@@ -12,8 +12,8 @@ class Photos(models.Model):
     class Meta:
         ordering = ['upload_date']
 
-    def __str__(self):
-        return self.owner
+    def __int__(self):
+        return self.id
 
 
 class Tags(models.Model):

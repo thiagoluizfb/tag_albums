@@ -107,11 +107,17 @@ def upload(request):
 
         images = request.FILES.get('upload-photo')
         alltags = request.POST.get('edit-file-tag').split('@')
-        tosave = Photos(
-            owner="none",
-            upload_date=datetime.datetime.now(),
-            image=images,
-        )
+        if request.user.is_authenticated:
+            tosave = Photos(
+                owner=UserProfile.objects.get(user=request.user),
+                upload_date=datetime.datetime.now(),
+                image=images,
+            )
+        else:
+            tosave = Photos(
+                upload_date=datetime.datetime.now(),
+                image=images,
+            )
         tosave.save()
         for tag in alltags:
             if tag != "":

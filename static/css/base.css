@@ -93,23 +93,19 @@ textarea{
 
 .form-control:focus {
     background-color: #1a1a1a !important;
-    border-top: none;
-    border-left: none;
-    border-right: none;
     color: #bebebe;
     border-color: #bebebe !important;
     outline: none !important;
     box-shadow: none !important;
+    
 }
 
 .form-control, textarea{
     background-color: #1a1a1a !important;
-    border-top: none !important;;
-    border-left: none !important;;
-    border-right: none !important;;
-    color: #bebebe !important;;
-    outline: none !important;;
-    box-shadow: none !important;;
+    color: #bebebe !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0;
 }
 
 form li{
