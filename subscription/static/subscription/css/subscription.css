@@ -1,0 +1,13 @@
+.snack-choice {
+    border: 1px solid #bebebe !important;
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    padding-top: 4px;
+    border-radius: 100%;
+}
+
+.fa-cookie-bite{
+    margin-top: 10px;
+    font-size: 20px;
+}
