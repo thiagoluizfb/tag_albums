@@ -17,7 +17,7 @@ class UserProfile(models.Model):
         ordering = ['user']
 
     def __int__(self):
-        return self.id
+        return self.display_name
 
 
 @receiver(post_save, sender=User)
@@ -27,5 +27,10 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
     if created:
         UserProfile.objects.create(user=instance)
+        instance.userprofile.save()
+        profile = UserProfile.objects.get(user=instance)
+        setattr(profile, 'display_name', instance.username)
+        profile.save()
     # Existing users: just save the profile
-    instance.userprofile.save()
+    else:
+        instance.userprofile.save()

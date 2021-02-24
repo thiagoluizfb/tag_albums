@@ -1,4 +1,5 @@
 import datetime
+import os
 from django.shortcuts import render, redirect, reverse
 from .models import Photos, Tags
 from profiles.models import UserProfile
@@ -160,6 +161,7 @@ def delete_img(request, image_id):
     if request.method == 'POST':
 
         todelete = Photos.objects.get(id=image_id)
+        os.remove(f'media/{todelete.image.name}')
         todelete.delete()
 
         tags = list(Tags.objects.all())
@@ -167,6 +169,7 @@ def delete_img(request, image_id):
             if not tag.tag_photos.all():
                 todelete = Tags.objects.filter(tag_name=tag)
                 todelete.delete()
+
 
         return redirect(reverse('all_photos'))
 
