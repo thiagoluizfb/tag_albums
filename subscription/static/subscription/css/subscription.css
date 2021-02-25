@@ -11,3 +11,30 @@
     margin-top: 10px;
     font-size: 20px;
 }
+
+
+/* Stripe Payments */
+
+
+.StripeElement,
+.stripe-style-input {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid #bebebe;
+  background-color: #1a1a1a;
+}
+
+.StripeElement--focus,
+.stripe-style-input:focus,
+.stripe-style-input:active {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #1a1a1a !important;
+}
+
+.stripe-style-input::placeholder {
+    color: #bebebe;
+}
