@@ -10,7 +10,8 @@
 {% endblock %}
 
 {% block username %}
-    <em>{{ profile.display_name | lower}}</em>
+    <em id="display_name">{{ profile.display_name | lower}}</em>
+    <span class="hidden" id="tier">{{tier}}</span>
 {% endblock %}
 
 {% block content %}
@@ -25,14 +26,27 @@
                 <h3 class="text-muted mb-lg-5">My Nickname</h3>
                 <form class="pt-lg-3" action="{% url 'profile' %}" method="POST">
                     {% csrf_token %}
-                    <div class="col-12 d-flex justify-content-center text-center py-4">{{ form|crispy }}</div>
-                    <button class="btn auth-btn mt-lg-5">Update Information</button>
+                    <div class="row d-flex justify-content-left">
+                        <p class="col-6 p-4 text-right">Change your nickname: </p>
+                        <div class="col-4 pt-3 px-0">{{ form.display_name | as_crispy_field }}</div>
+                    </div>
+                    <button class="btn auth-btn mt-lg-5">Update</button>
+                    {% if message %}
+                        <div><em>{{ message }}</em></div>
+                    {% endif %}
                 </form>
             </div>
             <div class="col-12 col-lg-6 my-4">
                 <h3 class="text-muted mb-lg-5">My Plan</h3>
+                {% if tier %}
+                    <h4 class="mb-lg-5 tier"><em>Golden</em></h4>
+                    <p class="mb-lg-5"><em>Thank you for your donation!!</em></p>
+                    <p><a href="{% url 'buy' %}">Click here if you want to buy me more snacks</a></p>
+                {% else %}
                     <p class="py-4"><em>Basic</em></p>
-                    <a class="btn auth-btn mt-lg-5" href="">Update to Premium</a>
+                    <p><em><a href="{% url 'buy' %}">Click here if you want to buy me snacks</a></em></p>
+                    <p><em>and become a Gold member</em></p>
+                {% endif %}
             </div>
         </div>
     </div>

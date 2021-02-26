@@ -9,7 +9,8 @@
 {% endblock %}
 
 {% block username %}
-    <em>{{ profile.display_name | lower}}</em>
+    <em id="display_name">{{ profile.display_name | lower}}</em>
+    <span class="hidden" id="tier">{{tier}}</span>
 {% endblock %}
 
 {% block content %}
@@ -31,12 +32,12 @@
                         </ul>
                     </div>
                     <div class="col-sm-6 col-11 mx-auto py-2 text-center">
-                        <form action="{% url 'subscribe' %}" method="POST">
+                        <form action="{% url 'buy' %}" method="POST">
                             {% csrf_token %}
                             <div class="row d-flex justify-content-between py-1">
-                                <div class="text-center snack-choice">1</div>
-                                <div class="text-center snack-choice">3</div>
-                                <div class="text-center snack-choice">5</div>
+                                <div class="btn text-center snack-choice">1</div>
+                                <div class="btn text-center snack-choice">3</div>
+                                <div class="btn text-center snack-choice">5</div>
                                 <div>
                                     <i class="fas fa-cookie-bite px-1">  x  </i>
                                     <input type="text" class="text-center snack-choice-input" name="qty" value="1">

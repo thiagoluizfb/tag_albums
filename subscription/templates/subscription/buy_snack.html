@@ -10,7 +10,8 @@
 {% endblock %}
 
 {% block username %}
-    <em>{{ profile.display_name | lower}}</em>
+    <em id="display_name">{{ profile.display_name | lower}}</em>
+    <span class="hidden" id="tier">{{tier}}</span>
 {% endblock %}
 
 {% block content %}
@@ -18,31 +19,39 @@
         <div class="row">
             <div class="col">
                 <h2 class="mb-2"><i class="fas fa-cookie-bite"></i> Buy me {{ qty }} snack(s)</h2>
-                <h5>Total US$ {{ total|floatformat:2  }} <a href="{% url 'subscribe' %}"> (change qty) </a></h5>
+                <h5>Total US$ {{ total|floatformat:2  }} <a href="{% url 'buy' %}"> (change qty) </a></h5>
             </div>
         </div>
         <div class="row mt-3">
             <form class="pt-3 col-lg-8 offset-lg-2" action="{% url 'buy_snack' qty %}" method="POST" id="payment-form"> 
                 {% csrf_token %}
                 <div class="row mx-auto d-flex justify-content-between">
+                    <div class="col-6 offset-3">{{ snack_form.email | as_crispy_field }}</div>
                     <div class="col-6">{{ snack_form.f_name | as_crispy_field }}</div>
                     <div class="col-6">{{ snack_form.l_name | as_crispy_field }}</div>
-                    <div class="col-6">{{ snack_form.email | as_crispy_field }}</div>
                 </div>
-                    <div class="col-12">{{ snack_form.street_address1 | as_crispy_field }}</div>
-                    <div class="col-12">{{ snack_form.street_address2 | as_crispy_field }}</div>
-                <div class="row mx-auto d-flex justify-content-between">
-                    <div class="col-6">{{ snack_form.town_or_city | as_crispy_field }}</div>
-                    <div class="col-6">{{ snack_form.postcode | as_crispy_field }}</div>
-                </div>
-                    <div class="col-12">{{ snack_form.county | as_crispy_field }}</div>
-                    <div class="col-12">{{ snack_form.country | as_crispy_field }}</div>
-                <div class="row mx-3 d-flex justify-content-between">
-                    <div class="mb-3 col-12" id="card-number-element"></div>
-                    <div class="mb-3 col-6" id="card-expiry-element"></div>
-                    <div class="mb-3 col-4" id="card-cvc-element"></div>
-                </div>
-                <input type="number" name="total" class="" value="{{ total }}">
+                <fieldset class="pt-3">
+                    <div class="row mx-auto d-flex justify-content-between">
+                        <p class="text-left p-0 my-1 mx-3"><small><em>Billing information</em></small></p>
+                        <div class="col-12">{{ snack_form.street_address1 | as_crispy_field }}</div>
+                        <div class="col-12">{{ snack_form.street_address2 | as_crispy_field }}</div>
+                    </div>
+                    <div class="row mx-auto d-flex justify-content-between">
+                        <div class="col-6">{{ snack_form.town_or_city | as_crispy_field }}</div>
+                        <div class="col-6">{{ snack_form.postcode | as_crispy_field }}</div>
+                    </div>
+                        <div class="col-12">{{ snack_form.county | as_crispy_field }}</div>
+                        <div class="col-12">{{ snack_form.country | as_crispy_field }}</div>
+                </fieldset>
+                <fieldset class="pt-3">
+                    <div class="row mx-3 d-flex justify-content-between">
+                        <p class="text-left p-0 my-1"><small><em>Please complete the payment information</em></small></p>
+                        <div class="mb-3 col-12" id="card-number-element"></div>
+                        <div class="mb-3 col-6" id="card-expiry-element"></div>
+                        <div class="mb-3 col-4" id="card-cvc-element"></div>
+                    </div>
+                </fieldset>
+                <input type="number" name="total" class="hidden" value="{{ total }}">
                 <button class="btn auth-btn mt-4" type="submit" id="submit-button">CONFIRM</button>
                 <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
             </form>

@@ -2,6 +2,7 @@ import datetime
 import os
 from django.shortcuts import render, redirect, reverse
 from .models import Photos, Tags
+from subscription.models import Tiers
 from profiles.models import UserProfile
 
 
@@ -10,11 +11,17 @@ def all_photos(request):
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
+        status = Tiers.objects.get(user=profile)
+        tier = status.tier
     else:
         profile = UserProfile.objects.get(id=6)
+        tier = False
+
     photos = profile.photos.all()
     tags = Tags
     context = {
+        'tier': tier,
+        'tier': tier,
         'photos': photos,
         'tags': tags,
         'profile': profile,
@@ -28,11 +35,16 @@ def albums(request):
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
+        status = Tiers.objects.get(user=profile)
+        tier = status.tier
     else:
+        tier = False
         profile = UserProfile.objects.get(id=6)
+
     photos = profile.photos.all()
     tags = list(Tags.objects.all())
     context = {
+        'tier': tier,
         'photos': photos,
         'tags': tags,
         'profile': profile,
@@ -46,11 +58,16 @@ def tag_album(request, album):
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
+        status = Tiers.objects.get(user=profile)
+        tier = status.tier
     else:
         profile = UserProfile.objects.get(id=6)
+        tier = False
+
     photos = profile.photos.all()
     tags = list(Tags.objects.filter(tag_name=album))
     context = {
+        'tier': tier,
         'photos': photos,
         'tags': tags,
         'profile': profile,
@@ -66,9 +83,14 @@ def edit_tags(request, image_id):
     tags = Tags
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
+        status = Tiers.objects.get(user=profile)
+        tier = status.tier
     else:
+        tier = False
         profile = UserProfile.objects.get(id=6)
+
     context = {
+        'tier': tier,
         'photo': photo,
         'tags': tags,
         'profile': profile,
@@ -134,9 +156,14 @@ def upload(request):
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
+        status = Tiers.objects.get(user=profile)
+        tier = status.tier
     else:
+        tier = False
         profile = UserProfile.objects.get(id=6)
+
     context = {
+        'tier': tier,
         'profile': profile,
     }
 
@@ -150,9 +177,14 @@ def delete_img(request, image_id):
     tags = Tags
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
+        status = Tiers.objects.get(user=profile)
+        tier = status.tier
     else:
-        profile = ""
+        tier = False
+        profile = UserProfile.objects.get(id=6)
+
     context = {
+        'tier': tier,
         'photo': photo,
         'tags': tags,
         'profile': profile,
@@ -169,7 +201,6 @@ def delete_img(request, image_id):
             if not tag.tag_photos.all():
                 todelete = Tags.objects.filter(tag_name=tag)
                 todelete.delete()
-
 
         return redirect(reverse('all_photos'))
 

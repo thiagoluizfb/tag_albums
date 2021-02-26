@@ -27,15 +27,19 @@ def index(request):
         profile = UserProfile.objects.get(user=request.user)
         email = request.user.email
         if Snack.objects.filter(email=email):
-            user = Tiers.objects.get(
-                user=UserProfile.objects.get(user=request.user))
+            user = Tiers.objects.get(user=profile)
             setattr(user, 'tier', True)
             user.save()
+            tier = user.tier
+        else:
+            tier = False
     else:
         profile = ""
+        tier = False
 
     context = {
         'profile': profile,
+        'tier': tier,
     }
 
     return render(request, "home/index.html", context)
@@ -44,32 +48,32 @@ def index(request):
 def upload(request):
     """ A view to return the upload page"""
 
-    if request.method == 'POST':
+    # if request.method == 'POST':
 
-        images = request.FILES.get('upload-photo')
-        alltags = request.POST.get('edit-file-tag').split('@')
-        if request.user.is_authenticated:
-            tosave = Photos(
-                owner=UserProfile.objects.get(user=request.user),
-                upload_date=datetime.datetime.now(),
-                image=images,
-            )
-        else:
-            tosave = Photos(
-                upload_date=datetime.datetime.now(),
-                image=images,
-            )
-        tosave.save()
-        for tag in alltags:
-            if tag != "":
-                if Tags.objects.filter(tag_name=tag):
-                    savetag = Tags.objects.get(tag_name=tag)
-                    savetag.tag_photos.add(tosave)
-                else:
-                    savetag = Tags(tag_name=tag)
-                    savetag.save()
-                    savetag.tag_photos.add(tosave)
+    #     images = request.FILES.get('upload-photo')
+    #     alltags = request.POST.get('edit-file-tag').split('@')
+    #     if request.user.is_authenticated:
+    #         tosave = Photos(
+    #             owner=UserProfile.objects.get(user=request.user),
+    #             upload_date=datetime.datetime.now(),
+    #             image=images,
+    #         )
+    #     else:
+    #         tosave = Photos(
+    #             upload_date=datetime.datetime.now(),
+    #             image=images,
+    #         )
+    #     tosave.save()
+    #     for tag in alltags:
+    #         if tag != "":
+    #             if Tags.objects.filter(tag_name=tag):
+    #                 savetag = Tags.objects.get(tag_name=tag)
+    #                 savetag.tag_photos.add(tosave)
+    #             else:
+    #                 savetag = Tags(tag_name=tag)
+    #                 savetag.save()
+    #                 savetag.tag_photos.add(tosave)
 
-        return redirect(reverse('all_photos'))
+    #     return redirect(reverse('all_photos'))
 
     return redirect(reverse('all_photos'))

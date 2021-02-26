@@ -8,7 +8,7 @@ class SnackForm(forms.ModelForm):
         fields = ('f_name', 'l_name', 'email',
                   'street_address1', 'street_address2',
                   'town_or_city', 'county', 'country',
-                  'postcode', 'snack_qty',)
+                  'postcode', 'snack_qty', 'total')
 
     def __init__(self, *args, **kwargs):
         """
@@ -27,6 +27,7 @@ class SnackForm(forms.ModelForm):
             'country': 'Country',
             'postcode': 'Post Code',
             'snack_qty': '1',
+            'total': 'total',
         }
 
         for field in self.fields:

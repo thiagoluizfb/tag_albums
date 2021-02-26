@@ -10,7 +10,8 @@
 {% endblock %}
 
 {% block username %}
-    <em>{{ profile.display_name | lower}}</em>
+    <em id="display_name">{{ profile.display_name | lower}}</em>
+    <span class="hidden" id="tier">{{tier}}</span>
 {% endblock %}
 
 {% block content %}

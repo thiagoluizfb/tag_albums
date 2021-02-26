@@ -43,7 +43,7 @@
                 <a href="{% url 'home' %}" class="nav-link">
                     {% if request.user.is_authenticated %}
                         <h4 class="my-0">
-                            @{% block username %}{% endblock %}
+                            <span>@</span>{% block username %}{% endblock %}
                         </h4>
                         {% else %}
                         <h2>@</h2>

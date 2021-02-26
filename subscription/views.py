@@ -3,28 +3,35 @@ from django.contrib.auth.models import User
 from profiles.models import UserProfile
 from django.conf import settings
 
-from .models import Snack, Tiers
+from .models import Tiers
 from .forms import SnackForm
 
 import stripe
 
 
-def subscribe(request):
+def buy(request):
     """ A view to choose how many snacks to buy """
 
     price = settings.SNACK_PRICE
-    profile = ""
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        status = Tiers.objects.get(user=profile)
+        tier = status.tier
+    else:
+        tier = False
+        profile = UserProfile.objects.get(id=6)
 
     if request.method == "POST":
         qty = request.POST.get('qty')
         return redirect('buy_snack', qty)
 
     context = {
+        'tier': tier,
         'profile': profile,
         'price': price,
     }
 
-    return render(request, "subscription/subscribe.html", context)
+    return render(request, "subscription/buy.html", context)
 
 
 def buy_snack(request, qty):
@@ -34,7 +41,13 @@ def buy_snack(request, qty):
     price = settings.SNACK_PRICE
     total = qty*price
 
-    profile = ""
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        status = Tiers.objects.get(user=profile)
+        tier = status.tier
+    else:
+        tier = False
+        profile = UserProfile.objects.get(id=6)
 
     if request.method == 'POST':
 
@@ -55,15 +68,16 @@ def buy_snack(request, qty):
         snack_form = SnackForm(form_data)
 
         if snack_form.is_valid():
+            setattr(snack_form, 'total', total)
             snack_form.save()
-            if User.objects.get(email=email):
+            if User.objects.filter(email=email):
                 profile = User.objects.get(email=email)
                 user = Tiers.objects.get(
                     user=UserProfile.objects.get(user=profile))
                 setattr(user, 'tier', True)
                 user.save()
 
-            return redirect(reverse('subscribe'))
+            return redirect(reverse('buy'))
 
     else:
         stripe.api_key = stripe_secret_key
@@ -74,6 +88,7 @@ def buy_snack(request, qty):
         snack_form = SnackForm()
 
     context = {
+        'tier': tier,
         'profile': profile,
         'snack_form': snack_form,
         'stripe_public_key': stripe_public_key,
