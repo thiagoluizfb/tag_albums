@@ -1,7 +1,9 @@
 import datetime, os
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from photos.views import Photos, Tags
+from subscription.models import Snack, Tiers
 from profiles.models import UserProfile
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -23,6 +25,12 @@ def index(request):
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
+        email = request.user.email
+        if Snack.objects.filter(email=email):
+            user = Tiers.objects.get(
+                user=UserProfile.objects.get(user=request.user))
+            setattr(user, 'tier', True)
+            user.save()
     else:
         profile = ""
 

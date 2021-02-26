@@ -12,10 +12,10 @@ class Tiers(models.Model):
     tier = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['user']
+        ordering = ['id']
 
-    def __str__(self):
-        return self.tier
+    def __repr__(self):
+        return self.user
 
 
 class Snack(models.Model):
@@ -33,7 +33,7 @@ class Snack(models.Model):
     total = models.IntegerField(null=False, default=0)
 
     class Meta:
-        ordering = ['f_name']
+        ordering = ['id']
 
     def __str__(self):
         return self.f_name

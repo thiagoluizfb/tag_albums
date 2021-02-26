@@ -1,10 +1,9 @@
-var stripe_public_key = $('#id_stripe_public_key').text().slice(1, -1);
-var client_secret = $('#id_client_secret').text().slice(1, -1);
-var stripe = Stripe(stripe_public_key);
+var stripePublicKey  = $('#id_stripe_public_key').text().slice(1, -1);
+var clientSecret = $('#id_client_secret').text().slice(1, -1);
+var stripe = Stripe(stripePublicKey );
 var elements = stripe.elements();
 var style = {
     base: {
-        padding: '0',
         color: '#bebebe',
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSmoothing: 'antialiased',
@@ -40,19 +39,17 @@ form.addEventListener('submit', function(ev) {
     $('#submit-button').attr('disabled', true);
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
-            cardNumberElement: cardNumberElement,
-            cardExpiryElement: cardExpiryElement,
-            cardCvcElement: cardCvcElement,
+            card: cardNumberElement
         }
     }).then(function(result) {
         if (result.error) {
             var errorDiv = document.getElementById('card-errors');
-            // var html = `
-            //     <span class="icon" role="alert">
-            //     <i class="fas fa-times"></i>
-            //     </span>
-            //     <span>${result.error.message}</span>`;
-            $(errorDiv).html(html);
+            var html = `
+                <span class="icon" role="alert">
+                <i class="fas fa-times"></i>
+                </span>
+                <span>Something went wrong, please try again</span>`;
+            $(errorDiv  ).html(html);
             cardNumberElement.update({ 'disabled': false});
             cardExpiryElement.update({ 'disabled': false});
             cardCvcElement.update({ 'disabled': false});
