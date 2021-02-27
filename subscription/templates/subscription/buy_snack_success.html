@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'subscription/css/subscription.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'subscription/js/subscription.js' %}"></script>
+{% endblock %}
+
+{% block username %}
+    <em id="display_name">{{ profile.display_name | lower}}</em>
+    <span class="hidden" id="tier">{{tier}}</span>
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center mt-5">
+        <div class="row mt-5">
+            <div class="col mt-5">
+                <h2 class="mb-2 mt-5"><em><i class="fas fa-cookie-bite"></i> Thank you for buying me some snacks!!</em></h2>
+            </div>
+        </div>
+        <div class="row mt-5 text-center">
+            <p class="col-12 mt-5"><a href="{% url 'all_photos' %}">Click here to go back to photos</a></p>
+        </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'subscription/js/stripe_elements.js' %}"></script>
+{% endblock %}

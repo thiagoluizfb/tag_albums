@@ -37,6 +37,8 @@ form.addEventListener('submit', function(ev) {
     cardExpiryElement.update({ 'disabled': true});
     cardCvcElement.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
+    $('#payment-form').fadeToggle(100);
+    $('#loading-overlay').fadeToggle(100);
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: cardNumberElement
@@ -50,6 +52,8 @@ form.addEventListener('submit', function(ev) {
                 </span>
                 <span>Something went wrong, please try again</span>`;
             $(errorDiv  ).html(html);
+            $('#payment-form').fadeToggle(100);
+            $('#loading-overlay').fadeToggle(100);
             cardNumberElement.update({ 'disabled': false});
             cardExpiryElement.update({ 'disabled': false});
             cardCvcElement.update({ 'disabled': false});

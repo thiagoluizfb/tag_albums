@@ -77,7 +77,7 @@ def buy_snack(request, qty):
                 setattr(user, 'tier', True)
                 user.save()
 
-            return redirect(reverse('buy'))
+            return redirect(reverse('success'))
 
     else:
         stripe.api_key = stripe_secret_key
@@ -98,3 +98,21 @@ def buy_snack(request, qty):
     }
 
     return render(request, "subscription/buy_snack.html", context)
+
+
+def success(request):
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        status = Tiers.objects.get(user=profile)
+        tier = status.tier
+    else:
+        tier = False
+        profile = UserProfile.objects.get(id=6)
+
+    context = {
+        'tier': tier,
+        'profile': profile,
+    }
+
+    return render(request, "subscription/buy_snack_success.html", context)
