@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, HttpResponse
+from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
 from profiles.models import UserProfile
 from django.conf import settings
@@ -7,6 +8,25 @@ from .models import Tiers
 from .forms import SnackForm
 
 import stripe
+import json
+
+
+@require_POST
+def cache_buy_snacks(request):
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        snack_data = {
+            'snack_qty': request.POST.get('qty'),
+            'total': request.POST.get('total'),
+        }
+        stripe.PaymentIntent.modify(pid, metadata={
+            'snack_data': json.dumps(snack_data),
+            'username': request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        return HttpResponse(content=e, status=400)
 
 
 def buy(request):
@@ -63,7 +83,7 @@ def buy_snack(request, qty):
             'street_address2': request.POST['street_address2'],
             'postcode': request.POST['postcode'],
             'snack_qty': qty,
-            'total': total,
+            'total': request.POST.get('total'),
         }
         snack_form = SnackForm(form_data)
 
@@ -86,7 +106,6 @@ def buy_snack(request, qty):
             currency=settings.STRIPE_CURRENCY,
         )
         snack_form = SnackForm()
-
     context = {
         'tier': tier,
         'profile': profile,
@@ -96,7 +115,6 @@ def buy_snack(request, qty):
         'total': total,
         'client_secret': intent.client_secret,
     }
-
     return render(request, "subscription/buy_snack.html", context)
 
 

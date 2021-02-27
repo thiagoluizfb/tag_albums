@@ -22,6 +22,7 @@
                 <h5>Total US$ {{ total|floatformat:2  }} <a href="{% url 'buy' %}"> (change qty) </a></h5>
             </div>
         </div>
+        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
         <div class="row mt-3 mx-0">
             <form class="pt-3 col-lg-8 offset-lg-2" action="{% url 'buy_snack' qty %}" method="POST" id="payment-form"> 
                 {% csrf_token %}
@@ -51,9 +52,9 @@
                         <div class="mb-3 col-4" id="card-cvc-element"></div>
                     </div>
                 </fieldset>
-                <input type="number" name="total" class="hidden" value="{{ total }}">
+                <input type="number" name="total" class="" value="{{ total }}">
+                <input type="number" name="qty" class="" value="{{ qty }}">
                 <button class="btn auth-btn mt-4" type="submit" id="submit-button">CONFIRM</button>
-                <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
             </form>
             </div>
         </div>
@@ -70,5 +71,7 @@
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
+    {{ qty|json_script:"id_qty" }}
+    {{ total|json_script:"id_total" }}
     <script src="{% static 'subscription/js/stripe_elements.js' %}"></script>
 {% endblock %}
