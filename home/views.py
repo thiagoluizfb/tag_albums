@@ -21,7 +21,6 @@ def index(request):
             if not tag.tag_photos.all():
                 todelete = Tags.objects.filter(tag_name=tag)
                 todelete.delete()
-        tags.delete()
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)

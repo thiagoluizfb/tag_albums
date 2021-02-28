@@ -7,7 +7,6 @@ class UserProfileAdmin(admin.ModelAdmin):
         'id',
         'user',
         'display_name',
-        'user_photo',
     )
 
 

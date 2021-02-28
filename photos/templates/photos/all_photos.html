@@ -14,8 +14,16 @@
     <span class="hidden" id="tier">{{tier}}</span>
 {% endblock %}
 
+{% block page_nav %}
+    <hr class="menu justify-content-end d-block d-md-none text-right">
+    <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="{% url 'albums' %}">Albums</a></li>
+    <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="{% url 'upload' %}">Upload</a></li>
+    <hr class="menu justify-content-end d-block d-md-none text-right">
+{% endblock %}
+
+
 {% block content %}
-    <div class="row mx-0 mb-5">
+    <div class="row mx-0 my-5">
         <div class="col-12 text-center">
             <h2>My Photos</h2>
         </div>

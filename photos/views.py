@@ -21,7 +21,6 @@ def all_photos(request):
     tags = Tags
     context = {
         'tier': tier,
-        'tier': tier,
         'photos': photos,
         'tags': tags,
         'profile': profile,

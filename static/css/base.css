@@ -1,10 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
 html {
     height: 100%;
+}
+
+hr.menu {
+    border-top: 1px solid #bebebe ;
+    width: 75%;
 }
 
 body{
     background-color: #1a1a1a;
     color: #bebebe;
+    font-family: "Open Sans", sans-serif;
+}
+
+nav a{
+    font-size: 14px;
 }
 
 .base-text-color, a{
@@ -14,6 +26,14 @@ body{
 a:hover{
     color: #bebebe;
     text-decoration: none;
+}
+
+#side-menu-list{
+    padding: 0;
+}
+
+#side-menu-list li{
+    list-style-type: none;
 }
 
 ::-webkit-scrollbar {
@@ -32,6 +52,9 @@ a:hover{
     display: none !important;
 }
 
+#bt-toggler{
+    color: #bebebe;
+}
 /* Login and authentication */
 
 .auth-container{

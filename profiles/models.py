@@ -9,9 +9,7 @@ class UserProfile(models.Model):
     A user profile model for saving photos
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    display_name = models.CharField(
-        max_length=20, null=True, blank=True)
-    user_photo = models.FileField(null=False, blank=False)
+    display_name = models.CharField(max_length=20, null=True, blank=True)
 
     class Meta:
         ordering = ['user']
