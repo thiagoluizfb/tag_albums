@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, reverse
 from .models import Photos, Tags
 from subscription.models import Tiers
 from profiles.models import UserProfile
+from django.conf import settings
 
 
 def all_photos(request):
@@ -17,6 +18,9 @@ def all_photos(request):
         profile = UserProfile.objects.get(id=6)
         tier = False
 
+    location = settings.MEDIA_URL
+    print(location)
+
     photos = profile.photos.all()
     tags = Tags
     context = {
@@ -24,6 +28,7 @@ def all_photos(request):
         'photos': photos,
         'tags': tags,
         'profile': profile,
+        'location': location,
     }
 
     return render(request, 'photos/all_photos.html', context)
