@@ -21,7 +21,7 @@ def profile(request):
         form = UserProfileForm(request.POST, instance=profile)
         if name != profile.display_name:
             if form.is_valid():
-                if not UserProfile.objects.filter(display_name=name):
+                if not UserProfile.objects.get(display_name=name):
                     form.save()
                     message = False
                 else:

@@ -2,6 +2,9 @@ from django.db import models
 from profiles.models import UserProfile
 from django_countries.fields import CountryField
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 class Tiers(models.Model):
     """
@@ -15,8 +18,8 @@ class Tiers(models.Model):
     class Meta:
         ordering = ['id']
 
-    def __repr__(self):
-        return self.user
+    def __int__(self):
+        return self.id
 
 
 class Snack(models.Model):
@@ -40,3 +43,13 @@ class Snack(models.Model):
 
     def __str__(self):
         return self.f_name
+
+
+@receiver(post_save, sender=UserProfile)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    """
+    Create or update the user profile
+    """
+    if created:
+        new_user = Tiers.objects.create(user=instance)
+        new_user.save()

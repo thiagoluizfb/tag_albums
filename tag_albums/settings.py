@@ -25,9 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-# 'DEVELOPMENT' in os.environ
+DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['tag-albums.herokuapp.com', 'localhost']
 
@@ -118,21 +116,21 @@ WSGI_APPLICATION = 'tag_albums.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+# if 'DATABASE_URL' in os.environ:
+#     DATABASES = {
+#         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
 
-# DATABASES = {
-#     'default': dj_database_url.parse('postgres://pjpothggfmubvr:4a12ffeaf39f8ce803f71dcddd1112f85caba8d0f498d3956ae9489d7453c956@ec2-34-254-69-72.eu-west-1.compute.amazonaws.com:5432/dqrsej1r0r4p3')
-# }
+DATABASES = {
+    'default': dj_database_url.parse('postgres://pjpothggfmubvr:4a12ffeaf39f8ce803f71dcddd1112f85caba8d0f498d3956ae9489d7453c956@ec2-34-254-69-72.eu-west-1.compute.amazonaws.com:5432/dqrsej1r0r4p3')
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
