@@ -18,9 +18,6 @@ def all_photos(request):
         profile = UserProfile.objects.get(id=6)
         tier = False
 
-    location = settings.MEDIA_URL
-    print(location)
-
     photos = profile.photos.all()
     tags = Tags
     context = {
@@ -133,6 +130,9 @@ def upload(request):
     if request.method == 'POST':
 
         images = request.FILES.get('upload-photo')
+        image_name = images.name.split('.')
+        now = datetime.datetime.now().strftime("%H%M%S")
+        images.name = f'{image_name[0]}_{now}.jpg'
         alltags = request.POST.get('edit-file-tag').split('@')
         if request.user.is_authenticated:
             tosave = Photos(

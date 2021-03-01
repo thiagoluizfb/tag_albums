@@ -13,7 +13,6 @@ def index(request):
         profile = UserProfile.objects.get(id=6)
         for photos in profile.photos.all():
             photos.delete()
-            os.remove(f'media/{photos.image.name}')
 
     tags = Tags.objects.all()
     if tags:
