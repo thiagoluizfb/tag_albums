@@ -18,6 +18,8 @@ def all_photos(request):
         profile = UserProfile.objects.get(id=6)
         tier = False
 
+    location = settings.MEDIA_URL
+
     photos = profile.photos.all()
     tags = Tags
     context = {
