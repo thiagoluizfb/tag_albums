@@ -41,7 +41,7 @@
                     {% for tag in tags %}          
                         {% for t in tag.tag_photos.all %}
                             <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
-                                <img class="" src="/media/{{ t.image  }}">
+                                <img class="" src="{{location}}{{ t.image }}">
                             </div>
                         {% endfor %}
                     {% endfor %}

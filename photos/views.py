@@ -19,7 +19,6 @@ def all_photos(request):
         tier = False
 
     location = settings.MEDIA_URL
-
     photos = profile.photos.all()
     tags = Tags
     context = {
@@ -44,6 +43,7 @@ def albums(request):
         tier = False
         profile = UserProfile.objects.get(id=6)
 
+    location = settings.MEDIA_URL
     photos = profile.photos.all()
     tags = list(Tags.objects.all())
     context = {
@@ -51,6 +51,7 @@ def albums(request):
         'photos': photos,
         'tags': tags,
         'profile': profile,
+        'location': location,
     }
 
     return render(request, 'photos/albums.html', context)
@@ -67,6 +68,7 @@ def tag_album(request, album):
         profile = UserProfile.objects.get(id=6)
         tier = False
 
+    location = settings.MEDIA_URL
     photos = profile.photos.all()
     tags = list(Tags.objects.filter(tag_name=album))
     context = {
@@ -74,6 +76,7 @@ def tag_album(request, album):
         'photos': photos,
         'tags': tags,
         'profile': profile,
+        'location': location,
     }
 
     return render(request, 'photos/tag_album.html', context)
@@ -82,8 +85,6 @@ def tag_album(request, album):
 def edit_tags(request, image_id):
     """ A view to edit photos' tags page"""
 
-    photo = Photos.objects.get(id=image_id)
-    tags = Tags
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         status = Tiers.objects.get(user=profile)
@@ -92,11 +93,15 @@ def edit_tags(request, image_id):
         tier = False
         profile = UserProfile.objects.get(id=6)
 
+    photo = Photos.objects.get(id=image_id)
+    tags = Tags
+    location = settings.MEDIA_URL
     context = {
         'tier': tier,
         'photo': photo,
         'tags': tags,
         'profile': profile,
+        'location': location,
     }
 
     if request.method == 'POST':
@@ -132,9 +137,10 @@ def upload(request):
     if request.method == 'POST':
 
         images = request.FILES.get('upload-photo')
-        image_name = images.name.split('.')
-        now = datetime.datetime.now().strftime("%H%M%S")
-        images.name = f'{image_name[0]}_{now}.jpg'
+        if Photos.objects.filter(image=images):
+            count = Photos.objects.filter(image=images).count()
+            image_name = images.name.split('.')
+            images.name = f'{image_name[0]}_({count}).jpg'
         alltags = request.POST.get('edit-file-tag').split('@')
         if request.user.is_authenticated:
             tosave = Photos(
@@ -179,8 +185,6 @@ def upload(request):
 def delete_img(request, image_id):
     """ A view to delete photo"""
 
-    photo = Photos.objects.get(id=image_id)
-    tags = Tags
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         status = Tiers.objects.get(user=profile)
@@ -189,17 +193,20 @@ def delete_img(request, image_id):
         tier = False
         profile = UserProfile.objects.get(id=6)
 
+    photo = Photos.objects.get(id=image_id)
+    tags = Tags
+    location = settings.MEDIA_URL
     context = {
         'tier': tier,
         'photo': photo,
         'tags': tags,
         'profile': profile,
+        'location': location,
     }
 
     if request.method == 'POST':
 
         todelete = Photos.objects.get(id=image_id)
-        os.remove(f'media/{todelete.image.name}')
         todelete.delete()
 
         tags = list(Tags.objects.all())
