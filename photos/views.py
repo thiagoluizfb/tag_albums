@@ -1,5 +1,4 @@
 import datetime
-import os
 from django.shortcuts import render, redirect, reverse
 from .models import Photos, Tags
 from subscription.models import Tiers

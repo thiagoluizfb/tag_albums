@@ -25,4 +25,5 @@ urlpatterns = [
     path('photos/', include('photos.urls')),
     path('profile/', include('profiles.urls')),
     path('buy/', include('subscription.urls')),
+    path('preview/', include('preview_photos.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

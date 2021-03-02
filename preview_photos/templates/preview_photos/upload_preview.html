@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'preview_photos/js/preview_photos.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="row mx-0 my-5">
+        <div class="col-12 text-center">
+            <h2>Upload</h2>
+        </div>
+    </div>
+    <div class="row mx-0">
+        <form method="POST" class="col-12" action="{% url 'upload_preview' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-12 text-center my-3">
+            <a href="{% url 'upload_preview' %}" class="btn upload-photo-btn mx-2" >CANCEL</a>
+            <button type="submit" class="btn upload-photo-btn mx-2" >DONE</button>
+        </div>
+        <div class="col-12 col-md-10 text-center">
+            <div class="row mx-0">
+                    <div id="frame" class="col-12 col-md-4 text-center mx-auto px-0">
+                        <div class="position-relative frame-wrapper">
+                            <div class="image-container">
+                                <label for="upload-photo" class="upload-photo">
+                                    <i class="fas fa-image"></i>
+                                    <p>Click here to upload a new image</p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 py-3 text-center">
+                            <input class="hidden" type="file"  accept="image/*" name="upload-photo" id="upload-photo" onchange="loadFile(event)" required>
+                            <input class="" type="text" name="img-src" id="img-src" value="">
+                            <label for="upload-photo" class="upload-photo hidden">
+                                <p><i class="fas fa-sync-alt"></i> Change photo</p>
+                            </label>
+                        </div>
+                    </div>
+                    <textarea class="col-12 col-md-6 edit-tag-img text-left"
+                        name="edit-file-tag" id="edit-file-tag" placeholder="Tag this photo here. Add the symbol @ between each tag. Ex.: @summer@2019@party"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
