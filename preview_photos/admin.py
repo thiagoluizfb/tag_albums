@@ -6,6 +6,7 @@ class PhotosPreviewAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'image',
+        'image_name',
     )
 
 

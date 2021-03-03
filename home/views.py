@@ -3,7 +3,9 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from photos.views import Photos, Tags
 from subscription.models import Snack, Tiers
 from profiles.models import UserProfile
+from preview_photos.models import PhotosPreview
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 def index(request):
@@ -11,9 +13,12 @@ def index(request):
 
     preview = request.session.get('preview', {})
     request.session['preview'] = {}
+    location = settings.MEDIA_URL[1:100000]
     for photo in preview:
         image = preview[photo]['image']
-        os.remove(f'media/preview/{image}')
+        os.remove(f'{location}preview/{image}')
+        deleteimage = PhotosPreview.objects.get(image_name=image)
+        deleteimage.delete()
     request.session['preview'] = {}
 
     if Photos.objects.all():

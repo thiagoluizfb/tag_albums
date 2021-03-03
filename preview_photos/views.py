@@ -10,15 +10,16 @@ def upload_preview(request):
 
         images = request.FILES.get('upload-photo')
         alltags = request.POST.get('edit-file-tag').split('@')
-        tosave = PhotosPreview(image=images)
+        tosave = PhotosPreview(
+            image=images,
+            image_name=images.name
+        )
         tosave.save()
 
         preview = request.session.get('preview', {})
-        src = request.POST.get('img-src')
         photo_id = len(preview)
         preview[photo_id] = {
             'id': photo_id,
-            'src': src,
             'tags': alltags,
             'image': images.name,
         }
