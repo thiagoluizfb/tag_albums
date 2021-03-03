@@ -9,6 +9,13 @@ from django.contrib.auth.models import User
 def index(request):
     """ A view to delete photos uploaded w/o login and return the index page"""
 
+    preview = request.session.get('preview', {})
+    request.session['preview'] = {}
+    for photo in preview:
+        image = preview[photo]['image']
+        os.remove(f'media/preview/{image}')
+    request.session['preview'] = {}
+
     if Photos.objects.all():
         profile = UserProfile.objects.get(id=6)
         for photos in profile.photos.all():

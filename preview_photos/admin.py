@@ -1,3 +1,12 @@
 from django.contrib import admin
+from .models import PhotosPreview
 
-# Register your models here.
+
+class PhotosPreviewAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'image',
+    )
+
+
+admin.site.register(PhotosPreview, PhotosPreviewAdmin)

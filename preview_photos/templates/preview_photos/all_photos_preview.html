@@ -35,7 +35,7 @@
                 {% for photo in photos %}
                     <div id="{{ photo.id }}-img-container" class="col-12 col-md-4 col-lg-3 text-center">
                         <div class="frame-wrapper position-relative">
-                            <img id="{{ photo.id }}-img" class="thumbnail" src="{{ photo.src }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
+                            <img id="{{ photo.id }}-img" class="thumbnail" src="/media/preview/{{ photo.image }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
                             <span class="btn delete-thumbnail hidden">
                                 <strong>
                                     <a href=""><i class="far fa-times-circle" data-toggle="tooltip" data-placement="top" title="Delete this photo"></i></a>
