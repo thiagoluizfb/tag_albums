@@ -1,4 +1,6 @@
-import datetime, os, boto3
+import os
+import boto3
+
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from photos.views import Photos, Tags
 from subscription.models import Snack, Tiers
@@ -29,7 +31,7 @@ def index(request):
             obj.delete()
 
         image_id = preview[photo]['image_id']
-        deleteimage = PhotosPreview.objects.get(image_name=image_id)
+        deleteimage = PhotosPreview.objects.filter(image_name=image_id)
         deleteimage.delete()
 
     request.session['preview'] = {}
