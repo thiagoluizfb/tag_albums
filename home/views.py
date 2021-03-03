@@ -14,13 +14,13 @@ def index(request):
     """ A view to delete photos uploaded w/o login and return the index page"""
 
     preview = request.session.get('preview', {})
-    location = settings.MEDIA_URL
 
     for photo in preview:
+        location = settings.MEDIA_URL
         image = preview[photo]['image']
         if location[0] == '/':
             location = location[1:10000000]
-            os.remove(f'{location}preview/{image}')
+            os.remove(f'{location}{image}')
         else:
             # Credits https://www.edureka.co/community/31903/how-to-delete-a /
             #   -file-from-s3-bucket-using-boto3#:~:text=You%20can%20delete%20the%20file,delete().
