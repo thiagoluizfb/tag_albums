@@ -25,8 +25,8 @@ def index(request):
             # Credits https://www.edureka.co/community/31903/how-to-delete-a /
             #   -file-from-s3-bucket-using-boto3#:~:text=You%20can%20delete%20the%20file,delete().
             s3 = boto3.resource("s3")
-            bucket_name = settings.AWS_STORAGE_BUCKET_NAME
-            location = settings.MEDIAFILES_LOCATION
+            bucket_name = 'tag-albums'
+            location = 'media/'
             obj = s3.Object(bucket_name, f'{location}preview/{image}')
             obj.delete()
 
