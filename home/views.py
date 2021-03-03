@@ -1,4 +1,4 @@
-import datetime, os
+import datetime, os, boto3
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from photos.views import Photos, Tags
 from subscription.models import Snack, Tiers
@@ -13,14 +13,25 @@ def index(request):
 
     preview = request.session.get('preview', {})
     location = settings.MEDIA_URL
-    if location[0] == '/':
-        location = location[1:10000000]
+
     for photo in preview:
         image = preview[photo]['image']
-        os.remove(f'{location}preview/{image}')
+        if location[0] == '/':
+            location = location[1:10000000]
+            os.remove(f'{location}preview/{image}')
+        else:
+            # Credits https://www.edureka.co/community/31903/how-to-delete-a /
+            #   -file-from-s3-bucket-using-boto3#:~:text=You%20can%20delete%20the%20file,delete().
+            s3 = boto3.resource("s3")
+            bucket_name = settings.AWS_STORAGE_BUCKET_NAME
+            location = settings.MEDIAFILES_LOCATION
+            obj = s3.Object(bucket_name, f'{location}preview/{image}')
+            obj.delete()
+
         image_id = preview[photo]['image_id']
         deleteimage = PhotosPreview.objects.get(image_name=image_id)
         deleteimage.delete()
+
     request.session['preview'] = {}
 
     if Photos.objects.all():
