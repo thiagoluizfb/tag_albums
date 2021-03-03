@@ -12,12 +12,14 @@ def index(request):
     """ A view to delete photos uploaded w/o login and return the index page"""
 
     preview = request.session.get('preview', {})
-    request.session['preview'] = {}
-    location = settings.MEDIA_URL[1:100000]
+    location = settings.MEDIA_URL
+    if location[0] == '/':
+        location = location[1:10000000]
     for photo in preview:
         image = preview[photo]['image']
         os.remove(f'{location}preview/{image}')
-        deleteimage = PhotosPreview.objects.get(image_name=image)
+        image_id = preview[photo]['image_id']
+        deleteimage = PhotosPreview.objects.get(image_name=image_id)
         deleteimage.delete()
     request.session['preview'] = {}
 

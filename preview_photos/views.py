@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, reverse
 from django.conf import settings
 from .models import PhotosPreview
 
+import uuid
+
 
 def upload_preview(request):
     """ A view to return the upload preview page"""
@@ -10,9 +12,12 @@ def upload_preview(request):
 
         images = request.FILES.get('upload-photo')
         alltags = request.POST.get('edit-file-tag').split('@')
+        image_id = str(uuid.uuid4())
+        todelete = PhotosPreview.objects.all()
+        todelete.delete()
         tosave = PhotosPreview(
             image=images,
-            image_name=images.name
+            image_name=image_id
         )
         tosave.save()
 
@@ -22,6 +27,7 @@ def upload_preview(request):
             'id': photo_id,
             'tags': alltags,
             'image': images.name,
+            'image_id': image_id,
         }
         request.session['preview'] = preview
         return redirect(reverse('all_photos_preview'))
