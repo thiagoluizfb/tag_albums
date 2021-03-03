@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'preview_photos/js/preview_photos.js' %}"></script>
+{% endblock %}
+
+{% block page_nav %}
+    <hr class="menu justify-content-end d-block d-md-none text-right">
+    <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="">Albums</a></li>
+    <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="">Upload</a></li>
+    <hr class="menu justify-content-end d-block d-md-none text-right">
+{% endblock %}
+
+
+{% block content %}
+    <div class="row mx-0 my-5">
+        <div class="col-12 text-center">
+            <h2>My Photos</h2>
+        </div>
+    </div>
+    <div class="row mx-0">
+        <div class="col-2 d-none d-md-block">
+            <ul id="side-menu-list">
+                <li class="py-2"><a href=""><i class="fas fa-book"></i> Albums</a></li>
+                <li class="py-2"><a href="{% url 'upload_preview' %}"><i class="fas fa-upload"></i> Upload</a></li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-10 text-center mb-5">
+            <div class="row mx-0">
+                {% for photo in photos %}
+                    <div id="{{ photo.id }}-img-container" class="col-12 col-md-4 col-lg-3 text-center">
+                        <div class="frame-wrapper position-relative">
+                            <img id="{{ photo.id }}-img" class="thumbnail" src="{{ photo.src }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
+                            <span class="btn delete-thumbnail hidden">
+                                <strong>
+                                    <a href=""><i class="far fa-times-circle" data-toggle="tooltip" data-placement="top" title="Delete this photo"></i></a>
+                                </strong>
+                            </span>
+                        </div>
+                        <div>
+                            <div class="tag-slot text-left position-relative" >
+                                <p id="{{ photo.id }}-tag-slot-img" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
+                                    {% if photo.tags %}
+                                        {% for tag in photo.tags %}@{{tag}}{% endfor %}
+                                    {% else %}
+                                        Click edit to add tag
+                                    {% endif %}
+                                </p>
+                                <span class="btn edit-tag hidden" data-toggle="tooltip" data-placement="top" title="Edit tags">
+                                    <strong>
+                                        <a href=""><i id="{{ photo.id }}-img-edit" class="fas fa-pencil-alt" ></i></a>
+                                    </strong>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

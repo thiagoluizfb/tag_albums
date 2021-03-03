@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
-    'SECRET_KEY', 'xv(mgpe^o$8*3i$qbxfo5ls20wg&jz!o%v#^)f_+bur#z5*92n')
+    'SECRET_KEY', '&9)-6&&pb2)_4^(a2&5%p%r@d+hrfwo2b_%3td^&8qoz!u5!-$')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'photos',
     'profiles',
     'subscription',
+    'preview_photos',
 
     # Others
     'crispy_forms',
@@ -83,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'preview_photos.contexts.preview',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',

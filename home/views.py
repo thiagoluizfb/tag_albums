@@ -22,6 +22,7 @@ def index(request):
                 todelete.delete()
 
     if request.user.is_authenticated:
+        upload = 'upload'
         profile = UserProfile.objects.get(user=request.user)
         email = request.user.email
         if Snack.objects.filter(email=email):
@@ -34,10 +35,12 @@ def index(request):
     else:
         profile = ""
         tier = False
+        upload = 'upload_preview'
 
     context = {
         'profile': profile,
         'tier': tier,
+        'upload': upload,
     }
 
     return render(request, "home/index.html", context)

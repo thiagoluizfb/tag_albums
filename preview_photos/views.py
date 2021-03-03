@@ -1,0 +1,41 @@
+from django.shortcuts import render, redirect, reverse
+from django.conf import settings
+
+
+def upload_preview(request):
+    """ A view to return the upload preview page"""
+
+    if request.method == 'POST':
+
+        images = request.FILES.get('upload-photo')
+        alltags = request.POST.get('edit-file-tag').split('@')
+
+        preview = request.session.get('preview', {})
+        src = request.POST.get('img-src')
+        photo_id = len(preview)
+        preview[photo_id] = {
+            'id': photo_id,
+            'src': src,
+            'tags': alltags,
+        }
+        request.session['preview'] = preview
+        return redirect(reverse('all_photos_preview'))
+
+    return render(request, "preview_photos/upload_preview.html")
+
+
+def all_photos_preview(request):
+    """ A view to return the photos preview page"""
+
+    location = settings.MEDIA_URL
+    preview = request.session.get('preview', {})
+    photos = []
+    for p in preview:
+        photos.append(preview[p])
+        print(photos)
+    context = {
+        'photos': photos,
+        'location': location,
+    }
+
+    return render(request, 'preview_photos/all_photos_preview.html', context)
