@@ -23,11 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
+<<<<<<< HEAD
     'SECRET_KEY', '&9)-6&&pb2)_4^(a2&5%p%r@d+hrfwo2b_%3td^&8qoz!u5!-$')
+=======
+    'SECRET_KEY', '')
+>>>>>>> ee8cdd25b9a492e0ce02d47662e3a88e8d70ec8b
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# 'DEVELOPMENT' in os.environ
+DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['tag-albums.herokuapp.com', 'localhost']
 

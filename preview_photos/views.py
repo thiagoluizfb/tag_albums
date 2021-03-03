@@ -1,9 +1,16 @@
 from django.shortcuts import render, redirect, reverse
+<<<<<<< HEAD
 from django.conf import settings
 
 
 def upload_preview(request):
     """ A view to return the upload preview page"""
+=======
+
+
+def upload_preview(request):
+    """ A view to return the upload page"""
+>>>>>>> ee8cdd25b9a492e0ce02d47662e3a88e8d70ec8b
 
     if request.method == 'POST':
 
@@ -12,13 +19,18 @@ def upload_preview(request):
 
         preview = request.session.get('preview', {})
         src = request.POST.get('img-src')
+<<<<<<< HEAD
         photo_id = len(preview)
         preview[photo_id] = {
             'id': photo_id,
+=======
+        preview[images.name] = {
+>>>>>>> ee8cdd25b9a492e0ce02d47662e3a88e8d70ec8b
             'src': src,
             'tags': alltags,
         }
         request.session['preview'] = preview
+<<<<<<< HEAD
         return redirect(reverse('all_photos_preview'))
 
     return render(request, "preview_photos/upload_preview.html")
@@ -39,3 +51,8 @@ def all_photos_preview(request):
     }
 
     return render(request, 'preview_photos/all_photos_preview.html', context)
+=======
+        # return redirect(reverse('all_photos_preview'))
+
+    return render(request, "preview_photos/upload_preview.html")
+>>>>>>> ee8cdd25b9a492e0ce02d47662e3a88e8d70ec8b
