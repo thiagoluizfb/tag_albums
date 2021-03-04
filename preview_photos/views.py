@@ -3,6 +3,8 @@ from django.conf import settings
 from .models import PhotosPreview
 
 import uuid
+import os
+import boto3
 
 
 def upload_preview(request):
@@ -141,3 +143,42 @@ def tag_album_preview(request, album):
     }
 
     return render(request, 'preview_photos/tag_album_preview.html', context)
+
+
+def delete_img_preview(request, image_id):
+    """ A view to delete photo"""
+
+    location = settings.MEDIA_URL
+    preview = request.session.get('preview', {})
+    photo = preview[f'{image_id}']
+
+    template = 'preview_photos/delete_photos_preview.html'
+    context = {
+        'photo': photo,
+        'location': location,
+    }
+
+    if request.method == 'POST':
+
+        image = photo['image']
+        if location[0] == '/':
+            location = location[1:10000000]
+            os.remove(f'{location}{image}')
+        else:
+            # Credits https://www.edureka.co/community/31903/how-to-delete-a /
+            #   -file-from-s3-bucket-using-boto3#:~:text=You%20can%20delete%20the%20file,delete().
+            s3 = boto3.resource("s3")
+            bucket_name = 'tag-albums'
+            location = 'media/'
+            obj = s3.Object(bucket_name, f'{location}preview/{image}')
+            obj.delete()
+
+        preview.pop(f'{image_id}')
+        request.session['preview'] = preview
+        deleteimage = PhotosPreview.objects.filter(image_name=image_id)
+        deleteimage.delete()
+
+        return redirect(reverse('all_photos_preview'))
+
+    else:
+        return render(request, template, context)

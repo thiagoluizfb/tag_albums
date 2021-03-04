@@ -12,12 +12,12 @@
 {% block content %}
     <div class="row mx-0 my-5">
         <div class="col-12 text-center">
-            <h2>Edit Photo</h2>
+            <h2>Delete Photo</h2>
         </div>
     </div>
     <div class="row mx-0">
         <div class="col-12 col-md-10 text-center mb-4">
-            <form method="POST" action="{% url 'edit_tags_preview' photo.id %}" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'delete_img_preview' photo.id %}" enctype="multipart/form-data">
             {% csrf_token %}
                 <div class="row mx-0">
                     <div id="{{ photo.id }}-img-container" class="col-12 col-md-4 text-center mx-auto">
@@ -25,17 +25,17 @@
                             <img id="{{ photo.id }}-img" class="thumbnail" src="{{location}}{{ photo.image }}">
                         </div>
                         <div class="col-12 py-3">
-                            <a href="{% url 'delete_img_preview' photo.id %}"><i class="fas fa-trash-alt mr-2"></i>Delete this photo</a>
+                            <p>{% for tag in photo.tags_set.all %}@{{tag.tag_name}}{% endfor %}</p>
                         </div>
                     </div>
-                    <textarea id="{{ photo.id }}-tag-slot-img"
-                        class="col-12 col-md-6 edit-tag-img text-left" 
-                        name="edit-file-tag">{% for tag in photo.tags %}@{{tag}}{% endfor %}</textarea>
-                    <div class="col-12 col-md-6 offset-md-4 text-center my-3">
-                        <a href="{% url 'all_photos_preview' %}" class="btn upload-photo-btn mx-2" >CANCEL</a>
-                        <button type="submit" class="btn upload-photo-btn mx-2" >DONE</button>
+                    <div class="col-12 col-md-6 text-center py-3">
+                        <h3 class="my-3">Are you sure that you want to delete this photo?</h3>
+                        <div class="col-12 text-center py-5">
+                            <a href="{% url 'all_photos' %}" class="btn upload-photo-btn mx-2" >CANCEL</a>
+                            <button type="submit" class="btn upload-photo-btn mx-2" >CONFIRM</button>
+                        </div>
                     </div>
-            </div>
+                </div>
             </form>
         </div>
     </div>

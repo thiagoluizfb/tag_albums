@@ -1,6 +1,3 @@
-import os
-import boto3
-
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from photos.views import Photos, Tags
 from subscription.models import Snack, Tiers
@@ -8,6 +5,9 @@ from profiles.models import UserProfile
 from preview_photos.models import PhotosPreview
 from django.contrib.auth.models import User
 from django.conf import settings
+
+import os
+import boto3
 
 
 def index(request):
