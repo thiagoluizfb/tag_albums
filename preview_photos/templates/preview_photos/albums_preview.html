@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'photos/js/photos.js' %}"></script>
+{% endblock %}
+
+{% block page_nav %}
+    <hr class="menu justify-content-end d-block d-md-none text-right">
+    <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="{% url 'upload' %}">Upload</a></li>
+    <hr class="menu justify-content-end d-block d-md-none">
+{% endblock %}
+
+{% block content %}
+    <div class="row mx-0 my-5">
+        <div class="col-12 text-center">
+            <h2>My @lbums</h2>
+        </div>
+    </div>
+
+    <div class="row mx-0">
+        <div class="col-2 d-none d-md-block">
+            <ul id="side-menu-list">
+                <li class="py-2"><a href="{% url 'all_photos_preview' %}"><i class="fas fa-images"></i> Photos</a></li>
+                <li class="py-2"><a href="{% url 'upload_preview' %}"><i class="fas fa-upload"></i> Upload</a></li>
+            </ul>
+        </div>
+        <div class="col-12 col-md-10 text-center px-0">
+            <div class="row mx-0">
+                {% for album in albums %}
+                    <div class="col-12 col-md-4 col-lg-3 text-center">
+                        <div class="frame-wrapper">
+                            <a href="">
+                                {% for cover in album.images %}
+                                    {% if forloop.first %}
+                                        <img class="thumbnail" src="{{location}}{{ cover }}">
+                                    {% endif %}
+                                {% endfor %}
+                            </a>
+                        </div>
+                        <h3>@{{album.tag}}</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

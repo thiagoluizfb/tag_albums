@@ -56,6 +56,43 @@ def all_photos_preview(request):
     return render(request, 'preview_photos/all_photos_preview.html', context)
 
 
+def albums_preview(request):
+    """ A view to return the albums preview page"""
+
+    location = settings.MEDIA_URL
+    preview = request.session.get('preview', {})
+    photos = []
+    for p in preview:
+        photos.append(preview[p])
+
+    alltags = []
+    for tags in photos:
+        for tag in tags['tags']:
+            alltags.append(tag)
+    tags = list(set(alltags))
+    tag_albums = {}
+    for tag in tags:
+        tag_id = len(tag_albums)
+        images = []
+        for photo in photos:
+            if tag in photo['tags']:
+                images.append(photo['image'])
+            tag_albums[tag_id] = {
+                'tag': tag,
+                'images': images,
+            }
+    albums = []
+    for tag in tag_albums:
+        albums.append(tag_albums[tag])
+
+    context = {
+        'albums': albums,
+        'location': location,
+    }
+
+    return render(request, 'preview_photos/albums_preview.html', context)
+
+
 def edit_tags_preview(request, image_id):
     """ A view to edit photos' tags page"""
 
