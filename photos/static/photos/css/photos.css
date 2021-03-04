@@ -120,6 +120,6 @@
 /* Photos in albums */
 .carousel-item img{
     height: 70vh;
-    max-width: 100vh;
+    max-width: 100%;
     margin: 0;
 }

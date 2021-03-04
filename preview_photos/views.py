@@ -85,6 +85,8 @@ def albums_preview(request):
     for tag in tag_albums:
         albums.append(tag_albums[tag])
 
+    request.session['albums'] = albums
+
     context = {
         'albums': albums,
         'location': location,
@@ -100,7 +102,6 @@ def edit_tags_preview(request, image_id):
     preview = request.session.get('preview', {})
     photo = preview[f'{image_id}']
     tags = photo['tags']
-    print(tags)
 
     template = 'preview_photos/edit_photos_preview.html'
     context = {
@@ -118,9 +119,25 @@ def edit_tags_preview(request, image_id):
                 tags.append(tag)
         preview[f'{image_id}']['tags'] = tags
         request.session['preview'] = preview
-        print(preview[f'{image_id}']['tags'])
 
         return redirect(reverse('all_photos_preview'))
 
     else:
         return render(request, template, context)
+
+
+def tag_album_preview(request, album):
+    """ A view to return the tag album page"""
+
+    location = settings.MEDIA_URL
+    albums = request.session.get('albums', {})
+    for tag_album in albums:
+        if tag_album['tag'] == album:
+            album = tag_album
+
+    context = {
+        'album': album,
+        'location': location,
+    }
+
+    return render(request, 'preview_photos/tag_album_preview.html', context)
