@@ -39,7 +39,7 @@ def buy(request):
         tier = status.tier
     else:
         tier = False
-        profile = UserProfile.objects.get(id=6)
+        profile = ""
 
     if request.method == "POST":
         qty = request.POST.get('qty')
@@ -67,7 +67,7 @@ def buy_snack(request, qty):
         tier = status.tier
     else:
         tier = False
-        profile = UserProfile.objects.get(id=6)
+        profile = ""
 
     if request.method == 'POST':
 
@@ -106,6 +106,7 @@ def buy_snack(request, qty):
             currency=settings.STRIPE_CURRENCY,
         )
         snack_form = SnackForm()
+
     context = {
         'tier': tier,
         'profile': profile,
@@ -126,7 +127,7 @@ def success(request):
         tier = status.tier
     else:
         tier = False
-        profile = UserProfile.objects.get(id=6)
+        profile = ""
 
     context = {
         'tier': tier,

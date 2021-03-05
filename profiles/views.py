@@ -1,20 +1,18 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+
 from .models import UserProfile
 from .forms import UserProfileForm
 from subscription.models import Tiers
 
 
+@login_required
 def profile(request):
     """ A view to view user profile """
 
     profile = get_object_or_404(UserProfile, user=request.user)
-
-    if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
-        status = Tiers.objects.get(user=profile)
-        tier = status.tier
-    else:
-        tier = False
+    status = Tiers.objects.get(user=profile)
+    tier = status.tier
 
     if request.method == 'POST':
         name = request.POST['display_name']

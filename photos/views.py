@@ -1,21 +1,21 @@
-import datetime
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
+
 from .models import Photos, Tags
 from subscription.models import Tiers
 from profiles.models import UserProfile
-from django.conf import settings
+
+import datetime
 
 
+@login_required
 def all_photos(request):
     """ A view to return the photos page"""
 
-    if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
-        status = Tiers.objects.get(user=profile)
-        tier = status.tier
-    else:
-        profile = UserProfile.objects.get(id=6)
-        tier = False
+    profile = get_object_or_404(UserProfile, user=request.user)
+    status = Tiers.objects.get(user=profile)
+    tier = status.tier
 
     location = settings.MEDIA_URL
     photos = profile.photos.all()
@@ -31,16 +31,13 @@ def all_photos(request):
     return render(request, 'photos/all_photos.html', context)
 
 
+@login_required
 def albums(request):
     """ A view to return the albums page"""
 
-    if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
-        status = Tiers.objects.get(user=profile)
-        tier = status.tier
-    else:
-        tier = False
-        profile = UserProfile.objects.get(id=6)
+    profile = get_object_or_404(UserProfile, user=request.user)
+    status = Tiers.objects.get(user=profile)
+    tier = status.tier
 
     location = settings.MEDIA_URL
     photos = profile.photos.all()
@@ -56,16 +53,13 @@ def albums(request):
     return render(request, 'photos/albums.html', context)
 
 
+@login_required
 def tag_album(request, album):
     """ A view to return the photos page"""
 
-    if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
-        status = Tiers.objects.get(user=profile)
-        tier = status.tier
-    else:
-        profile = UserProfile.objects.get(id=6)
-        tier = False
+    profile = get_object_or_404(UserProfile, user=request.user)
+    status = Tiers.objects.get(user=profile)
+    tier = status.tier
 
     location = settings.MEDIA_URL
     photos = profile.photos.all()
@@ -81,16 +75,13 @@ def tag_album(request, album):
     return render(request, 'photos/tag_album.html', context)
 
 
+@login_required
 def edit_tags(request, image_id):
     """ A view to edit photos' tags page"""
 
-    if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
-        status = Tiers.objects.get(user=profile)
-        tier = status.tier
-    else:
-        tier = False
-        profile = UserProfile.objects.get(id=6)
+    profile = get_object_or_404(UserProfile, user=request.user)
+    status = Tiers.objects.get(user=profile)
+    tier = status.tier
 
     photo = Photos.objects.get(id=image_id)
     tags = Tags
@@ -130,6 +121,7 @@ def edit_tags(request, image_id):
         return render(request, 'photos/edit_photos.html', context)
 
 
+@login_required
 def upload(request):
     """ A view to return the upload page"""
 
@@ -139,7 +131,7 @@ def upload(request):
         if Photos.objects.filter(image=images):
             count = Photos.objects.filter(image=images).count()
             image_name = images.name.split('.')
-            images.name = f'{image_name[0]}_({count}).jpg'
+            images.name = f'{image_name[0]}_{count}.jpg'
         alltags = request.POST.get('edit-file-tag').split('@')
         if request.user.is_authenticated:
             tosave = Photos(
@@ -181,16 +173,13 @@ def upload(request):
     return render(request, "photos/upload.html", context)
 
 
+@login_required
 def delete_img(request, image_id):
     """ A view to delete photo"""
 
-    if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
-        status = Tiers.objects.get(user=profile)
-        tier = status.tier
-    else:
-        tier = False
-        profile = UserProfile.objects.get(id=6)
+    profile = get_object_or_404(UserProfile, user=request.user)
+    status = Tiers.objects.get(user=profile)
+    tier = status.tier
 
     photo = Photos.objects.get(id=image_id)
     tags = Tags
