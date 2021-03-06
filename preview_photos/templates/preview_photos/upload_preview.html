@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{% static 'preview_photos/js/preview_photos.js' %}"></script>
+    <script src="{% static 'photos/js/photos.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@
         <form method="POST" class="col-12" action="{% url 'upload_preview' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="col-12 text-center my-3">
-            <a href="{% url 'upload_preview' %}" class="btn upload-photo-btn mx-2" >CANCEL</a>
+            <a href="{% url 'all_photos_preview' %}" class="btn upload-photo-btn mx-2" >CANCEL</a>
             <button type="submit" class="btn upload-photo-btn mx-2" >DONE</button>
         </div>
         <div class="col-12 col-md-10 text-center">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-12 py-3 text-center">
                             <input class="hidden" type="file"  accept="image/*" name="upload-photo" id="upload-photo" onchange="loadFile(event)" required>
-                            <input class="" type="text" name="img-src" id="img-src" value="">
+                            <input class="hidden" type="text" name="img-src" id="img-src" value="">
                             <label for="upload-photo" class="upload-photo hidden">
                                 <p><i class="fas fa-sync-alt"></i> Change photo</p>
                             </label>

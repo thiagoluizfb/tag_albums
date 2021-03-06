@@ -90,24 +90,9 @@ a:hover{
 }
 
 .btn:focus,
-textarea{
+textarea:focus{
     box-shadow: 0 0 0 0.2rem rgba(190, 190, 190, 0.25);
 }
-
-/* #logo-text:focus,
-#id_login:focus,
-#id_password:focus,
-#id_email:focus,
-#id_email2:focus,
-#id_username:focus,
-#id_password1:focus,
-#id_password2:focus,
-#id_display_name:focus,
-#id_remember,
-textarea{
-    outline: none;
-    box-shadow: none;
-} */
 
 #logo-text:focus{
     outline: none;
@@ -127,8 +112,11 @@ textarea{
     background-color: #1a1a1a !important;
     color: #bebebe !important;
     outline: none !important;
-    box-shadow: none !important;
     border-radius: 0;
+}
+
+.form-control {
+    box-shadow: none !important;
 }
 
 form li{

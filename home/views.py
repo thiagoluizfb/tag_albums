@@ -1,11 +1,10 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from photos.views import Tags
 from subscription.models import Snack, Tiers
 from profiles.models import UserProfile
 from preview_photos.models import PhotosPreview
 from django.conf import settings
 
-import os
 import boto3
 
 
@@ -17,21 +16,19 @@ def index(request):
     for photo in preview:
         location = settings.MEDIA_URL
         image = preview[photo]['image']
-        if location[0] == '/':
-            location = location[1:10000000]
-            os.remove(f'{location}{image}')
-        else:
+        image_id = preview[photo]['image_id']
+        try:
+            deleteimage = PhotosPreview.objects.filter(image_name=image_id)
+            deleteimage.delete()
+
             # Credits https://www.edureka.co/community/31903/how-to-delete-a /
             #   -file-from-s3-bucket-using-boto3#:~:text=You%20can%20delete%20the%20file,delete().
             s3 = boto3.resource("s3")
             bucket_name = 'tag-albums'
-            location = 'media/'
-            obj = s3.Object(bucket_name, f'{location}preview/{image}')
+            obj = s3.Object(bucket_name, f'{location}{image}')
             obj.delete()
-
-        image_id = preview[photo]['image_id']
-        deleteimage = PhotosPreview.objects.filter(image_name=image_id)
-        deleteimage.delete()
+        except Exception:
+            pass
 
     request.session['preview'] = {}
 
@@ -43,7 +40,7 @@ def index(request):
                 todelete.delete()
 
     if request.user.is_authenticated:
-        upload = 'upload'
+        start = 'all_photos'
         profile = get_object_or_404(UserProfile, user=request.user)
         email = request.user.email
         if Snack.objects.filter(email=email):
@@ -56,12 +53,12 @@ def index(request):
     else:
         profile = ""
         tier = False
-        upload = 'upload_preview'
+        start = 'upload_preview'
 
     context = {
         'profile': profile,
         'tier': tier,
-        'upload': upload,
+        'start': start,
     }
 
     return render(request, "home/index.html", context)

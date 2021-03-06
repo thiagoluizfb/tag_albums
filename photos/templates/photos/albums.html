@@ -21,19 +21,27 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row mx-0 my-5">
-        <div class="col-12 text-center">
+<div class="row mt-2 px-0 mx-0">
+    <div class="col-md-2 d-none d-md-block py-5 my-5">
+        <ul id="side-menu-list">
+            <li class="py-2 text-center"><a href="{% url 'all_photos' %}"><i class="fas fa-images"></i> Photos</a></li>
+            <li class="py-2 text-center"><a href="{% url 'upload' %}"><i class="fas fa-upload"></i> Upload</a></li>
+        </ul>
+    </div>
+    <div class="col-12 col-md-10 text-center pb-5 text-left">
+        <div class="col-12 text-center py-3">
             <h2>My @lbums</h2>
         </div>
-    </div>
-
-    <div class="row mx-0">
-        <div class="col-2 d-none d-md-block">
-            <ul id="side-menu-list">
-                <li class="py-2"><a href="{% url 'all_photos' %}"><i class="fas fa-images"></i> Photos</a></li>
-                <li class="py-2"><a href="{% url 'upload' %}"><i class="fas fa-upload"></i> Upload</a></li>
-            </ul>
-        </div>
+        {% if tags|length is 0 %}
+            <div class="col-12 col-md-10 mx-auto mt-5">
+                <h1 class="py-5"><em>No photos or tags added</em></h1>
+                <h1><em>Click in <a href="{% url 'upload' %}"><u>upload</u></a> to start or tag your <a href="{% url 'all_photos' %}"><u>photos</u></a></em></h1>
+                <div class="text-center mt-5">
+                    <a href="{% url 'account_login' %}"><small><em>or click here to log in </em></small></a>
+                    <p><a href="{% url 'account_login' %}"><small><em>and save your photos and @lbums</em></small></a></p>
+                </div>
+            </div>
+        {% endif %}
         <div class="col-12 col-md-10 text-center px-0">
             <div class="row mx-0">
                 {% for tag in tags %}

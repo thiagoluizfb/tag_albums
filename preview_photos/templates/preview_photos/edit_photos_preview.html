@@ -28,7 +28,7 @@
                             <a href="{% url 'delete_img_preview' photo.id %}"><i class="fas fa-trash-alt mr-2"></i>Delete this photo</a>
                         </div>
                     </div>
-                    <textarea id="{{ photo.id }}-tag-slot-img"
+                    <textarea id="{{ photo.id }}-tag-slot-img" placeholder="Tag this photo here. Add the symbol @ between each tag. Ex.: @summer@2019@party"
                         class="col-12 col-md-6 edit-tag-img text-left" 
                         name="edit-file-tag">{% for tag in photo.tags %}@{{tag}}{% endfor %}</textarea>
                     <div class="col-12 col-md-6 offset-md-4 text-center my-3">

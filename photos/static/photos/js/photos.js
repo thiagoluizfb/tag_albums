@@ -11,6 +11,8 @@ function loadFile(event) {
         <img id="img-upload" class="thumbnail"/>`);
     image = document.getElementById("img-upload");
     image.src = URL.createObjectURL(event.target.files[0]);
+    $("#img-src").val(image.src);
+    $('#edit-file-tag').select();
 }
 
 function showDelete(btn){
