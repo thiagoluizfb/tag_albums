@@ -9,11 +9,6 @@
     <script src="{% static 'photos/js/photos.js' %}"></script>
 {% endblock %}
 
-{% block username %}
-    <em id="display_name">{{ profile.display_name | lower}}</em>
-    <span class="hidden" id="tier">{{tier}}</span>
-{% endblock %}
-
 {% block page_nav %}
     <hr class="menu justify-content-end d-block d-md-none text-right">
     <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="{% url 'albums' %}">Albums</a></li>
@@ -22,20 +17,18 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row mx-0 my-5">
-        <div class="col-12 col-md-10 text-center">
-            <h2>@{{ tags.0 }}</h2>
-        </div>
-    </div>
-    <div class="row mx-0">
-        <div class="col-md-2 d-none d-md-block">
+    <div class="row mt-2 px-0 mx-0">
+        <div class="col-md-2 d-none d-md-block py-5 my-5">
             <ul id="side-menu-list">
-                <li class="py-2"><a href="{% url 'all_photos' %}"><i class="fas fa-images"></i> Photos</a></li>
-                <li class="py-2"><a href="{% url 'albums' %}"><i class="fas fa-book"></i> Albums</a></li>
-                <li class="py-2"><a href="{% url 'upload' %}"><i class="fas fa-upload"></i> Upload</a></li>
+                <li class="py-2 text-center"><a href="{% url 'all_photos' %}"><i class="fas fa-images"></i> Photos</a></li>
+                <li class="py-2 text-center"><a href="{% url 'albums' %}"><i class="fas fa-book"></i> Albums</a></li>
+                <li class="py-2 text-center"><a href="{% url 'upload' %}"><i class="fas fa-upload"></i> Upload</a></li>
             </ul>
         </div>
-        <div class="col-12 text-center">
+        <div class="col-12 col-md-10 text-center pb-5 text-left">
+            <div class="col-12 text-center py-3">
+                <h2>@{{ tags.0 }}</h2>
+            </div>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <div class="col-12 carousel-inner px-0">
                     {% for tag in tags %}          
