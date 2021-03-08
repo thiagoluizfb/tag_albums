@@ -30,7 +30,7 @@
                             <img id="{{ photo.id }}-img" class="thumbnail" src="{{location}}{{ photo.image }}">
                         </div>
                         <div class="col-12 py-3">
-                            <p>{% for tag in photo.tags_set.all %}@{{tag.tag_name}}{% endfor %}</p>
+                            <p class="tags-wrapper text-left">{% for tag in photo.tags_set.all %}@{{tag.tag_name}}{% endfor %}</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 text-center py-3">

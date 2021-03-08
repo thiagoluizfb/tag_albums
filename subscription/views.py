@@ -49,6 +49,7 @@ def buy(request):
         'tier': tier,
         'profile': profile,
         'price': price,
+        'buy': True,
     }
 
     return render(request, "subscription/buy.html", context)
@@ -115,6 +116,7 @@ def buy_snack(request, qty):
         'qty': qty,
         'total': total,
         'client_secret': intent.client_secret,
+        'buy': True,
     }
     return render(request, "subscription/buy_snack.html", context)
 
@@ -132,6 +134,7 @@ def success(request):
     context = {
         'tier': tier,
         'profile': profile,
+        'buy': True,
     }
 
     return render(request, "subscription/buy_snack_success.html", context)

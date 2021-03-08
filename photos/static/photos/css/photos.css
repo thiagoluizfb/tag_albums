@@ -117,6 +117,12 @@
     outline: none;
 }
 
+.tags-wrapper{
+    max-width: 220px;
+    word-wrap: break-word;
+    margin: auto;
+}
+
 /* Photos in albums */
 .carousel-item img{
     height: 70vh;

@@ -74,6 +74,23 @@
     {% block content %}
     {% endblock %}
 
+    {% if tier is False %}
+        {% if not buy %}
+            <div id="add-popup" class="col-6 offset-3 text-center hidden" onmouseenter="showClose(this)" onmouseleave="hideClose(this)">
+                <span>Buy me a snack and help to mantain the page</span>
+                <p><small><em>buy snack and log in to remove adds</em></small></p>
+                <p class="pt-2">
+                    <a href="{% url 'buy' %}"><i class="fas fa-cookie-bite"></i> Buy now</a>
+                </p>
+                <span class="btn close-add hidden">
+                    <strong>
+                        <i class="fas fa-times" onclick="closeAdd()"></i>
+                    </strong>
+                </span>
+            </div>
+        {% endif %}
+    {% endif %}
+
     {% block postloadjs %}
     {% endblock %}
   </body>

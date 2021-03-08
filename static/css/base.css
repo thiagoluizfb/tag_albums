@@ -55,6 +55,30 @@ a:hover{
 #bt-toggler{
     color: #bebebe;
 }
+
+#add-popup {
+    background-color: #bebebe ;
+    margin: 0 auto;
+    width: 50vw;
+    padding: 1rem 2rem;
+    position: relative;
+    color: #1a1a1a;
+    bottom: 20vh;
+    z-index: 999;
+}
+
+#add-popup a, .fa-times{
+    color: #1a1a1a;
+}
+
+.close-add {
+    top: 5%;
+    left: 90%;
+    position: absolute;
+    color: #1a1a1a;
+}
+
+
 /* Login and authentication */
 
 .auth-container{

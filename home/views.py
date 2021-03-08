@@ -42,14 +42,16 @@ def index(request):
     if request.user.is_authenticated:
         start = 'all_photos'
         profile = get_object_or_404(UserProfile, user=request.user)
-        email = request.user.email
-        if Snack.objects.filter(email=email):
-            user = Tiers.objects.get(user=profile)
-            setattr(user, 'tier', True)
-            user.save()
-            tier = user.tier
-        else:
-            tier = False
+        status = Tiers.objects.get(user=profile)
+        tier = status.tier
+        # email = request.user.email
+        # if Snack.objects.filter(email=email):
+        #     user = Tiers.objects.get(user=profile)
+        #     setattr(user, 'tier', True)
+        #     user.save()
+        #     tier = user.tier
+        # else:
+        #     tier = False
     else:
         profile = ""
         tier = False

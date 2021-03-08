@@ -53,3 +53,6 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
         new_user = Tiers.objects.create(user=instance)
         new_user.save()
+        user = Tiers.objects.get(user=new_user)
+        setattr(user, 'tier', False)
+        user.save()
