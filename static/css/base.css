@@ -4,15 +4,15 @@ html {
     height: 100%;
 }
 
-hr.menu {
-    border-top: 1px solid #bebebe ;
-    width: 75%;
-}
-
 body{
     background-color: #1a1a1a;
     color: #bebebe;
     font-family: "Open Sans", sans-serif;
+}
+
+hr.menu {
+    border-top: 1px solid #bebebe ;
+    width: 75%;
 }
 
 nav a{
@@ -34,18 +34,6 @@ a:hover{
 
 #side-menu-list li{
     list-style-type: none;
-}
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #bebebe;
 }
 
 .hidden{
@@ -129,7 +117,6 @@ textarea:focus{
     border-color: #bebebe !important;
     outline: none !important;
     box-shadow: none !important;
-    
 }
 
 .form-control, textarea{
@@ -153,4 +140,16 @@ form li{
 
 #signup_form ul{
     padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bebebe;
 }

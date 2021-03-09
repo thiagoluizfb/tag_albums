@@ -2,7 +2,7 @@ var stripePublicKey  = $('#id_stripe_public_key').text().slice(1, -1);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var qty = $('#id_qty').text();
 var total = $('#id_total').text();
-var stripe = Stripe(stripePublicKey );
+var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
 var style = {
     base: {
@@ -22,6 +22,7 @@ var style = {
         iconColor: '#dc3545'
     }
 };
+
 var cardNumberElement = elements.create('cardNumber', {style: style});
 var cardExpiryElement = elements.create('cardExpiry', {style: style});
 var cardCvcElement = elements.create('cardCvc', {style: style});
