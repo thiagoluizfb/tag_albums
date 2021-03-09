@@ -5,14 +5,10 @@
     <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
 {% endblock %}
 
-{% block extra_js %}
-    <script src="{% static 'photos/js/photos.js' %}"></script>
-{% endblock %}
-
 {% block page_nav %}
     <hr class="menu justify-content-end d-block d-md-none text-right">
-    <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="">Albums</a></li>
-    <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="">Upload</a></li>
+    <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="{% url 'albums_preview' %}">Albums</a></li>
+    <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="{% url 'upload_preview' %}">Upload</a></li>
     <hr class="menu justify-content-end d-block d-md-none text-right">
 {% endblock %}
 
@@ -73,4 +69,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    <script src="{% static 'photos/js/photos.js' %}"></script>
 {% endblock %}

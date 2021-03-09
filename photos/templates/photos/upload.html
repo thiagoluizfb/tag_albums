@@ -5,10 +5,6 @@
     <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
 {% endblock %}
 
-{% block extra_js %}
-    <script src="{% static 'photos/js/photos.js' %}"></script>
-{% endblock %}
-
 {% block username %}
     <em id="display_name">{{ profile.display_name | lower}}</em>
     <span class="hidden" id="tier">{{tier}}</span>
@@ -49,4 +45,8 @@
             </div>
         </form>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    <script src="{% static 'photos/js/photos.js' %}"></script>
 {% endblock %}

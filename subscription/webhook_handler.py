@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .models import Snack, Tiers
 from profiles.models import UserProfile
-from django.conf import settings
 
 import time
 
