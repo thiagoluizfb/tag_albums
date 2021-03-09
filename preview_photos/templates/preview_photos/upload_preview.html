@@ -5,10 +5,6 @@
     <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
 {% endblock %}
 
-{% block extra_js %}
-    <script src="{% static 'photos/js/photos.js' %}"></script>
-{% endblock %}
-
 {% block content %}
     <div class="row mx-0 my-5">
         <div class="col-12 text-center">
@@ -47,4 +43,8 @@
             </div>
         </form>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    <script src="{% static 'photos/js/photos.js' %}"></script>
 {% endblock %}

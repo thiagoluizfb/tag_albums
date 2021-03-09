@@ -5,10 +5,6 @@
     <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
 {% endblock %}
 
-{% block extra_js %}
-    <script src="{% static 'photos/js/photos.js' %}"></script>
-{% endblock %}
-
 {% block page_nav %}
     <hr class="menu justify-content-end d-block d-md-none text-right">
     <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="">Albums</a></li>
@@ -18,58 +14,63 @@
 
 
 {% block content %}
-<div class="row mt-2 px-0 mx-0">
-    <div class="col-md-2 d-none d-md-block py-5 my-5">
-        <ul id="side-menu-list">
-            <li class="py-2 text-center"><a href="{% url 'albums_preview' %}"><i class="fas fa-book"></i> Albums</a></li>
-            <li class="py-2 text-center"><a href="{% url 'upload_preview' %}"><i class="fas fa-upload"></i> Upload</a></li>
-        </ul>
-    </div>
-    <div class="col-12 col-md-10 text-center pb-5 text-left">
-        <div class="col-12 text-center py-3">
-            <h2>My Photos</h2>
+    <div class="row mt-2 px-0 mx-0">
+        <div class="col-md-2 d-none d-md-block py-5 my-5">
+            <ul id="side-menu-list">
+                <li class="py-2 text-center"><a href="{% url 'albums_preview' %}"><i class="fas fa-book"></i> Albums</a></li>
+                <li class="py-2 text-center"><a href="{% url 'upload_preview' %}"><i class="fas fa-upload"></i> Upload</a></li>
+            </ul>
         </div>
-        {% if photos|length is 0 %}
-            <div class="col-12 col-md-10 mx-auto mt-5">
-                <h1 class="py-5"><em>No photos added</em></h1>
-                <h1><em>Click in <a href="{% url 'upload_preview' %}">upload</a> to start!</em></h1>
-                <div class="text-center mt-5">
-                    <a href="{% url 'account_login' %}"><small><em>or click here to log in </em></small></a>
-                    <p><a href="{% url 'account_login' %}"><small><em>and save your photos and @lbums</em></small></a></p>
-                </div>
+        <div class="col-12 col-md-10 text-center pb-5 text-left">
+            <div class="col-12 text-center py-3">
+                <h2>My Photos</h2>
             </div>
-        {% endif %}
-        <div class="col-12 col-md-10 text-center mb-5">
-            <div class="row mx-0">
-                {% for photo in photos %}
-                    <div id="{{ photo.id }}-img-container" class="col-12 col-md-4 col-lg-3 text-center">
-                        <div class="frame-wrapper position-relative">
-                            <img id="{{ photo.id }}-img" class="thumbnail" src="{{location}}{{ photo.image }}" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
-                            <span class="btn delete-thumbnail hidden">
-                                <strong>
-                                    <a href="{% url 'delete_img_preview' photo.id %}"><i class="far fa-times-circle" data-toggle="tooltip" data-placement="top" title="Delete this photo"></i></a>
-                                </strong>
-                            </span>
-                        </div>
-                        <div>
-                            <div class="tag-slot text-left position-relative" >
-                                <p id="{{ photo.id }}-tag-slot-img" onmouseenter="showDelete(this)" onmouseleave="hideDelete(this)">
-                                {% if photo.tags %}
-                                    {% for tag in photo.tags %}@{{tag}}{% endfor %}
-                                {% else %}
-                                    Click edit to add tag
-                                {% endif %}
-                                </p>
-                                <span class="btn edit-tag hidden" data-toggle="tooltip" data-placement="top" title="Edit tags">
+            {% if photos|length is 0 %}
+                <div class="col-12 col-md-10 mx-auto mt-5">
+                    <h1 class="py-5"><em>No photos added</em></h1>
+                    <h1><em>Click in <a href="{% url 'upload_preview' %}">upload</a> to start!</em></h1>
+                    <div class="text-center mt-5">
+                        <a href="{% url 'account_login' %}"><small><em>or click here to log in </em></small></a>
+                        <p><a href="{% url 'account_login' %}"><small><em>and save your photos and @lbums</em></small></a></p>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="col-12 col-md-10 text-center mb-5">
+                <div class="row mx-0">
+                    {% for photo in photos %}
+                        <div id="{{ photo.id }}-img-container" class="col-12 col-md-4 col-lg-3 text-center">
+                            <div class="frame-wrapper position-relative">
+                                <img id="{{ photo.id }}-img" class="thumbnail" src="{{location}}{{ photo.image }}" alt="{{ photo.image }}" onmouseenter="showIcon(this)" onmouseleave="hideIcon(this)">
+                                <span class="btn delete-thumbnail hidden">
                                     <strong>
-                                        <a href="{% url 'edit_tags_preview' photo.id %}"><i id="{{ photo.id }}-img-edit" class="fas fa-pencil-alt" ></i></a>
+                                        <a href="{% url 'delete_img_preview' photo.id %}"><i class="far fa-times-circle" data-toggle="tooltip" data-placement="top" title="Delete this photo"></i></a>
                                     </strong>
                                 </span>
                             </div>
+                            <div>
+                                <div class="tag-slot text-left position-relative" >
+                                    <p id="{{ photo.id }}-tag-slot-img" onmouseenter="showIcon(this)" onmouseleave="hideIcon(this)">
+                                    {% if photo.tags %}
+                                        {% for tag in photo.tags %}@{{tag}}{% endfor %}
+                                    {% else %}
+                                        Click edit to add tag
+                                    {% endif %}
+                                    </p>
+                                    <span class="btn edit-tag hidden" data-toggle="tooltip" data-placement="top" title="Edit tags">
+                                        <strong>
+                                            <a href="{% url 'edit_tags_preview' photo.id %}"><i id="{{ photo.id }}-img-edit" class="fas fa-pencil-alt" ></i></a>
+                                        </strong>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    <script src="{% static 'photos/js/photos.js' %}"></script>
 {% endblock %}
