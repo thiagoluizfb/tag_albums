@@ -58,12 +58,12 @@ a:hover{
 
 #add-popup {
     background-color: #bebebe ;
+    border: 1px solid #1a1a1a;
     margin: 0 auto;
-    width: 50vw;
     padding: 1rem 2rem;
     position: relative;
     color: #1a1a1a;
-    bottom: 20vh;
+    bottom: 50vh;
     z-index: 999;
 }
 

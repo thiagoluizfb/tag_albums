@@ -9,13 +9,12 @@ $(document).ready(function(){
     }
 
     setInterval(function(){
-        $("#add-popup").removeClass("hidden");;
+        $("#add-popup").removeClass("hidden");
     }, 15000);
 })
 
 function showClose(btn){
     $(btn).children().last().removeClass("hidden");
-    console.log($(btn).children().last())
     return;
 }
 
@@ -26,5 +25,6 @@ function hideClose(btn){
 
 function closeAdd(){
     $("#add-popup").addClass("hidden");
+    $('#logo-text').focus();
     return;
 }

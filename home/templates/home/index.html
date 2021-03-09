@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 {% endblock %}
 
+{% block extra_js %}
+    <script src="{% static 'home/js/home.js' %}"></script>
+{% endblock %}
+
 {% block username %}
     <em id="display_name">{{ profile.display_name | lower}}</em>
     <span class="hidden" id="tier">{{tier}}</span>
@@ -21,8 +25,4 @@
         <div class="pt-md-5"><a href="{% url start %}">St@rt now</a></div>
     </div>
     <input type="text" id="logo-text" spellcheck="false" onkeyup="logoText()">
-{% endblock %}
-
-{% block postloadjs %}
-    <script src="{% static 'home/js/home.js' %}"></script>
 {% endblock %}
