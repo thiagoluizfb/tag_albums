@@ -1,4 +1,4 @@
-var indexTag = 1
+var indexTag = 1;
 
 $(document).ready(function() {
     $('#logo-text').focus();
@@ -6,10 +6,12 @@ $(document).ready(function() {
 
 function logoText() {
     $('#logo-text').focus();
-    $(".logo-anime").css("font-size", "50px")
+    $(".logo-anime").css("font-size", "50px");
     text = $("#logo-text").val();
     if (event.keyCode == 13){
-        if (indexTag == 4){indexTag = 1}
+        if (indexTag == 4){
+            indexTag = 1;
+        }
         $(`.index-tag-${indexTag}`).html(`#${text}`);
         indexTag ++;
         text = "";
@@ -18,4 +20,4 @@ function logoText() {
     }else{
         $(".logo-anime").html(`@${text}`);
     }
-};
+}
