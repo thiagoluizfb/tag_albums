@@ -12,14 +12,15 @@ class Tiers(models.Model):
     """
     user = models.ForeignKey(
         UserProfile, on_delete=models.SET_NULL,
-        null=True, blank=True, related_name='tier', default=6)
+        null=True, blank=True, related_name='tier')
     tier = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['id']
 
-    def __int__(self):
-        return self.id
+    def __str__(self):
+        _id = str(self.user)
+        return _id
 
 
 class Snack(models.Model):
@@ -53,6 +54,7 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
         new_user = Tiers.objects.create(user=instance)
         new_user.save()
-        user = Tiers.objects.get(user=new_user)
+        user_profile = UserProfile.objects.get(user=instance)
+        user = Tiers.objects.filter(user=user_profile)
         setattr(user, 'tier', False)
         user.save()

@@ -109,6 +109,7 @@ def edit_tags(request, image_id):
                     savetag.save()
                     savetag.tag_photos.add(tosave)
 
+        # Delete all unused tags
         tags = list(Tags.objects.all())
         for tag in tags:
             if not tag.tag_photos.all():
@@ -197,6 +198,7 @@ def delete_img(request, image_id):
         todelete = Photos.objects.get(id=image_id)
         todelete.delete()
 
+        # Delete all unused tags
         tags = list(Tags.objects.all())
         for tag in tags:
             if not tag.tag_photos.all():

@@ -5,10 +5,6 @@
     <link rel="stylesheet" href="{% static 'photos/css/photos.css' %}">
 {% endblock %}
 
-{% block extra_js %}
-    <script src="{% static 'photos/js/photos.js' %}"></script>
-{% endblock %}
-
 {% block page_nav %}
     <hr class="menu justify-content-end d-block d-md-none text-right">
     <li class="nav-item py-0 mr-5 d-flex justify-content-end d-none d-sm-block d-md-none"><a class="nav-link" href="{% url 'albums' %}">Albums</a></li>
@@ -34,7 +30,7 @@
                     {% for tag in tags %}          
                         {% for t in tag.tag_photos.all %}
                             <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
-                                <img class="" src="{{location}}{{ t.image }}">
+                                <img class="" src="{{location}}{{ t.image }}" alt="{{ t.image }}">
                             </div>
                         {% endfor %}
                     {% endfor %}

@@ -7,7 +7,7 @@ $(document).ready(function() {
 function logoText() {
     $('#logo-text').focus();
     $(".logo-anime").css("font-size", "50px");
-    text = $("#logo-text").val();
+    var text = $("#logo-text").val();
     if (event.keyCode == 13){
         if (indexTag == 4){
             indexTag = 1;
