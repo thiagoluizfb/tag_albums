@@ -25,9 +25,7 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     Create or update the user profile
     """
     if created:
-        UserProfile.objects.create(user=instance)
-        instance.userprofile.save()
-        profile = UserProfile.objects.get(user=instance)
+        profile = UserProfile.objects.create(user=instance)
         setattr(profile, 'display_name', instance.username)
         profile.save()
 

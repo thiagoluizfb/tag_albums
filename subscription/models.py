@@ -52,9 +52,4 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     Create or update the user profile
     """
     if created:
-        new_user = Tiers.objects.create(user=instance)
-        new_user.save()
-        user_profile = UserProfile.objects.get(user=instance)
-        user = Tiers.objects.filter(user=user_profile)
-        setattr(user, 'tier', False)
-        user.save()
+        Tiers.objects.create(user=instance)
