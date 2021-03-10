@@ -47,13 +47,12 @@ Users can register and create an account to save their photos and albums.
   - As a user, I would like to log in and log out, so that I can access my photos from any device;
   - As a user, I would like to recover my password in case I forget it, so that I can recover access to my account;
   - As a user, I would like to receive an email confirmation after registering, so that I can be assured that my contact is not being used by another user
-  - As a user, I would like to have my personalized user profile, so taht I can save my albums privetely.
 
   ### New User
   -  As a new user, I would like to see how te website works without saving my photos or registering
     
   ## Site Owner and Admin
-  As a site owner, I would like to be able to maintain the page through donations and/or publicity adds;
+  As a site owner, I would like to be able to maintain the page through donations and/or publicity adds.
 
  
 ## Design
@@ -80,6 +79,9 @@ Users can register and create an account to save their photos and albums.
 
 
 # FEATURES
+
+This project is made by the main app "tag_albums" and also by more four apps: "Home", "Profiles", "Photos" and "Subscription".
+
 
   ## Landing page
   - The landing page is already interactive, it has a blinking tab which tempts the user to already starting tagging, which is the main goal of the page
@@ -136,8 +138,10 @@ Users can register and create an account to save their photos and albums.
      - Balsamiq was used to create the initial [wireframes](https://github.com/thiagoluizfb/tag_albums/files/6112229/Tagalbums_wireframes.pdf) for this project
   11. [Coolors.co](https://coolors.co/)
       - Used to create colour palette.
-     
+
+
  ---------------------------------------------------------
+ 
  
  ## DATA ARCHITECTURE
   
@@ -240,9 +244,165 @@ Login is required to upload photos. FileField is set as image in html unput, the
 
 Tags are created when users edit photos. Before form is submited, the site look for duplicates and only unique tags are stored. Each Tag Name can be linked to many Photos, as well as many Photos can be linked to Many tags. The relationship is set after Tag Names are added to the model.
 
+
 ---------------------------------------------------------------------------------------------------------------------------------------
+
+
 # TESTING
+
+## Testing User Stories
+
+### As a user, I would like to create albums with the photos uploaded, so that I can organize my photos as I was making a physical album
+### As a user, I would like to tag photos uploaded by categories, location and dates, so that I can categorize photos by tag
+
+Users can upload one photo at a time, the photos can be tagged at this points, each tag has to be separated by the tag **@**
+
+![image](https://user-images.githubusercontent.com/62474197/110618187-697beb00-818e-11eb-864a-12f7d542386c.png)
+
+Once the photo is uploaded, the user is redirected to all photos page
+
+![image](https://user-images.githubusercontent.com/62474197/110618616-d1323600-818e-11eb-9341-3fed824e7a35.png)
+
+
+### As a user, I would like to untag photos, so that I can recategorize my photos and albums;
+
+By hovering over the tags section of each photo, a edit icon will show up. When the user click in this icon, he/she are redirected to the edit page where tags can be edited.
+Users can also delete photos from from this screen
+
+![image](https://user-images.githubusercontent.com/62474197/110619854-389cb580-8190-11eb-9bbc-f46de556ec9a.png)
+
+
+### As a user, I would like to view all my albums created, so that I can quick switch between albums
+
+After uploading photos and tag them. By clicking in the Albums the user is redirected to the albums page and can see all unique tags converted in albums
+
+![image](https://user-images.githubusercontent.com/62474197/110619220-71885a80-818f-11eb-83c1-6d13c18ba090.png)
+
+By clicking in one of the albums cover, the user is redirected to the album created with a specific tag, photos are displayed in a carousel mode
+
+![image](https://user-images.githubusercontent.com/62474197/110619629-ecea0c00-818f-11eb-8f64-46e956514a13.png)
+
+
+### As a user, I would like to easliy remove photos from the webpage, so that I can control the photos that I have storaged in the webpage;
+
+By hovering over each photo in all photos screen, a delete icon will show up. When the user click in this icon, he/she are redirected to the delete page where photos can be deleted
+
+![image](https://user-images.githubusercontent.com/62474197/110620135-95986b80-8190-11eb-9dcc-90ee63044616.png)
+
+
+### As a user, I would like to log in and log out, so that I can access my photos from any device;
+### As a user, I would like to register for an account, so that I can save my details and upload my photos pravitely and storage photos in a different place than my phone/computer/camera memory;
+
+Users can register an account and after login they will be able to storage their photos. Photos will be always available, unless they are deleted by the users.
+
+![image](https://user-images.githubusercontent.com/62474197/110620618-1f483900-8191-11eb-97b0-631a2a42971c.png)
+
+
+### As a new user, I would like to see how te website works without saving my photos or registering
+
+Unless the user have an account registered and upload photos when they are logged in, photos and data will be deleted everytime the home page is loaded
+
+![image](https://user-images.githubusercontent.com/62474197/110620908-80700c80-8191-11eb-9556-8b076b9ac7a9.png)
+
+
+### User Authentication
+#### As a user, I would like to recover my password in case I forget it, so that I can recover access to my account;
+#### As a user, I would like to receive an email confirmation after registering, so that I can be assured that my contact is not being used by another user
+
+Users can reset their password. A link will be sent to the registered email and the user will be redirected to a page to change their password
+
+![image](https://user-images.githubusercontent.com/62474197/110621459-27ed3f00-8192-11eb-872c-2ca54f58ff87.png)
+
+    
+## Site Owner and Admin
+
+### As a site owner, I would like to be able to maintain the page through donations and/or publicity adds.
+
+A popup add appears (set to be every 15 seconds, asking users to make a donnation and help to maintain the page, after donation made, users will no longer see the popup message
+
+![image](https://user-images.githubusercontent.com/62474197/110621708-713d8e80-8192-11eb-9774-80049df135c5.png)
+
+
+
+## Manual Testing
+
+All functionalities (links, scripts, forms where tested throughout the project development and with pass result)
+
+### Base Template
+
+| Function | Action | Expected Result | Result |
+| --- | ----------- |-----|---- |
+|Logo nav link | Click | Render home page screen | Pass |
+|Buy me a snack nav link | Click | Render buy snack page | Pass |
+|Register nav link| Click | Render register page screen | Pass |
+|Log in nav link | Click | Render Login page screen | Pass |
+
+
+### My Photos App
+
+#### All Photos Screen
+
+| Function | Action | Expected Result | Result |
+| --- | ----------- |-----|---- |
+|Albums Link | Click | Render albums page screen | Pass |
+|Upload Link | Click | Render upload page screen | Pass |
+|Photos Thumbnail | Hover | Show delete photo icon | Pass |
+|Delete photo icon | Click | Render delete page screen | Pass |
+|Photos Tags Section | Hover | Show edit tags icon | Pass |
+|Edit tags icon | Click | Render edit page screen | Pass |
+
+#### Albums Screen
+
+| Function | Action | Expected Result | Result |
+| --- | ----------- |-----|---- |
+|Photos Link | Click | Render photos page screen | Pass |
+|Upload Link | Click | Render upload page screen | Pass |
+|Photos Thumbnail | Click | Render tag albums page screen | Pass |
+
+#### Edit Tags Screen
+
+| Function | Action | Expected Result | Result |
+| --- | ----------- |-----|---- |
+|Cancel button | Click | Render photos page screen | Pass |
+|Done button | Click | Render all photos page screen with edited tags | Pass |
+|Photos Thumbnail | Click | Render tag albums page screen | Pass |
+
+#### Delete Photos Screen
+
+| Function | Action | Expected Result | Result |
+| --- | ----------- |-----|---- |
+|Cancel button | Click | Render photos page screen | Pass |
+|Confirm button | Click | Delete photos and tags from database and render all photos page screen | Pass |
+
+#### Delete Photos Screen
+
+| Function | Action | Expected Result | Result |
+| --- | ----------- |-----|---- |
+| Upload button | Click | Load photos | Pass |
+| Change photo link button | Click | Change photo uploaded | Pass |
+| Cancel button | Click | Render photos page screen | Pass |
+| Done button | Click | Upload photos and tags to database and render all photos page screen | Pass |
+
+#### My Profile Screen
+
+| Function | Action | Expected Result | Result |
+| --- | ----------- |-----|---- |
+| Update button | Click | Change Nickname entered | Pass |
+
+
+#### Choose Snack quantity
+
+| Function | Action | Expected Result | Result |
+| --- | ----------- |-----|---- |
+| Options buttons | Click | Change quantity of snacks | Pass |
+| Buy button | Click | Render buy me a snack form page | Pass |
+
+#### Buy me a Snack
+
+Form was tested in the project through test_forms.py in 'Subscription' app
+
 ---------------------------------------------------------------------------------------------------------------------------------------
+
 
 # DEPLOYEMENT
 
@@ -344,7 +504,7 @@ To host media and static files in S3 Bucket in AWS:
 
 -   Quick information of "how to" was promplty found on [W3Schools](https://www.w3schools.com/)
 
--   To all tutors that helped me debuggin challenging errors during the entire project
+-   To all tutors that helped me debugging challenging errors during the entire project
 
 -   To all present in [Code Institute Slack Community](https://slack.com/), colaboration makes difference.
 
