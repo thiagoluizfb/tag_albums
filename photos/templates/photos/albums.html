@@ -42,7 +42,7 @@
             <div class="col-12 col-md-10 text-center px-0">
                 <div class="row mx-0">
                     {% for tag in tags %}
-                        <div class="col-12 col-md-4 col-lg-3 text-center">
+                        <div class="col-12 col-md-6 col-lg-4 text-center">
                             {% for cover in tag.tag_photos.all %}
                                 {% if forloop.last %}
                                     <div class="frame-wrapper">
