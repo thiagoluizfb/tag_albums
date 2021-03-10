@@ -1,5 +1,6 @@
 # TAG ALBUMS
 
+
 The live version of this game can be viewed [here](https://tag-albums.herokuapp.com/)
 
 ![image](https://user-images.githubusercontent.com/62474197/110554863-7c150680-8133-11eb-8982-157af82f69c1.png)
@@ -13,9 +14,12 @@ The focus of Tag Albums is to provide a website able to categorize photos accord
 
 Users can register and create an account to save their photos and albums.
 
+
 ----------------------------------------------------------------------------------------------------------------------------------------
 
-# USER EXPERIENCE - UX 
+
+# USER EXPERIENCE - UX
+
 
 
 ## Main Goals
@@ -118,7 +122,7 @@ Users can register and create an account to save their photos and albums.
       - Used to simplify, style and validate forms
   4. [Bootstrap 4.5:](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
       - Bootstrap was used to assist with positioning.
-  5. [Stripe]
+  5. [Stripe](https://stripe.com/)
       - Used validate credit card information to buy snacks and handle financial transactions
   6. [Google Fonts:](https://fonts.google.com/)
       - Google fonts was used to import the 'Open Sans' into the style.css file which is used on all pages throughout the project.
@@ -133,12 +137,108 @@ Users can register and create an account to save their photos and albums.
   11. [Coolors.co](https://coolors.co/)
       - Used to create colour palette.
      
-     
+ ---------------------------------------------------------
+ 
+ ## DATA ARCHITECTURE
   
-  ## Databases
+  To store data in the development level, the database SQlite3 was installed when app was created with Django, while for production the website uses PostgreSQL (add-on provided by Heroku)
   
-  1. SQlite3 - database used during development
-  2. PostgreSQL - database used for production
+  
+## Data Modeling
+
+### Authentication Model
+
+Users can create their account using authorization form created by django.
+The model was instaled by typing the following commands in the terminal
+
+      pip3 install django-allauth
+      
+      cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth/
+
+
+It is also necessary to add AUTHENTICATION_BACKENDS in settings in the main app
+
+      AUTHENTICATION_BACKENDS = [
+    ...
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    ...
+    ]
+
+The complete guide to install all_auth can be found [here](https://django-allauth.readthedocs.io/en/latest/installation.html)
+
+
+### Profiles App
+
+#### UserProfile Model
+
+| Name | Key | Field Type | Validation |
+| --- | ----------- |-----|---- |
+| User | user | OneToOneField (User) | on_delete=models.CASCADE |
+| Nickname | display_name | CharField | max_length=20, null=True, blank=True |
+
+UserProfile is created as via signals once a new account is set up. Nickname is set with the same username, this field can be edited by users once they access their account.
+ 
+ 
+### Subsbscription App
+
+#### Tiers Model
+
+| Name | Key | Field Type | Validation |
+| --- | ----------- |-----|---- |
+| User | user | ForeignKey (UserProfile) | on_delete=models.SET_NULL,null=True, blank=True, related_name='tier' |
+| Tier | tier | BooleanField | default=False |
+
+Tiers are created as via signals once a new UserProfile is set up. Tier has default set to False and it is set to True once the same email used to create to open the account is also linked to a donation made by the user. When Tier is set to True, users will no longer see popup add.
+
+#### Snack Model
+
+| Name | Key | Field Type | Validation |
+| --- | ----------- |-----|---- |
+| First Name | f_name |CharField | max_length=50, null=False, blank=False|
+| Last Name | l_name | CharField|max_length=50, null=True, blank=True|
+| Email | email| EmailField| max_length=254, null=False, blank=False|
+| Street Address 1 | street_address1|CharField | max_length=80, null=False, blank=False|
+| Street Address 2 | street_address2|CharField | max_length=80, null=True, blank=True|
+| Town or City | town_or_city| CharField| max_length=40, null=False, blank=False|
+| County | county| CharField| max_length=80, null=True, blank=True|
+| Postal Code | postcode|CharField | max_length=20, null=True, blank=True|
+| Country | country|CountryField | blank_label='Country', null=False, blank=False, default='Country'|
+| Date | date| DateTimeField| auto_now_add=True|
+| Snack Quantity | sanck_qty| IntegerField| null=False, default=0|
+| Total | total| IntegerField| null=False, default=0|
+| Snack Data | snack_data | TextField| null=True, blank=True, default=''|
+| Stripe PID | stripe_pid | CharField| max_length=254, null=True, blank=True, default='|
+
+
+Snack data is created when the user decides to donate to the page. It is symbolically called "buy me a snack". Fields required are **First Name** , **Email**, **Street Address 1**, **Town or City**, **Country**, **Snack Quantity** and **Total** (These last two fields are set a page before the user is redirected to the payment screen)
+
+Once the payment is processed, webhook handles the data to prevent payment being made without data being saved. Snack Data field is created with the quantity and total previously selected and Stripe PID is also saved in order to guarantee that the user will not donate and have this information lost.
+
+
+### Photos App
+
+#### Photos Model
+
+| Name | Key | Field Type | Validation |
+| --- | ----------- |-----|---- |
+| Photo Owner | owner | ForeignKey (UserProfile) |on_delete=models.SET_NULL,null=True, blank=True, related_name='photos'|
+| Upload Date | upload_date | DateTimeField | N/A |
+| Uploaded Photo | image | FileField | null=False, blank=False |
+
+Login is required to upload photos. FileField is set as image in html unput, the idea is to let users to update videos in future versions of this project, also based on their Tiers. Upload Date was not set to auto_date and data is generated when form is submited (this is not the best practice, this was the first model created in the project and modification in this field was left to future improvement due to time constraints)
+
+#### Tags Model
+
+| Name | Key | Field Type | Validation |
+| --- | ----------- |-----|---- |
+| Tag Name | tag_name | CharField | max_length=100, null=True, blank=True |
+| Tag Photos | tag_photos | ManyToManyField (Photos) | Photos |
+
+Tags are created when users edit photos. Before form is submited, the site look for duplicates and only unique tags are stored. Each Tag Name can be linked to many Photos, as well as many Photos can be linked to Many tags. The relationship is set after Tag Names are added to the model.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 # TESTING
@@ -169,7 +269,7 @@ The IDE platform used to develop this project was GitPod and GitHub used for ver
   1.  Create new app
   2.	Set Region (the most close to you)
   3.	Select Postgres as database in the Add-ons section
-  4.	Go to settings and in Config Vars, add all necessary variables to access and run the app, for this project it was used the following:
+  4.	Go to settings and in Config Vars, add all necessary variables to access and run the app, for this project it was used the following keys (and its respective keys as values):
         
     AWS_ACCESS_KEY_ID
     AWS_SECRET_ACCESS_KEY
@@ -199,6 +299,15 @@ In setting in your main app add use os.getenv() and/or os.environ.get() commands
   7.	To enable automatic deployment from Gitpod to Heroku, the function must be set in the Automatic Deployment section.
   8.	When enabled, every git push command in the terminal will automatically deploy to Heroku.
 
+## Stripe Keys
+  1. To install stripe, type the commands
+      
+    pip3 install stripe
+    
+    pip3 freeze –local > requirements.txt
+     
+  2. More information about how to install and set up Stripe Keys and WebHooks can be found [here](https://stripe.com/docs/keys)
+ 
 ### Amazon Web Services (AWS)
 
 To host media and static files in S3 Bucket in AWS:
@@ -207,7 +316,7 @@ To host media and static files in S3 Bucket in AWS:
   2.	Create your S3 Bucket with public access
   3.	After completing configuration it will generate a AWS_ACCESS_KEY_ID and a AWS_SECRET_ACCESS_KEY, variables to be added in your Config Vars in Heroku. Also set USE_AWS key to True
   4.	The necessary variables need to be also added to settings in your app
-  5.	More information in steps and documentation can be found **HERE**
+  5.	More information in steps and documentation can be found [here](https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html)
 
 ### Email validation
  
@@ -224,13 +333,10 @@ To host media and static files in S3 Bucket in AWS:
   
     git clone https://github.com/thiagoluizfb/tag_albums
   
-  1. This can also be done via GitHub by clicking the green button Clone or download , then Download Zip button. Once the files are extracted, it can accessed by linking its location in your terminal directory.
-
-## Stripe Keys
-  For more information about how to install and set up Stripe Keys and WebHooks please access **Stripe Documentation
-
+  2. This can also be done via GitHub by clicking the green button Clone or download , then Download Zip button. Once the files are extracted, it can accessed by linking its location in your terminal directory.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
+
 
 # CREDITS
 
@@ -238,9 +344,10 @@ To host media and static files in S3 Bucket in AWS:
 
 -   Quick information of "how to" was promplty found on [W3Schools](https://www.w3schools.com/)
 
--   To all comunity present in stackoverflow, where quick questions were easily found.
+-   To all tutors that helped me debuggin challenging errors during the entire project
 
--   The game rules were based on this [post](https://howdoyouplayit.com/parcheesi-rules-play-parcheesi/) (rules can slightly vary)
+-   To all present in [Code Institute Slack Community](https://slack.com/), colaboration makes difference.
+
 
 ---------------------------------------------------------------------------------------------------------------------------------------- 
 
