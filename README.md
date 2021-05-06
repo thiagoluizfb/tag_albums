@@ -1,7 +1,7 @@
 # TAG ALBUMS
 
 
-The live version of this game can be viewed [here](https://tag-albums.herokuapp.com/)
+The live version of this page can be viewed [here](https://tag-albums.herokuapp.com/)
 
 ![image](https://user-images.githubusercontent.com/62474197/110554863-7c150680-8133-11eb-8982-157af82f69c1.png)
 
