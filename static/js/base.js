@@ -7,7 +7,7 @@ $(document).ready(function(){
 
     setInterval(function(){
         $("#add-popup").removeClass("hidden");
-    }, 15000);
+    }, 60000);
 });
 
 function showClose(btn){
